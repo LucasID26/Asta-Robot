@@ -60,7 +60,7 @@ def Gimages(query):
 
     all_script_tags = soup.select("script")
     
-        matched_images_data = "".join(re.findall(r"AF_initDataCallback\(([^<]+)\);", str(all_script_tags)))
+    matched_images_data = "".join(re.findall(r"AF_initDataCallback\(([^<]+)\);", str(all_script_tags)))
 
     matched_images_data_fix = json.dumps(matched_images_data)
     matched_images_data_json = json.loads(matched_images_data_fix)
