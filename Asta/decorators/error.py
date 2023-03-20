@@ -1,6 +1,7 @@
 import traceback
 from functools import wraps
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
+from config import bot
 
 
 def split_limits(text):
@@ -26,7 +27,7 @@ def error(func):
     try:
       return await func(client, message, *args, **kwargs)
     except ChatWriteForbidden:
-      return await app.leave_chat(message.chat.id)
+      return await bot.leave_chat(message.chat.id)
     except Exception as err:
       exc = traceback.format_exc()
       error_feedback = split_limits(
