@@ -1,9 +1,9 @@
 import os 
 from pyrogram import Client 
 
-ID = os.env['API_ID']
-HASH = os.env['API_HASH']
-TOKEN = os.env['BOT_TOKEN']
+ID = os.environ['API_ID']
+HASH = os.environ['API_HASH']
+TOKEN = os.environ['BOT_TOKEN']
 
 bot = Client('Asta-Robot',
              api_id=ID,
