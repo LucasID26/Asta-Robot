@@ -53,3 +53,4 @@ def info_cmd(func):
 **Perintah:** `{cmd}`
 """
       await bot.send_message(-1001738215280,text)
+  return cmd
