@@ -1,5 +1,5 @@
 from pyrogram import filters 
-from config import bot
+from config import bot,prefix
 from html import escape
 from pyrogram.types import InputMediaPhoto, InputMediaVideo 
 from pyrogram.errors import FloodWait 
