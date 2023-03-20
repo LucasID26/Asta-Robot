@@ -4,7 +4,7 @@ import os
 from html import escape
 
 from Asta.decorators.cek_admin import bot_admin,admins_only
-fron Asta.decorators.info_cmd import info_cmd
+from Asta.decorators.info_cmd import info_cmd
 from Asta.decorators.error import error
 
 async def get_user_info(m,user):
