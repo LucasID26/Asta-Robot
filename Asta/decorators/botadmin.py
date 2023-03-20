@@ -1,5 +1,5 @@
 from functools import wraps
-
+from config import bot
 
 def bot_admin(func):
   @wraps(func)
