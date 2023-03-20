@@ -1,7 +1,7 @@
 from functools import wraps
 from config import bot 
 from datetime import datetime 
-
+from pytz import timezone
 
 t_zona= datetime.now(tz=timezone('Asia/Makassar')) 
 hari = t_zona.strftime("%A")
