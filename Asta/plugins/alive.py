@@ -1,10 +1,11 @@
 from pyrogram import filters 
 from config import * 
 import time 
-import datetime
+from datetime import datetime
 from Asta.decorators.info_cmd import info_cmd
 from Asta.func.duration import duration
 
+starttime = datetime.utcnow()
 
 @bot.on_message(filters.command("ping",prefix))
 #@info_cmd
@@ -14,10 +15,10 @@ async def ping(client, m):
   msg = await m.reply_text("**0% ▒▒▒▒▒▒▒▒▒▒**")
   end = time.time()
   durasi = round(end - start,3)
-  await msg.edit("**20% ██▒▒▒▒▒▒▒▒**")
-  await msg.edit("**40% ████▒▒▒▒▒▒**")
-  await msg.edit("**60% ██████▒▒▒▒**")
-  await msg.edit("**80% ████████▒▒**")
+  #await msg.edit("**20% ██▒▒▒▒▒▒▒▒**")
+  #await msg.edit("**40% ████▒▒▒▒▒▒**")
+  #await msg.edit("**60% ██████▒▒▒▒**")
+  #await msg.edit("**80% ████████▒▒**")
   await msg.edit("**100% ██████████**")
   owner = (await bot.get_users(own[0])).mention
   await msg.edit(f"""
