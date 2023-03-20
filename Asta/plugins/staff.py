@@ -3,7 +3,7 @@ from pyrogram.errors import FloodWait
 from pyrogram.enums import ChatMemberStatus
 from config import *
 
-from Asta.decorators.cek_bot import admins_only,bot_admin
+from Asta.decorators.cek_admin import admins_only,bot_admin
 from Asta.decorators.pv_or_gc import no_private
 from Asta.decorators.info_cmd import info_cmd
 from Asta.decorators.error import error
