@@ -4,9 +4,9 @@ from config import bot,prefix
 from pyrogram.types import InputMediaPhoto, InputMediaVideo, InputMediaAudio
 import os
 
-from Asta.func.cek_admin import bot_admin
-from Asta.func.info_cmd import info_cmd
-from Asta.func.error import error
+from Asta.decorators.cek_admin import bot_admin
+from Asta.decorators.info_cmd import info_cmd
+from Asta.decorators.error import error
 from Asta.func.donghua import get_donghua,eps
 
 
