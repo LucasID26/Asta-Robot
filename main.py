@@ -3,8 +3,8 @@ from flask import Flask
 from threading import Thread 
 from pyrogram import idle
 import random
-from Asta import plugins
-
+#from Asta import plugins
+import Asta
 
 app = Flask(__name__)
 
