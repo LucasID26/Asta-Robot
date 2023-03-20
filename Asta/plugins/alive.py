@@ -3,6 +3,8 @@ from config import *
 import time 
 import datetime
 from Asta.decorators.info_cmd import info_cmd
+from Asta.func.duration import duration
+
 
 @bot.on_message(filters.command("ping",prefix))
 #@info_cmd
