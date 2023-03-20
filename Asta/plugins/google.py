@@ -8,7 +8,7 @@ from geopy.geocoders import Nominatim
 
 from Asta.decorators.error import error
 from Asta.decorators.info_cmd import info_cmd 
-from Asta.decorators.bot
+from Asta.decorators.cek_admin import bot_admin
 
 
 @bot.on_message(filters.command(["google","g"],prefix)) 
