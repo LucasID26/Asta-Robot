@@ -1,3 +1,6 @@
+from functools import wraps
+
+
 def no_private(func):
   @wraps(func)
   async def pv(client,m,*args,**kwargs):
