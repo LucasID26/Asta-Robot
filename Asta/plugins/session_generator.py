@@ -10,8 +10,8 @@ from telethon.sessions import StringSession
 from config import bot
 import os
 
-from Asta.func.info_cmd import info_cmd
-frim Asta.func.pv_or_gc import no_group
+from Asta.decorators.info_cmd import info_cmd
+frim Asta.decorators.pv_or_gc import no_group
 
 
 LOGGER = getLogger(__name__)
