@@ -1,4 +1,5 @@
 import traceback
+import os
 from logging import getLogger
 from pyrogram import Client, filters
 from pyrogram.errors import ApiIdInvalid, PasswordHashInvalid, PhoneCodeExpired, PhoneCodeInvalid, PhoneNumberInvalid, SessionPasswordNeeded
@@ -6,9 +7,8 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from telethon import TelegramClient
 from telethon.errors import ApiIdInvalidError, PasswordHashInvalidError, PhoneCodeExpiredError, PhoneCodeInvalidError, PhoneNumberInvalidError, SessionPasswordNeededError
 from telethon.sessions import StringSession
-
 from config import bot
-import os
+
 
 from Asta.decorators.info_cmd import info_cmd
 from Asta.decorators.pv_or_gc import no_group
@@ -16,7 +16,7 @@ from Asta.decorators.pv_or_gc import no_group
 
 LOGGER = getLogger(__name__)
 API_ID = os.environ['API_ID']
-API_HASH = os.envirin['API_HASH']
+API_HASH = os.environ['API_HASH']
 
 ask_ques = "**» Silakan pilih pustaka yang ingin Anda hasilkan string :**\n\nCatnCatatanatan: Saya tidak mengumpulkan info pribadi apa pun dari fitur ini."
 buttons_ques = [
