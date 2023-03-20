@@ -1,6 +1,6 @@
 from pyrogram import filters, enums
 from pyrogram.errors import FloodWait 
-from app import bot,prefix
+from config import bot,prefix
 import asyncio 
 
 from Asta.decorators.cek_admin import admins_only,bot_admin
