@@ -3,9 +3,9 @@ from pyrogram import filters,enums
 import os
 from html import escape
 
-from Asta.func.cek_admin import bot_admin,admins_only
-fron Asta.func.info_cmd import info_cmd
-from Asta.func.error import error
+from Asta.decorators.cek_admin import bot_admin,admins_only
+fron Asta.decorators.info_cmd import info_cmd
+from Asta.decorators.error import error
 
 async def get_user_info(m,user):
     try:
