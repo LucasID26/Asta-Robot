@@ -5,7 +5,7 @@ ID = os.environ['API_ID']
 HASH = os.environ['API_HASH']
 TOKEN = os.environ['BOT_TOKEN']
 
-prefix = "/"
+prefix = ['/','!','.','*'] 
 own = [1928677026]
 bot = Client('Asta-Robot',
              api_id=ID,
