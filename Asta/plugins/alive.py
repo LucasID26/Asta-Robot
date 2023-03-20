@@ -2,7 +2,7 @@ from pyrogram import filters
 from config import * 
 import time 
 import datetime
-
+from Asta.decorators.info_cmd import info_cmd
 
 @bot.on_message(filters.command("ping",prefix))
 @info_cmd
