@@ -5,7 +5,7 @@ import datetime
 from Asta.decorators.info_cmd import info_cmd
 
 @bot.on_message(filters.command("ping",prefix))
-@info_cmd
+#@info_cmd
 async def ping(client, m):
   uptime = duration((datetime.utcnow() - starttime).total_seconds())
   start = time.time() 
