@@ -10,6 +10,8 @@ from Asta.decorators.error import error
 from Asta.decorators.info_cmd import info_cmd 
 from Asta.decorators.cek_admin import bot_admin
 
+from Asta.func.google import google,Gimages
+
 
 @bot.on_message(filters.command(["google","g"],prefix)) 
 @info_cmd
