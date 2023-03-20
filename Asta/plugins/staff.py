@@ -1,7 +1,7 @@
 from pyrogram import enums, filters 
 from pyrogram.errors import FloodWait
 from pyrogram.enums import ChatMemberStatus
-from app import *
+from config import *
 
 from Asta.decorators.cek_bot import admins_only,bot_admin
 from Asta.decorators.pv_or_gc import no_private
