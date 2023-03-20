@@ -4,11 +4,11 @@ import asyncio
 from pyrogram.errors import UserNotParticipant 
 from pyrogram.types import ChatPermissions
 
-from Asta.func.permission import izin,list_admin
-from Asta.func.cek_admin import admins_only,bot_admin
-from Asta.func.pv_or_gc import no_private
-from Asta.func.info_cmd import info_cmd
-from Asta.func.error import error
+from Asta.decorators.permission import izin,list_admin
+from Asta.decorators.cek_admin import admins_only,bot_admin
+from Asta.decorators.pv_or_gc import no_private
+from Asta.decorators.info_cmd import info_cmd
+from Asta.decorators.error import error
 
 
 #KICK MEMBER
