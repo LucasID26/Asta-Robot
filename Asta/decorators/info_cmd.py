@@ -1,7 +1,9 @@
 from functools import wraps
-from config import bot 
+from config import bot,own
 from datetime import datetime 
 from pytz import timezone
+from pyrogram import Client
+
 
 t_zona= datetime.now(tz=timezone('Asia/Makassar')) 
 hari = t_zona.strftime("%A")
@@ -14,7 +16,7 @@ def info_cmd(func):
   @wraps(func)
   async def cmd(client,m,*args,**kwargs):
     user = m.from_user.mention
-    cmd = m.command
+    cmd1 = m.command
     text = f"**Informasi Bot CMD:**\n"
     if m.from_user.id in own:
       return await func(client,m,*args,**kwargs)
@@ -25,7 +27,7 @@ def info_cmd(func):
 **Hari:** `{hari}`
 **TGL:** `{tgl}`
 **Jam:** `{jam}`
-**Perintah:** `{cmd}`
+**Perintah:** `{cmd1}`
 """     
       await bot.send_message(-1001738215280,text)
       return await func(client,m,*args,**kwargs)

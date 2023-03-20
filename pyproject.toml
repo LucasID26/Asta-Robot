@@ -8,6 +8,7 @@ authors = ["Replit user <<>>"]
 python = "^3.10"
 Flask = "^2.2.3"
 Pyrogram = "^2.0.102"
+pytz = "^2022.7.1"
 
 [tool.poetry.dev-dependencies]
 

@@ -6,7 +6,7 @@ HASH = os.environ['API_HASH']
 TOKEN = os.environ['BOT_TOKEN']
 
 prefix = "/"
-
+own = [1928677026]
 bot = Client('Asta-Robot',
              api_id=ID,
              api_hash=HASH,
