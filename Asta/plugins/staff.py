@@ -3,10 +3,10 @@ from pyrogram.errors import FloodWait
 from pyrogram.enums import ChatMemberStatus
 from app import *
 
-from Asta.func.cek_bot import admins_only,bot_admin
-from Asta.func.pv_or_gc import no_private
-from Asta.func.info_cmd import info_cmd
-from Asta.func.error import error
+from Asta.decorators.cek_bot import admins_only,bot_admin
+from Asta.decorators.pv_or_gc import no_private
+from Asta.decorators.info_cmd import info_cmd
+from Asta.decorators.error import error
 
 
 #ADMIN/STAFF GROUP 
