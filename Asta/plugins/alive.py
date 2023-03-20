@@ -1,11 +1,11 @@
 from pyrogram import filters 
-fron config import bot 
+from config import * 
 import time 
-
+import datetime
 
 
 @bot.on_message(filters.command("ping",prefix))
-#@info_cmd
+@info_cmd
 async def ping(client, m):
   uptime = duration((datetime.utcnow() - starttime).total_seconds())
   start = time.time() 
