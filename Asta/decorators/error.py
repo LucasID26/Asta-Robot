@@ -2,7 +2,7 @@ import traceback
 from functools import wraps
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 from config import bot
-
+from pyrogram.errors import FloodWait
 
 def split_limits(text):
     if len(text) < 2048:
