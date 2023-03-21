@@ -15,7 +15,7 @@ from Asta.decorators.error import error
 @admins_only
 @error
 async def filter(client, m):
-  _key = m.text.split(" ",2)
+  _key = m.text.split(" ",1)
   chatid = m.chat.id
   if len(m.command) == 1:
     return await m.reply_text("Silahkan masukan kata kunci dan kata respon/reply sticker!")
@@ -35,7 +35,8 @@ async def filter(client, m):
     await m.reply_text(f"**Save text filter di `{m.chat.title}` :**\n`~ {key}`")
   elif len(m.command) == 2:
     return await m.reply_text("Silahkan masukan respon/reply sticker")
-  key = _key[1].lower()
+  key_ = m.text.split(" ",2)
+  key = key_[1].lower()
   respon = m.text.split(" ",maxsplit=2)[2]
   type = "text"
   _filter = {
