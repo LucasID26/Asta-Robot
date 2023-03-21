@@ -1,12 +1,15 @@
 import os 
 from pyrogram import Client 
-import pymongo
+#import pymongo
+from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
+
+
 
 ID = os.environ['API_ID']
 HASH = os.environ['API_HASH']
 TOKEN = os.environ['BOT_TOKEN']
 DATABASE = os.environ["DB"]
-DB = pymongo.MongoClient(DATABASE)
+DB = MongoClient(DATABASE)
 
 dbname = DB["Asta-Robot"]
 
