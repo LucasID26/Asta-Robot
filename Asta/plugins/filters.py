@@ -63,3 +63,54 @@ async def filterss(client, m):
   for _filter in _filters:
       msg += f"**-** `{_filter}`\n"
   await m.reply_text(msg)
+
+
+@bot.on_message(filters.command("delfilter",prefix) , group=1)
+@info_cmd
+@no_private 
+@bot_admin
+@admins_only 
+@error
+async def stopf(client, m):
+  if len(m.command) == 1:
+    return await m.reply_text("Silahkan masukan kata kunci untuk stop filter!")
+  key_ = m.text.split(" ",1)
+  key = key[1].lower()
+  chatid = m.chat.id
+  delete = await del_filter(chatid,key)
+  if delete:
+    await m.reply_text(f"**Filter dihapus `{m.chat.title}`:**\n**-** `{key}`")
+  else:
+    await m.reply_text(f"**Filter tidak ditemukan:**\n**-** `{key}`")
+
+
+@bot.on_message(
+    filters.text & ~filters.private & ~filters.via_bot & ~filters.forwarded,
+    group=2,
+)
+async def filters_re(client, m):
+  text = message.text.split()
+  if not text:
+    return
+  chatid = m.chat.id
+  list = await get_filters_names(chatid)
+  for key in text:
+    if key in list:
+      _filter = await get_filter(chatid,key)
+      type = _filter["type"]
+      respon = _filter["data"]
+      if type == "text":
+        return await m.reply_text(respon)
+        break
+      elif type == "sticker":
+        return await m.reply_sticker(respon)
+        break
+
+
+    
+
+
+
+
+
+
