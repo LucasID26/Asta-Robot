@@ -1,4 +1,4 @@
-from app import *
+from config import bot,prefix
 from pyrogram import filters
 from pyrogram.errors import FloodWait
 from pyrogram.enums import ChatMemberStatus
