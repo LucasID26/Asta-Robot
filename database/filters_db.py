@@ -1,7 +1,7 @@
 from typing import Dict, List, Union
 from config import dbname
 
-db = dbname.filters
+filtersdb = dbname.filters
 
 async def _get_filters(chat_id: int) -> Dict[str, int]:
     filters = await filtersdb.find_one({"chat_id": chat_id})
