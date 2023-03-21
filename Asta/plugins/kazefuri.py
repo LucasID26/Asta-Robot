@@ -7,7 +7,7 @@ import os
 from Asta.decorators.cek_admin import bot_admin
 from Asta.decorators.info_cmd import info_cmd
 from Asta.decorators.error import error
-from Asta.func.donghua import get_donghua,eps
+from Asta.func.donghua import get_kazefuri,eps
 
 
 
