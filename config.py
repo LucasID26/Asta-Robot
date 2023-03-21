@@ -1,10 +1,13 @@
 import os 
 from pyrogram import Client 
+import pymongo
 
 ID = os.environ['API_ID']
 HASH = os.environ['API_HASH']
 TOKEN = os.environ['BOT_TOKEN']
-DB = os.environ["DB"]
+DATABASE = os.environ["DB"]
+DB = pymongo.MongoClient(DATABASE)
+
 dbname = DB["Asta-Robot"]
 
 

@@ -42,7 +42,7 @@ async def filter(client, m):
         "type": type,
         "data": respon,
     }
-    await save_filter(chatid, key, _filter)
-    await m.reply_text(f"**Save text filter di `{m.chat.title}` :**\n`~ {key}`")
+  await save_filter(chatid, key, _filter)
+  await m.reply_text(f"**Save text filter di `{m.chat.title}` :**\n`~ {key}`")
     
   
