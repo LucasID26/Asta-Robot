@@ -4,6 +4,7 @@ from html import escape
 from pyrogram.types import InputMediaPhoto, InputMediaVideo 
 from pyrogram.errors import FloodWait 
 import asyncio
+import lxml
 from geopy.geocoders import Nominatim
 
 from Asta.decorators.error import error
