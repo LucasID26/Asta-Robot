@@ -15,24 +15,26 @@ from Asta.decorators.error import error
 @admins_only
 @error
 async def filter(client, m):
-  _key = m.text.split(" ",1)
   chatid = m.chat.id
   if len(m.command) == 1:
     return await m.reply_text("Silahkan masukan kata kunci dan kata respon/reply sticker!")
   if m.reply_to_message is not None:
-    key = _key[1].lower()
+    _key = m.text.split()[1]
+    key = _key.lower()
     if m.reply_to_message.sticker:
       respon = m.reply_to_message.sticker.file_id
       type = "sticker"
     if m.reply_to_message.text:
-      respon = m.reply_to_messags.text
+      respon = m.reply_to_message.text
       type = "text"
+    else:
+      return await m.reply_text("Filter hanya support text dan sticker!")
     _filter = {
         "type": type,
         "data": respon,
     }
-    await save_filter(chatid, key, _filter)
-    await m.reply_text(f"**Save text filter di `{m.chat.title}` :**\n`~ {key}`")
+    save_filter(chatid, key, _filter)
+    return await m.reply_text(f"**Save text filter di `{m.chat.title}` :**\n**-** `{key}`")
   elif len(m.command) == 2:
     return await m.reply_text("Silahkan masukan respon/reply sticker")
   key_ = m.text.split(" ",2)
@@ -43,8 +45,8 @@ async def filter(client, m):
         "type": type,
         "data": respon,
     }
-  await save_filter(chatid, key, _filter)
-  await m.reply_text(f"**Save text filter di `{m.chat.title}` :**\n`~ {key}`")
+  save_filter(chatid, key, _filter)
+  await m.reply_text(f"**Save text filter di `{m.chat.title}` :**\n**-** `{key}`")
     
 
 @bot.on_message(filters.command('filters',prefix), group=1)
@@ -54,7 +56,7 @@ async def filter(client, m):
 @admins_only 
 @error
 async def filterss(client, m):
-  _filters = await get_filters_names(m.chat.id)
+  _filters = get_filters_names(m.chat.id)
   msg = f"**List filters di** {m.chat.title}:\n"
   if not _filters:
     msg += "**-** `[kosong]`"
@@ -75,9 +77,9 @@ async def stopf(client, m):
   if len(m.command) == 1:
     return await m.reply_text("Silahkan masukan kata kunci untuk stop filter!")
   key_ = m.text.split(" ",1)
-  key = key[1].lower()
+  key = key_[1].lower()
   chatid = m.chat.id
-  delete = await del_filter(chatid,key)
+  delete = del_filter(chatid,key)
   if delete:
     await m.reply_text(f"**Filter dihapus `{m.chat.title}`:**\n**-** `{key}`")
   else:
@@ -86,17 +88,18 @@ async def stopf(client, m):
 
 @bot.on_message(
     filters.text & ~filters.private & ~filters.via_bot & ~filters.forwarded,
-    group=2,
+    group=1,
 )
 async def filters_re(client, m):
-  text = message.text.split()
+  text1 = m.text.lower()
+  text = text1.split()
   if not text:
     return
   chatid = m.chat.id
-  list = await get_filters_names(chatid)
+  list = get_filters_names(chatid)
   for key in text:
     if key in list:
-      _filter = await get_filter(chatid,key)
+      _filter = get_filter(chatid,key)
       type = _filter["type"]
       respon = _filter["data"]
       if type == "text":

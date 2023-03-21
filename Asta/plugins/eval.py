@@ -78,7 +78,7 @@ async def evaluation_cmd_t(client, m):
   if len(final_output) > 4096:
     with open("AstaEval.txt", "w+", encoding="utf8") as out_file:
       out_file.write(final_output)
-    await m.reply_document(document="LucasEval.txt",
+    await m.reply_document(document="AstaEval.txt",
                            caption=f"<code>{cmd[1][: 4096 // 4 - 1]}</code>",
                            disable_notification=True)
     await status_message.delete()

@@ -3,16 +3,16 @@ from config import dbname
 
 filtersdb = dbname.filters
 
-async def _get_filters(chat_id: int) -> Dict[str, int]:
-    filters = await filtersdb.find_one({"chat_id": chat_id})
+def _get_filters(chat_id: int) -> Dict[str, int]:
+    filters = filtersdb.find_one({"chat_id": chat_id})
     return filters["filters"] if filters else {}
 
-async def del_filter(chat_id: int, name: str) -> bool:
-    filtersd = await _get_filters(chat_id)
+def del_filter(chat_id: int, name: str) -> bool:
+    filtersd = _get_filters(chat_id)
     name = name.lower().strip()
     if name in filtersd:
         del filtersd[name]
-        await filtersdb.update_one(
+        filtersdb.update_one(
             {"chat_id": chat_id},
             {"$set": {"filters": filtersd}},
             upsert=True,
@@ -20,19 +20,19 @@ async def del_filter(chat_id: int, name: str) -> bool:
         return True
     return False 
 
-async def get_filter(chat_id: int, name: str) -> Union[bool, dict]:
+def get_filter(chat_id: int, name: str) -> Union[bool, dict]:
     name = name.lower().strip()
-    _filters = await _get_filters(chat_id)
+    _filters = _get_filters(chat_id)
     return _filters[name] if name in _filters else False
 
-async def get_filters_names(chat_id: int) -> List[str]:
-    return list(await _get_filters(chat_id))
+def get_filters_names(chat_id: int) -> List[str]:
+    return list(_get_filters(chat_id))
 
-async def save_filter(chat_id: int, name: str, _filter: dict):
+def save_filter(chat_id: int, name: str, _filter: dict):
     name = name.lower().strip()
-    _filters = await _get_filters(chat_id)
+    _filters = _get_filters(chat_id)
     _filters[name] = _filter
-    await filtersdb.update_one(
+    filtersdb.update_one(
         {"chat_id": chat_id},
         {"$set": {"filters": _filters}},
         upsert=True,
