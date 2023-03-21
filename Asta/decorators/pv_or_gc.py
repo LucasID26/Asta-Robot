@@ -12,9 +12,9 @@ def no_private(func):
 
 def no_group(func):
   @wraps(func)
-  async def pv(client,m,*args,**kwargs):
+  async def gc(client,m,*args,**kwargs):
     if m.chat.type.value != 'private':
       return await m.reply_text("Perintah ini dibuat untuk digunakan di pm, bukan di obrolan group!",quote=True)
     else:
       return await func(client, m, *args, **kwargs)
-  return pv
+  return gc

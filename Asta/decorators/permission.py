@@ -2,11 +2,11 @@ from config import bot,own
 from functools import wraps
 from pyrogram import enums
 from time import time
-
+from pyrogram.enums import ChatMemberStatus
 
 admins_in_chat = {}
 
-async def list_admin(chat_id: int):
+async def list_admin(chat_id):
   global admins_in_chat
   if chat_id in admins_in_chat:
     interval = time() - admins_in_chat[chat_id]["last_updated_at"]
@@ -17,12 +17,12 @@ async def list_admin(chat_id: int):
         "last_updated_at": time(),
         "data": [member.user.id async for member in bot.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS)],
     }
-    return admins_in_chat[chat_id]["data"]
+  return admins_in_chat[chat_id]["data"]
 
 
 
 
-async def member_permissions(chat_id: int, user_id: int):
+async def member_permissions(chat_id, user_id):
   perms = []
   try:
     member = await bot.get_chat_member(chat_id, user_id)
@@ -59,7 +59,7 @@ def izin(permission):
       if not message.from_user:
         # For anonymous admins
         if message.sender_chat and message.sender_chat.id == message.chat.id:
-            return await message.reply_text(f"Anda tidak memiliki izin yang diperlukan untuk melakukan tindakan ini.\n**Izin:** {permission}")
+          return await message.reply_text(f"Anda tidak memiliki izin yang diperlukan untuk melakukan tindakan ini.\n**Izin:** {permission}")
       # For admins and sudo users
       userID = message.from_user.id
       permissions = await member_permissions(chatID, userID)

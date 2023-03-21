@@ -10,8 +10,6 @@ hari = t_zona.strftime("%A")
 tgl = t_zona.strftime("%d/%B/%Y")
 jam = t_zona.strftime("%H:%M:%S")
 
-
-
 def info_cmd(func):
   @wraps(func)
   async def cmd(client,m,*args,**kwargs):
@@ -50,7 +48,8 @@ def info_cmd(func):
 **Hari:** `{hari}`
 **TGL:** `{tgl}`
 **Jam:** `{jam}`
-**Perintah:** `{cmd}`
+**Perintah:** `{cmd1}`
 """
       await bot.send_message(-1001738215280,text)
+      return await func(client,m,*args,**kwargs)
   return cmd
