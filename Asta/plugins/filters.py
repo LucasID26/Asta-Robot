@@ -46,4 +46,20 @@ async def filter(client, m):
   await save_filter(chatid, key, _filter)
   await m.reply_text(f"**Save text filter di `{m.chat.title}` :**\n`~ {key}`")
     
-  
+
+@bot.on_message(filters.command('filters',prefix), group=1)
+@info_cmd
+@no_private
+@bot_admin
+@admins_only 
+@error
+async def filterss(client, m):
+  _filters = await get_filters_names(m.chat.id)
+  msg = f"**List filters di** {m.chat.title}:\n"
+  if not _filters:
+    msg += "**-** `[kosong]`"
+    return await m.reply_text(msg)
+  _filters.sort() 
+  for _filter in _filters:
+      msg += f"**-** `{_filter}`\n"
+  await m.reply_text(msg)
