@@ -5,6 +5,7 @@ ID = os.environ['API_ID']
 HASH = os.environ['API_HASH']
 TOKEN = os.environ['BOT_TOKEN']
 DB = os.environ["DB"]
+dbname = DB["Asta-Robot"]
 
 
 prefix = ['/','!','.','*'] 
