@@ -27,7 +27,7 @@ async def filter(client, m):
     elif m.reply_to_message.text:
       respon = m.reply_to_message.text
       type = "text"
-    elif m.reply_to_message.video and m.reply_to_message.photo and m.reply_to_message.animation::
+    elif m.reply_to_message.video and m.reply_to_message.photo and m.reply_to_message.animation:
       return await m.reply_text("Filter hanya support text dan sticker!")
     _filter = {
         "type": type,
