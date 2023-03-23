@@ -23,4 +23,4 @@ async def debug_cmd(client,m):
       dbg.write(hasil)
     return await m.reply_document("Asta_Debug.txt",caption="<b>HASIL-DEBUG</b>")
   else:
-    return m.reply_text(hasil)
+    return await m.reply_text(hasil)
