@@ -12,7 +12,7 @@ from Asta.decorators.error import error
 @info_cmd
 @bot_admin
 @error
-async debug_cmd(client,m):
+async def debug_cmd(client,m):
   if m.reply_to_message is not None:
     debug = m.reply_to_message
   else:
