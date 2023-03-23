@@ -13,3 +13,4 @@ from . import tag_all
 from . import yt_dl
 from . import asupan
 from . import filters
+from . import debug
