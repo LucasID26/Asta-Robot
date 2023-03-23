@@ -2,6 +2,6 @@
 
 
 # Catatan
-Untuk module dasar untuk bot ini menggunakan pyrofork
-\npip install pyromod=1.5
-\npip install pyrofork
+Untuk module dasar untuk bot ini menggunakan pyrofork  
+pip install pyromod=1.5  
+pip install pyrofork
