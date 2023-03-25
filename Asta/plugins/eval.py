@@ -104,7 +104,7 @@ async def shell_exec(code, treat=True):
         stdout = stdout.decode().strip()
     return stdout, process
 
-@bot.on_callback_query(filters.create(lambda _, __, query: "eval_close#" in query.data))
+@bot.on_callback_query(filters.create(lambda _, __, query: "delete#" in query.data))
 async def eval_call(client,call):
   if call.from_user.id != int(call.data.split("#")[1]):
     return await call.answer("Bukan buat lu..!",True) 
