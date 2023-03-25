@@ -14,3 +14,4 @@ from . import yt_dl
 from . import asupan
 from . import filters
 from . import debug
+from . import translate
