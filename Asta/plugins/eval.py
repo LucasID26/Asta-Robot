@@ -46,8 +46,8 @@ async def shell(client, m):
 async def evaluation_cmd_t(client, m):
   cmd = m.text.split(" ",1)
   if len(m.command) == 1:
-    return await m.reply(text="__No evaluate message!__",quote=True)
-  status_message = await m.reply(text="__Processing eval pyrogram...__",quote=True)
+    return await m.reply_text(text="__No evaluate message!__")
+  status = await m.reply_text(text="__Processing eval pyrogram...__")
 
   old_stderr = sys.stderr
   old_stdout = sys.stdout
@@ -84,10 +84,10 @@ async def evaluation_cmd_t(client, m):
     await m.reply_document(document="AstaEval.txt",
                            caption=f"<code>{cmd[1][: 4096 // 4 - 1]}</code>",
                            disable_notification=True,reply_markup=button)
-    await status_message.delete()
+    await status.delete()
     os.remove("AstaEval.txt")
   else:
-    await status_message.edit(text=final_output,reply_markup=button)
+    await status.edit_text(text=final_output,reply_markup=button)
 
 
 async def aexec(code, c, m):
@@ -106,7 +106,10 @@ async def shell_exec(code, treat=True):
 
 @bot.on_callback_query(filters.create(lambda _, __, query: "delete#" in query.data))
 async def eval_call(client,call):
-  if call.from_user.id != int(call.data.split("#")[1]):
-    return await call.answer("Bukan buat lu..!",True) 
-  return await call.message.delete()
+  try:
+    if call.from_user.id != int(call.data.split("#")[1]):
+      return await call.answer("Bukan buat lu..!",True) 
+    return await call.message.delete()
+  except:
+    return await call.answer("Callback timeout")
 
