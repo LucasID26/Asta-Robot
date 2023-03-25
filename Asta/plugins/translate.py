@@ -15,7 +15,12 @@ async def trans(client,m):
   if len(m.command) == 1:
     return await m.reply_text("Google Translate,/tr [kode bhs] [text]")
   try:
-    text = m.reply_to_message.text if m.reply_to_message is not None else m.text.split(" ",2)[2]
+    if m.reply_to_message is not None:
+      if not m.reply_to_message.text:
+        return await m.reply_text("Reply pesan bukan media")
+      text = m.reply_to_message.text 
+    else:
+      text = m.text.split(" ",2)[2]
     code = m.text.split(" ",2)[1]
     tr = translate(code,text)
     hasil = f"**Hasil translate ke {code}**\n\n`{tr}`"
