@@ -6,7 +6,7 @@ import subprocess
 import asyncio 
 import traceback 
 import io
-
+from pykeyboard import InlineKeyboard,InlineButton
 
 
 @bot.on_message(filters.command("sh") & filters.user(own))
@@ -17,6 +17,8 @@ async def shell(client, m):
         return await m.reply(text="No command to execute was given.",quote=True)
     msg = await m. reply(text="__Processing...__",quote=True)
     shell = (await shell_exec(cmd[1]))[0]
+    button = InlineKeyboard()
+    button.add(InlineButton("DELETE",callback_data=f"delete#{m.from_user.id}"))
     if len(shell) > 3000:
         with open("shell_asta.txt", "w") as file:
             file.write(shell)
@@ -24,18 +26,18 @@ async def shell(client, m):
           if m.chat.is_forum == True:
             await bot.send_document(m.chat.id,
                 document=doc,
-                file_name=doc.name,message_thread_id=m.topics.id)
+                file_name=doc.name,message_thread_id=m.topics.id,reply_markup=button)
           else:
             await bot.send_document(m.chat.id,
                 document=doc,
-                file_name=doc.name)
+                file_name=doc.name,reply_markup=button)
           await msg.delete()
           try:
             os.remove("shell_asta.txt")
           except:
             pass
     elif len(shell) != 0:
-        await msg.edit(text=shell)
+        await msg.edit(text=shell,reply_markup=button)
     else:
         await msg.edit("No Reply")
 
@@ -74,17 +76,18 @@ async def evaluation_cmd_t(client, m):
     evaluation = "Success"
 
   final_output = f"**EVAL**:\n`{cmd[1]}`\n\n**OUTPUT**:\n`{evaluation.strip()}`\n"
-
+  button = InlineKeyboard()
+  button.add(InlineButton("DELETE",callback_data=f"delete#{m.from_user.id}"))
   if len(final_output) > 4096:
     with open("AstaEval.txt", "w+", encoding="utf8") as out_file:
       out_file.write(final_output)
     await m.reply_document(document="AstaEval.txt",
                            caption=f"<code>{cmd[1][: 4096 // 4 - 1]}</code>",
-                           disable_notification=True)
+                           disable_notification=True,reply_markup=button)
     await status_message.delete()
     os.remove("AstaEval.txt")
   else:
-    await status_message.edit(text=final_output)
+    await status_message.edit(text=final_output,reply_markup=button)
 
 
 async def aexec(code, c, m):
@@ -100,3 +103,10 @@ async def shell_exec(code, treat=True):
     if treat:
         stdout = stdout.decode().strip()
     return stdout, process
+
+@bot.on_callback_query(filters.create(lambda _, __, query: "eval_close#" in query.data))
+async eval_call(client,call):
+  if call.from_user.id != int(call.data.split("#")[1]):
+    return await call.answer("Bukan buat lu..!",True) 
+  return await call.message.delete()
+
