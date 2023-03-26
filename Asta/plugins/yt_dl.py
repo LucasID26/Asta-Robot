@@ -94,6 +94,7 @@ async def callback_dl(client,call):
         os.remove(f"{title}.jpg") 
     else:
       await call.answer("Bukan buat lu!",True)
-  except:
+  except Exception as e:
+    print(e)
     pass
     #await call.answer("Timeout Callback data!",True)
