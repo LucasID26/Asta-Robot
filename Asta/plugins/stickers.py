@@ -1,6 +1,6 @@
 import os
 import asyncio
-from config import bot,asisstant,prefik
+from config import bot,asisstant,prefix
 from pyrogram import filters,emoji
 from pyrogram.errors import StickersetInvalid, YouBlockedUser
 from pyrogram.raw.functions.messages import GetStickerSet
