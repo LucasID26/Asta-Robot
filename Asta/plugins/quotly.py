@@ -29,12 +29,12 @@ async def quotly(client,m):
     await asyncio.sleep(5)
     async for quotly in asisstant.search_messages(Bot, limit=1):
       try:
-        asyncio.sleep(2)
-        await msg.delete()
+        asyncio.sleep(5)
         rep = m.id if m.reply_to_message.from_user.is_bot == True else m.reply_to_message.id
         await m.reply_sticker(
                     sticker=quotly.sticker.file_id,
                     reply_to_message_id=rep)
+        await msg.delete()
       except:
         return await m.edit("**Gagal Membuat Sticker Quotly**")
 
