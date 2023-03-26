@@ -115,13 +115,13 @@ async def kang(client,m):
         pack += 1
         packname = f"a{user.id}_by_userge_{pack}"
         packnick = f"{custom_packnick} Vol.{pack}"
-      if is_anim:
-        packname += f"_anim{pack}"
-        packnick += f" (Animated){pack}"
-      if is_video:
-        packname += f"_video{pack}"
-        packnick += f" (Video){pack}"
-      await Asta.edit(
+        if is_anim:
+          packname += f"_anim{pack}"
+          packnick += f" (Animated){pack}"
+        if is_video:
+          packname += f"_video{pack}"
+          packnick += f" (Video){pack}"
+        await Asta.edit(
                     f"`Membuat Sticker Pack Baru {pack} Karena Sticker Pack Sudah Penuh`"
                 )
         continue
