@@ -9,6 +9,7 @@ import pyromod.listen
 ID = os.environ['API_ID']
 HASH = os.environ['API_HASH']
 TOKEN = os.environ['BOT_TOKEN']
+ASISSTANT_STR = os.environ['ASISSTANT_STRING']
 DATABASE = os.environ["DB"]
 DB = pymongo.MongoClient(str(DATABASE))
 
@@ -21,5 +22,12 @@ bot = Client('Asta-Robot',
              api_id=ID,
              api_hash=HASH,
              bot_token=TOKEN,
+             in_memory=True
+            )
+asisstant = Client('Asta-Asisstant',
+             api_id=ID,
+             api_hash=HASH,
+             session_string=T
+ASISSTANT_STR,
              in_memory=True
             )
