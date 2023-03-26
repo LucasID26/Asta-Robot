@@ -12,12 +12,12 @@ async def helpp(client, m):
     button = InlineKeyboard(row_width=2)
     button.add(
       InlineButton(
-      'HELP❓',url='https://t.me/Virtual267_bot?start=help'),
+      'HELP❓',url=f'https://t.me/{bot.me.username}?start=help'),
       InlineButton(
         'OWNER👤',url='https://t.me/LucasBukanKalengSarden'),
       InlineButton(
       'CHANNEL',url='https://t.me/YoiID_robot'))
-    await m.reply_text('**Yo hallo saya adalah Bot Virtual\nJika ingin mengetahui fitur saya silahkan tekan tombol help dibawah!**', reply_markup=button)
+    await m.reply_text(f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol help dibawah!**', reply_markup=button)
   elif m.chat.type.value == 'private':
     button = InlineKeyboard(row_width=3)
     button.add(
@@ -28,9 +28,9 @@ async def helpp(client, m):
       InlineButton(
       'CHANNEL',url='https://t.me/YoiID_robot'),
       InlineButton(
-        'Add to your group',url='http://t.me/Virtual267_bot?startgroup=true'
+        'Add to your group',url=f'http://t.me/{bot.me.username}?startgroup=true'
       ))
-    await m.reply_text('**Yo hallo saya adalah Bot Virtual\nJika ingin mengetahui fitur saya silahkan tekan tombol help dibawah!**', reply_markup=button)
+    await m.reply_text(f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol help dibawah!**', reply_markup=button)
 
     
     
@@ -44,9 +44,9 @@ async def def_callback(_, call):
       InlineButton('OWNER👤',url='https://t.me/LucasBukanKalengSarden'),
       InlineButton(
       'CHANNEL',url='https://t.me/YoiID_robot'),
-      InlineButton('Add to your group',url='http://t.me/Virtual267_bot?startgroup=true'
+      InlineButton('Add to your group',url=f'http://t.me/{bot.me.username}?startgroup=true'
       ))
-    await bot.edit_message_text(call.message.chat.id,text='**Yo hallo saya adalah Bot Virtual\nJika ingin mengetahui fitur saya silahkan tekan tombol help dibawah!**',message_id=call.message.id,reply_markup=button)
+    await bot.edit_message_text(call.message.chat.id,text=f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol help dibawah!**',message_id=call.message.id,reply_markup=button)
     
   elif call.data == 'help':
     button = InlineKeyboard(row_width=3)
