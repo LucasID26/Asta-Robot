@@ -8,6 +8,9 @@ from Asta.decorators.error import error
 
 
 @bot.on_message(filters.command(["q", "quotly"],prefix))
+@info_cmd
+@bot_admin
+@error
 async def quotly(client,m):
   args = get_arg(m)
   if not m.reply_to_message and not args:
