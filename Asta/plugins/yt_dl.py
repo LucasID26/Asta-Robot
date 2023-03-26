@@ -68,9 +68,9 @@ async def callback_dl(client,call):
           ph_file.write(requests.get(thumb).content)
           ph_file.close() 
         await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
-        await bot.send_video(call.message.chat.id,open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
+        await call.message.reply_video(open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
 {title}
-• Size: {size}""",reply_to_message_id=call.message.reply_to_message.id)
+• Size: {size}""")
         await msg.delete()
         os.remove(title)
         os.remove(f"{title}.jpg") 
@@ -86,9 +86,9 @@ async def callback_dl(client,call):
           ph_file.write(requests.get(thumb).content)
           ph_file.close()
         await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
-        await bot.send_audio(call.message.chat.id,open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
+        await call.message.reply_audio(open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
 {title}
-• Size: {size}""",reply_to_message_id=call.message.reply_to_message.id)
+• Size: {size}""")
         await call.message.delete()
         os.remove(title)
         os.remove(f"{title}.jpg") 
