@@ -207,7 +207,7 @@ async def kang(client,m):
                 await get_response(m, asisstant)
                 == "Sorry, the file type is invalid."
             ):
-      retur await Asta.edit(
+        return await Asta.edit(
                     "**Gagal Menambahkan Sticker, Gunakan @Stickers Bot Untuk Menambahkan Sticker Anda.**"
                 )
       await asisstant.send_message("Stickers", emoji_)
