@@ -133,99 +133,99 @@ async def kang(client,m):
       except YouBlockedUser:
         await asisstant.unblock_user("stickers")
         await asisstant.send_message("stickers", "/addsticker")
-        except Exception as e:
-          return await Asta.edit(f"**ERROR:** `{e}`")
-        await asyncio.sleep(2)
-        await asisstant.send_message("stickers", packname)
-        await asyncio.sleep(2)
-        limit = "50" if is_anim else "120"
-        while limit in await get_response(m, asisstant):
-          pack += 1
-          packname = f"a{user.id}_by_{user.username}_{pack}"
-          packnick = f"{custom_packnick} vol.{pack}"
-          if is_anim:
-            packname += "_anim"
-            packnick += " (Animated)"
-          if is_video:
-            packname += "_video"
-            packnick += " (Video)"
-          await Asta.edit(
+      except Exception as e:
+        return await Asta.edit(f"**ERROR:** `{e}`")
+      await asyncio.sleep(2)
+      await asisstant.send_message("stickers", packname)
+      await asyncio.sleep(2)
+      limit = "50" if is_anim else "120"
+      while limit in await get_response(m, asisstant):
+        pack += 1
+        packname = f"a{user.id}_by_{user.username}_{pack}"
+        packnick = f"{custom_packnick} vol.{pack}"
+        if is_anim:
+          packname += "_anim"
+          packnick += " (Animated)"
+        if is_video:
+          packname += "_video"
+          packnick += " (Video)"
+        await Asta.edit(
                     "`Membuat Sticker Pack Baru "
                     + str(pack)
                     + " Karena Sticker Pack Sudah Penuh`"
                 )
-          await asisstant.send_message("stickers", packname)
+        await asisstant.send_message("stickers", packname)
+        await asyncio.sleep(2)
+        if await get_response(m, asisstant) == "Invalid pack selected.":
+          await asisstant.send_message("stickers", cmd)
           await asyncio.sleep(2)
-          if await get_response(m, asisstant) == "Invalid pack selected.":
-            await asisstant.send_message("stickers", cmd)
-            await asyncio.sleep(2)
-            await asisstant.send_message("stickers", packnick)
-            await asyncio.sleep(2)
-            await asisstant.send_document("stickers", media_)
-            await asyncio.sleep(2)
-            await asisstant.send_message("Stickers", emoji_)
-            await asyncio.sleep(2)
-            await asisstant.send_message("Stickers", "/publish")
-            await asyncio.sleep(2)
-            if is_anim:
+          await asisstant.send_message("stickers", packnick)
+          await asyncio.sleep(2)
+          await asisstant.send_document("stickers", media_)
+          await asyncio.sleep(2)
+          await asisstant.send_message("Stickers", emoji_)
+          await asyncio.sleep(2)
+          await asisstant.send_message("Stickers", "/publish")
+          await asyncio.sleep(2)
+          if is_anim:
               await asisstant.send_message(
                             "Stickers", f"<{packnick}>", parse_mode=ParseMode.MARKDOWN
                         )
               await asyncio.sleep(2)
-              await asisstant.send_message("Stickers", "/skip")
-              await asyncio.sleep(2)
-              await asisstant.send_message("Stickers", packname)
-              await asyncio.sleep(2)
-              return await Asta.edit(
+          await asisstant.send_message("Stickers", "/skip")
+          await asyncio.sleep(2)
+          await asisstant.send_message("Stickers", packname)
+          await asyncio.sleep(2)
+          return await Asta.edit(
                         f"**Sticker Berhasil Ditambahkan!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**"
                     )
-        await asisstant.send_document("stickers", media_)
-        await asyncio.sleep(2)
-        if (
+      await asisstant.send_document("stickers", media_)
+      await asyncio.sleep(2)
+      if (
                 await get_response(m, asisstant)
                 == "Sorry, the file type is invalid."
             ):
-          return await Asta.edit(
+        return await Asta.edit(
                     "**Gagal Menambahkan Sticker, Gunakan @Stickers Bot Untuk Menambahkan Sticker Anda.**"
                 )
-        await asisstant.send_message("Stickers", emoji_)
-        await asyncio.sleep(2)
-        await asisstant.send_message("Stickers", "/done")
-      else:
-        await Asta.edit("`Membuat Sticker Pack Baru`")
-        try:
-          await asisstant.send_message("Stickers", cmd)
-        except YouBlockedUser:
-          await asisstant.unblock_user("stickers")
-          await asisstant.send_message("stickers", "/addsticker")
-        await asyncio.sleep(2)
-        await asisstant.send_message("Stickers", packnick)
-        await asyncio.sleep(2)
-        await asisstant.send_document("stickers", media_)
-        await asyncio.sleep(2)
-        if (
+      await asisstant.send_message("Stickers", emoji_)
+      await asyncio.sleep(2)
+      await asisstant.send_message("Stickers", "/done")
+    else:
+      await Asta.edit("`Membuat Sticker Pack Baru`")
+      try:
+        await asisstant.send_message("Stickers", cmd)
+      except YouBlockedUser:
+        await asisstant.unblock_user("stickers")
+        await asisstant.send_message("stickers", "/addsticker")
+      await asyncio.sleep(2)
+      await asisstant.send_message("Stickers", packnick)
+      await asyncio.sleep(2)
+      await asisstant.send_document("stickers", media_)
+      await asyncio.sleep(2)
+      if (
                 await get_response(m, asisstant)
                 == "Sorry, the file type is invalid."
             ):
-          retur await Asta.edit(
+        retur await Asta.edit(
                     "**Gagal Menambahkan Sticker, Gunakan @Stickers Bot Untuk Menambahkan Sticker Anda.**"
                 )
-        await asisstant.send_message("Stickers", emoji_)
-        await asyncio.sleep(2)
-        await asisstant.send_message("Stickers", "/publish")
-        await asyncio.sleep(2)
-        if is_anim:
+      await asisstant.send_message("Stickers", emoji_)
+      await asyncio.sleep(2)
+      await asisstant.send_message("Stickers", "/publish")
+      await asyncio.sleep(2)
+      if is_anim:
           await asisstant.send_message("Stickers", f"<{packnick}>")
           await asyncio.sleep(2)
-        await asisstant.send_message("Stickers", "/skip")
-        await asyncio.sleep(2)
-        await asisstant.send_message("Stickers", packname)
-        await asyncio.sleep(2)
-      await Asta.edit(
+      await asisstant.send_message("Stickers", "/skip")
+      await asyncio.sleep(2)
+      await asisstant.send_message("Stickers", packname)
+      await asyncio.sleep(2)
+    await Asta.edit(
             f"**Sticker Berhasil Ditambahkan!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**"
         )
-      if os.path.exists(str(media_)):
-        os.remove(media_)
+    if os.path.exists(str(media_)):
+      os.remove(media_)
 
 async def get_response(m, asisstant):
     return [x async for x in asisstant.get_chat_history("Stickers", limit=1)][0].text
