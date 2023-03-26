@@ -102,7 +102,7 @@ async def kang(client,m):
     exist = False
     while True:
       try:
-        exist = await bot.invoke(
+        exist = await asisstant.invoke(
                     GetStickerSet(
                         stickerset=InputStickerSetShortName(short_name=packname), hash=0
                     )
