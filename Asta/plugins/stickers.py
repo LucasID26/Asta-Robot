@@ -20,8 +20,7 @@ from Asta.decorators.error import error
 async def kang(client,m):
   user = m.from_user
   replied = m.reply_to_message
-  rep = m if replied.from_user.is_bot == True else replied
-  Asta = await rep.reply_text("`Boleh juga ni stickernya colong ahh...`")
+  Asta = await m.reply_text("`Oke aku bantu colong tu sticker...`")
   media_ = None
   emoji_ = None
   is_anim = False
@@ -67,7 +66,7 @@ async def kang(client,m):
   else:
     return await Asta.edit("**Silahkan Reply ke Media Foto/GIF/Sticker!**")
   if media_:
-    args = get_arg(message)
+    args = get_arg(m)
     pack = 1
     if len(args) == 2:
       emoji_, pack = args
