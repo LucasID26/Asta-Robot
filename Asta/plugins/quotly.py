@@ -24,7 +24,7 @@ async def quotly(client,m):
       await asyncio.sleep(1)
     else:
       pass
-    await asisstant.forward_message(chat_id=Bot,from_chat_id=m.chat.id,message_ids=m.reply_to_message.id) 
+    await asisstant.forward_messages(chat_id=Bot,from_chat_id=m.chat.id,message_ids=m.reply_to_message.id) 
     #await m.reply_to_message.forward(Bot)
     await asyncio.sleep(5)
     async for quotly in asisstant.search_messages(Bot, limit=1):
