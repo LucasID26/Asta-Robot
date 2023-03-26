@@ -17,7 +17,7 @@ async def quotly(client,m):
     return await m.reply_text("**Mohon Balas ke Pesan**")
   Bot = "QuotLyBot"
   if m.reply_to_message:
-    await m.reply_text("`Membuat sticker . . .`")
+    msg = await m.reply_text("`Membuat sticker . . .`")
     await asisstant.unblock_user(Bot)
     if args:
       await asisstant.send_message(Bot, f"/qcolor {args}")
@@ -29,7 +29,7 @@ async def quotly(client,m):
     await asyncio.sleep(5)
     async for quotly in asisstant.search_messages(Bot, limit=1):
       if quotly:
-        await m.delete()
+        await msg.delete()
         await m.reply_sticker(
                     sticker=quotly.sticker.file_id,
                     reply_to_message_id=m.reply_to_message.id
