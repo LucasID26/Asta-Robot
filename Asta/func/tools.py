@@ -4,7 +4,7 @@ import os
 import shlex
 from typing import Tuple
 from PIL import Image
-
+from pymediainfo import MediaInfo
 
 
 async def run_cmd(cmd: str) -> Tuple[str, str, int, int]:
