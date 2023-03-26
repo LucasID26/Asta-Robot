@@ -14,7 +14,7 @@ from Asta.decorators.error import error
 async def quotly(client,m):
   args = get_arg(m)
   if not m.reply_to_message and not args:
-    return await m.edit("**Mohon Balas ke Pesan**")
+    return await m.reply_text("**Mohon Balas ke Pesan**")
   Bot = "QuotLyBot"
   if m.reply_to_message:
     await m.edit("`Membuat sticker . . .`")
