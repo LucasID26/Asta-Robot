@@ -1,4 +1,4 @@
-from config import bot
+from config import bot,asisstant
 from flask import Flask
 from threading import Thread 
 from pyrogram import idle
@@ -24,7 +24,9 @@ def run_all():
   run_thread()
   #bot.run()
   bot.start()
+  asisstant.start()
   idle()
   bot.stop()
+  asisstant.stop()
 
 run_all()
