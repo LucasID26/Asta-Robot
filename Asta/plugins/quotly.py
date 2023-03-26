@@ -5,7 +5,7 @@ from pyrogram import filters
 from Asta.decorators.info_cmd import info_cmd
 from Asta.decorators.cek_admin import bot_admin
 from Asta.decorators.error import error
-
+from Asta.func.tools import get_arg
 
 @bot.on_message(filters.command(["q", "quotly"],prefix))
 @info_cmd
@@ -37,11 +37,3 @@ async def quotly(client,m):
       else:
         return await m.edit("**Gagal Membuat Sticker Quotly**")
 
-
-def get_arg(m):
-  msg = m.text
-  msg = msg.replace(" ", "", 1) if msg[1] == " " else msg
-  split = msg[1:].replace("\n", " \n").split(" ")
-  if " ".join(split[1:]).strip() == "":
-    return ""
-  return " ".join(split[1:])
