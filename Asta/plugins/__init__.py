@@ -15,3 +15,4 @@ from . import asupan
 from . import filters
 from . import debug
 from . import translate
+from . import __HELP__
