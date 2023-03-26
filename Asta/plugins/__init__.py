@@ -16,4 +16,5 @@ from . import filters
 from . import debug
 from . import translate
 from . import quotly
+from . import stickers
 from . import __HELP__
