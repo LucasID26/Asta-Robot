@@ -29,7 +29,7 @@ async def quotly(client,m):
     await asyncio.sleep(5)
     async for quotly in asisstant.search_messages(Bot, limit=1):
       try:
-        asyncio.sleep(5)
+        await asyncio.sleep(5)
         await msg.delete()
         rep = m.id if m.reply_to_message.from_user.is_bot == True else m.reply_to_message.id
         await m.reply_sticker(
