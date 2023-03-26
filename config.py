@@ -27,7 +27,6 @@ bot = Client('Asta-Robot',
 asisstant = Client('Asta-Asisstant',
              api_id=ID,
              api_hash=HASH,
-             session_string=T
-ASISSTANT_STR,
+             session_string=ASISSTANT_STR,
              in_memory=True
             )
