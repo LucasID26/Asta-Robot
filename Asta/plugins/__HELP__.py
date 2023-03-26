@@ -38,7 +38,7 @@ async def helpp(client, m):
 @bot.on_callback_query(group=1)
 async def def_callback(_, call):
   if call.data == 'help1':
-    button = InlineKeyboard(row_width=2)
+    button = InlineKeyboard(row_width=3)
     button.add(
       InlineButton('PERINTAH📚',callback_data='help'),
       InlineButton('OWNER👤',url='https://t.me/LucasBukanKalengSarden'),
@@ -62,7 +62,7 @@ async def def_callback(_, call):
     InlineButton(
       'LAINNYA',callback_data='lain'))
     button.row(InlineButton('Back', callback_data='help1')) 
-    await bot.edit_message_text(call.message.chat.id, text="__**HELP VIRTUAL BOT**__\n\nTambahkan saya ke group mu dan jadikan saya admin supaya saya berfungsi dengan baik!.",message_id=call.message.id,reply_markup=button)
+    await bot.edit_message_text(call.message.chat.id, text=f"__**HELP {bot.me.first_name}**__\n\nTambahkan saya ke group mu dan jadikan saya admin supaya saya berfungsi dengan baik!.",message_id=call.message.id,reply_markup=button)
 
 
   #MANGGIL HELP
