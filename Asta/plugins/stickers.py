@@ -83,8 +83,8 @@ async def kang(client,m):
     if not emoji_:
       emoji_ = "✨"
 
-    u_name = user.username
-    u_name = "@" + u_name if u_name else user.first_name or user.id
+    #u_name = user.username
+    u_name = user.first_name
     packname = f"Sticker_u{user.id}_v{pack}"
     custom_packnick = f"{u_name} Sticker Pack"
     packnick = f"{custom_packnick} Vol.{pack}"
@@ -121,7 +121,7 @@ async def kang(client,m):
       if is_video:
         packname += f"_video{pack}"
         packnick += f" (Video){pack}"
-        await Asta.edit(
+      await Asta.edit(
                     f"`Membuat Sticker Pack Baru {pack} Karena Sticker Pack Sudah Penuh`"
                 )
         continue
