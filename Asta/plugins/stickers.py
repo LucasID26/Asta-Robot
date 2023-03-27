@@ -13,14 +13,14 @@ from Asta.decorators.info_cmd import info_cmd
 from Asta.decorators.cek_admin import bot_admin
 from Asta.decorators.error import error
 
-@bot.on_message(filters.command(["tikel", "kang"],prefix))
+@bot.on_message(filters.command(["addsticker", "tikel", "kang"],prefix))
 @info_cmd
 @bot_admin
 @error
 async def kang(client,m):
   user = m.from_user
   replied = m.reply_to_message
-  Asta = await m.reply_text("`Oke aku bantu colong tu sticker...`")
+  Asta = await m.reply_text("`Menambahkan sticker ke sticker pack mu...`")
   media_ = None
   emoji_ = None
   is_anim = False
@@ -231,9 +231,15 @@ async def get_response(m, asisstant):
 
 
 
-@bot.on_message(filters.command('unkang'))
+@bot.on_message(filters.command(['unkang','delsticker'],prefix))
+@info_cmd
+@bot_admin
+@error
 async def unkang(client,m):
+  if not m.reply_to_message:
+    return await m.reply_text("Silahkan reply sticker yang mau dihapus,pastikan reply sticker dari pesan mu sendiri")
   replied = m.reply_to_message
+  Asta = await m.reply_text("`Menghapus sticker dari sticker pack mu . . .`"
   if replied.sticker:
     try:
       await asisstant.send_message("stickers", "/delsticker")
@@ -242,4 +248,18 @@ async def unkang(client,m):
       await asisstant.send_message("stickers", "/delsticker")
     except Exception as e:
       return await Asta.edit(f"**ERROR:** `{e}`")
-    await 
+    await asyncio.sleep(2)
+    packname = replied.sticker.set_name
+    if not packname:
+      return await Asta.edit("Sticker tidak terdaftar dalam pack manapun")
+    await asisstant.forward_messages("stickers",from_chat_id=m.chat.id,message_ids=m.reply_to_message.id)
+    if await get_response(m, asisstant) == 'This is the last sticker in this set. Deleting it will also delete the set and free its link. Are you sure you want to do this?':
+      await asisstant.send_message("stickers",'Delete anyway')
+      if await get_response(m, asisstant) == 'Done! The sticker set is gone.':
+        return await Asta.edit(f"**Sticker Berhasil Dihapus!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**")
+    elif await get_response(m, asisstant) == 'I have deleted that sticker for you, it will stop being available to Telegram users within an hour.':
+      return await Asta.edit(f"**Sticker Berhasil Dihapus!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**")
+    elif await get_response(m, asisstant) == 'Sorry, I can't do this. Looks like you are not the owner of the relevant set.':
+      return await Asta.edit("Saya mendeteksi bahwa id sticker itu tidak ada dalam sticker pack mu")
+  else:
+    return await Asta.edit("**Silahkan Reply ke Sticker!**")
