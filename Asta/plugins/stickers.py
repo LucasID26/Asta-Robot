@@ -252,9 +252,12 @@ async def unkang(client,m):
     packname = replied.sticker.set_name
     if not packname:
       return await Asta.edit("Sticker tidak terdaftar dalam pack manapun")
+    if int(packname.split("_u")[1].split("_v")[0]) != int(m.from_user.id):
+      return await Asta.edit("Wow kamu mau hapus sticker ini dari sticker pack orang lain?")
     await asisstant.forward_messages("stickers",from_chat_id=m.chat.id,message_ids=m.reply_to_message.id)
     if await get_response(m, asisstant) == "This is the last sticker in this set. Deleting it will also delete the set and free its link. Are you sure you want to do this?":
       await asisstant.send_message("stickers",'Delete anyway')
+      await asyncio.sleep(2)
       if await get_response(m, asisstant) == "Done! The sticker set is gone.":
         return await Asta.edit(f"**Sticker Berhasil Dihapus!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**")
     elif await get_response(m, asisstant) == "I have deleted that sticker for you, it will stop being available to Telegram users within an hour.":
