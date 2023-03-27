@@ -257,6 +257,7 @@ async def unkang(client,m):
     if await get_response(m, asisstant) == "Invalid set selected.":
       return await Asta.edit("Wow kamu mau hapus sticker ini dari sticker pack orang lain?")
     elif int(packname.split("_u")[1].split("_v")[0]) != int(m.from_user.id):
+      await asisstant.send_message("stickers",'/cancel')
       return await Asta.edit("Wow kamu mau hapus sticker ini dari sticker pack orang lain?")
     await asisstant.forward_messages("stickers",from_chat_id=m.chat.id,message_ids=m.reply_to_message.id)
     if await get_response(m, asisstant) == "This is the last sticker in this set. Deleting it will also delete the set and free its link. Are you sure you want to do this?":
