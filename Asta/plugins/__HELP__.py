@@ -60,6 +60,8 @@ async def def_callback(_, call):
     InlineButton(
       'GENERATOR',callback_data='generator'),
     InlineButton(
+      'STICKERS',callback_data='stickers'),
+    InlineButton(
       'LAINNYA',callback_data='lain'))
     button.row(InlineButton('Back', callback_data='help1')) 
     await bot.edit_message_text(call.message.chat.id, text=f"__**HELP {bot.me.first_name}**__\n\nTambahkan saya ke group mu dan jadikan saya admin supaya saya berfungsi dengan baik!.",message_id=call.message.id,reply_markup=button)
@@ -79,6 +81,8 @@ async def def_callback(_, call):
     await bot.edit_message_text(call.message.chat.id, text=admins_help,message_id=call.message.id,reply_markup=button)
   elif call.data == 'generator':
     await bot.edit_message_text(call.message.chat.id, text=generator_help,message_id=call.message.id,reply_markup=button)
+  elif call.data == 'stickers':
+    await bot.edit_message_text(call.message.chat.id, text=sticker_help,message_id=call.message.id,reply_markup=button) 
   #await bot.send_message(call.message.chat.id,f"`Tommbol Satu`",reply_to_message_id=call.message.id)
 
 
@@ -154,4 +158,14 @@ generator_help = """
 - /cancel: Untuk mengehentikan.
 """
 
+#STICKER HELP
+sticker_help = """
+**STICKERS**
 
+Module ini adalah solusi bagi kalian yang ingin membuat sticker dan membuat sticker pack.
+Kamu bisa membuat sticker dari TEXT,PHOTO,VIDEO,GIF
+
+- /q atau /quotly [reply]: Membuat sticker dari TEXT.
+- /kang [reply_media]: Membuat sticker dari PHOTO,VIDEO,GIF termasuk menyimpan sticker yang sudah dibuat ke dalam sticker pack.
+- /unkang [reply_sticker]: Menghapus sticker dari sticker pack mu.
+"""
