@@ -228,3 +228,18 @@ async def kang(client,m):
 
 async def get_response(m, asisstant):
     return [x async for x in asisstant.get_chat_history("Stickers", limit=1)][0].text
+
+
+
+@bot.on_message(filters.command('unkang'))
+async def unkang(client,m):
+  replied = m.reply_to_message
+  if replied.sticker:
+    try:
+      await asisstant.send_message("stickers", "/delsticker")
+    except YouBlockedUser:
+      await asisstant.unblock_user("stickers")
+      await asisstant.send_message("stickers", "/delsticker")
+    except Exception as e:
+      return await Asta.edit(f"**ERROR:** `{e}`")
+    await 
