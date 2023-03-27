@@ -72,6 +72,7 @@ def resize_image(image):
 
 async def resize_media(media: str, video: bool, fast_forward: bool) -> str:
     if video:
+        return await convert_video(media)
         info_ = Media_Info.data(media)
         width = info_["pixel_sizes"][0]
         height = info_["pixel_sizes"][1]
