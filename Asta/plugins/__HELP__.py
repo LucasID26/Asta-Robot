@@ -154,6 +154,10 @@ Adapun Perintah lain
 generator_help = """
 **SESSION GENERATOR**
 
+Ingin membuat String Sessions?,module ini adalah solusinya.
+Module ini mendukung generator session Pyrogram dan Telethon.
+
+Perintah:
 - /generate: Hasilkan sesi string menggunakan bot ini atau memakai bot ini @GenerateStringYoiRobot . Hanya mendukung Pyrogram v2 dan Telethon.
 - /cancel: Untuk mengehentikan.
 """
@@ -165,6 +169,7 @@ sticker_help = """
 Module ini adalah solusi bagi kalian yang ingin membuat sticker dan membuat sticker pack.
 Kamu bisa membuat sticker dari TEXT,PHOTO,VIDEO,GIF
 
+Perintah:
 - /q atau /quotly [reply]: Membuat sticker dari TEXT.
 - /kang [reply_media]: Membuat sticker dari PHOTO,VIDEO,GIF termasuk menyimpan sticker yang sudah dibuat ke dalam sticker pack.
 - /unkang [reply_sticker]: Menghapus sticker dari sticker pack mu.
