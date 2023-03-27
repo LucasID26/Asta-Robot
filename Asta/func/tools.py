@@ -121,7 +121,7 @@ async def convert_video(filename: str) -> str:
     downpath, f_name = os.path.split(filename)
     webm_video = os.path.join(downpath, f"{f_name.split('.', 1)[0]}.webm")
     cmd = [
-        "mediaextract",
+        "ffmpeg",
         "-loglevel",
         "quiet",
         "-i",
