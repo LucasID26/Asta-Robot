@@ -253,13 +253,13 @@ async def unkang(client,m):
     if not packname:
       return await Asta.edit("Sticker tidak terdaftar dalam pack manapun")
     await asisstant.forward_messages("stickers",from_chat_id=m.chat.id,message_ids=m.reply_to_message.id)
-    if await get_response(m, asisstant) == 'This is the last sticker in this set. Deleting it will also delete the set and free its link. Are you sure you want to do this?':
+    if await get_response(m, asisstant) == "This is the last sticker in this set. Deleting it will also delete the set and free its link. Are you sure you want to do this?":
       await asisstant.send_message("stickers",'Delete anyway')
-      if await get_response(m, asisstant) == 'Done! The sticker set is gone.':
+      if await get_response(m, asisstant) == "Done! The sticker set is gone.":
         return await Asta.edit(f"**Sticker Berhasil Dihapus!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**")
-    elif await get_response(m, asisstant) == 'I have deleted that sticker for you, it will stop being available to Telegram users within an hour.':
+    elif await get_response(m, asisstant) == "I have deleted that sticker for you, it will stop being available to Telegram users within an hour.":
       return await Asta.edit(f"**Sticker Berhasil Dihapus!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**")
-    elif await get_response(m, asisstant) == 'Sorry, I can't do this. Looks like you are not the owner of the relevant set.':
+    elif await get_response(m, asisstant) == "Sorry, I can't do this. Looks like you are not the owner of the relevant set.":
       return await Asta.edit("Saya mendeteksi bahwa id sticker itu tidak ada dalam sticker pack mu")
   else:
     return await Asta.edit("**Silahkan Reply ke Sticker!**")
