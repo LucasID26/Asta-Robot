@@ -4,7 +4,7 @@ import os
 import shlex
 from typing import Tuple
 from PIL import Image
-from pymediainfo import MediaInfo
+#from pymediainfo import MediaInfo
 
 
 async def run_cmd(cmd: str) -> Tuple[str, str, int, int]:
@@ -116,57 +116,36 @@ async def resize_media(media: str, video: bool, fast_forward: bool) -> str:
 
 
 
-class Media_Info:
-    def data(media: str) -> dict:
-        "Get downloaded media's information"
-        found = False
-        media_info = MediaInfo.parse(media)
-        for track in media_info.tracks:
-            if track.track_type == "Video":
-                found = True
-                type_ = track.track_type
-                format_ = track.format
-                duration_1 = track.duration
-                other_duration_ = track.other_duration
-                duration_2 = (
-                    f"{other_duration_[0]} - ({other_duration_[3]})"
-                    if other_duration_
-                    else None
-                )
-                pixel_ratio_ = [track.width, track.height]
-                aspect_ratio_1 = track.display_aspect_ratio
-                other_aspect_ratio_ = track.other_display_aspect_ratio
-                aspect_ratio_2 = other_aspect_ratio_[0] if other_aspect_ratio_ else None
-                fps_ = track.frame_rate
-                fc_ = track.frame_count
-                media_size_1 = track.stream_size
-                other_media_size_ = track.other_stream_size
-                media_size_2 = (
-                    [
-                        other_media_size_[1],
-                        other_media_size_[2],
-                        other_media_size_[3],
-                        other_media_size_[4],
-                    ]
-                    if other_media_size_
-                    else None
-                )
+async def convert_video(filename: str) -> str:
+    downpath, f_name = os.path.split(filename)
+    webm_video = os.path.join(downpath, f"{f_name.split('.', 1)[0]}.webm")
+    cmd = [
+        "mediaextract",
+        "-loglevel",
+        "quiet",
+        "-i",
+        filename,
+        "-t",
+        "00:00:03",
+        "-vf",
+        "fps=30",
+        "-c:v",
+        "vp9",
+        "-b:v:",
+        "500k",
+        "-preset",
+        "ultrafast",
+        "-s",
+        "512x512",
+        "-y",
+        "-an",
+        webm_video,
+    ]
 
-        dict_ = (
-            {
-                "media_type": type_,
-                "format": format_,
-                "duration_in_ms": duration_1,
-                "duration": duration_2,
-                "pixel_sizes": pixel_ratio_,
-                "aspect_ratio_in_fraction": aspect_ratio_1,
-                "aspect_ratio": aspect_ratio_2,
-                "frame_rate": fps_,
-                "frame_count": fc_,
-                "file_size_in_bytes": media_size_1,
-                "file_size": media_size_2,
-            }
-            if found
-            else None
-        )
-        return dict_
+    proc = await asyncio.create_subprocess_exec(*cmd)
+    # Wait for the subprocess to finish
+    await proc.communicate()
+
+    if webm_video != filename:
+        os.remove(filename)
+    return webm_video
