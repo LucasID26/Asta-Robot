@@ -239,7 +239,7 @@ async def unkang(client,m):
   if not m.reply_to_message:
     return await m.reply_text("Silahkan reply sticker yang mau dihapus,pastikan reply sticker dari pesan mu sendiri")
   replied = m.reply_to_message
-  Asta = await m.reply_text("`Menghapus sticker dari sticker pack mu . . .`"
+  Asta = await m.reply_text("`Menghapus sticker dari sticker pack mu . . .`")
   if replied.sticker:
     try:
       await asisstant.send_message("stickers", "/delsticker")
