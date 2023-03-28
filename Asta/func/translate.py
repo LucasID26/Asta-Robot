@@ -1,7 +1,7 @@
 from requests import get
 from bs4 import BeautifulSoup as BF
 
-def translate(query):
+def trbali(query):
   url = f"https://translate.glosbe.com/id-ban/{query}"
   res = get(url)
   bf = BF(res.content,'html.parser')
