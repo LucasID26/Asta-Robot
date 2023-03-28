@@ -1,40 +1,67 @@
 import asyncio
-from config import bot,asisstant,prefix
+import base64
+import os
+import requests
+from config import bot,prefix
 from pyrogram import filters
 
 from Asta.decorators.info_cmd import info_cmd
 from Asta.decorators.cek_admin import bot_admin
 from Asta.decorators.error import error
-from Asta.func.tools import get_arg
 
 @bot.on_message(filters.command(["q", "quotly"],prefix))
 @info_cmd
 @bot_admin
 @error
 async def quotly(client,m):
-  args = get_arg(m)
-  if not m.reply_to_message and not args:
+  if not m.reply_to_message:
     return await m.reply_text("**Mohon Balas ke Pesan**")
-  Bot = "QuotLyBot"
   if m.reply_to_message:
+    if not m.reply_to_message.text:
+      return await m.reply_text("**Mohon balas ke pesan text bukan media**)
     msg = await m.reply_text("`Membuat sticker . . .`")
-    await asisstant.unblock_user(Bot)
-    if args:
-      await asisstant.send_message(Bot, f"/qcolor {args}")
-      await asyncio.sleep(1)
-    else:
-      pass
-    await asisstant.forward_messages(chat_id=Bot,from_chat_id=m.chat.id,message_ids=m.reply_to_message.id) 
-    #await m.reply_to_message.forward(Bot)
-    await asyncio.sleep(5)
-    async for quotly in asisstant.search_messages(Bot, limit=1):
-      try:
-        await asyncio.sleep(5)
-        await msg.delete()
-        rep = m.id if m.reply_to_message.from_user.is_bot == True else m.reply_to_message.id
-        await m.reply_sticker(
-                    sticker=quotly.sticker.file_id,
-                    reply_to_message_id=rep)
-      except:
-        return await m.reply_text("**Gagal Membuat Sticker Quotly**")
+    try:
+      json_data = {
+                'type': 'quote',
+                'format': 'webp',
+                'backgroundColor': '#1b1429',
+                'width': 512,
+                'height': 768,
+                'scale': 2,
+                'messages': [
+                    {
+                        'entities': [],
+                        'chatId': m.chat.id,
+                        'avatar': True,
+                        'from': {
+                            'id': m.reply_to_message.from_user.id,
+                            'first_name': m.reply_to_message.from_user.first_name,
+                            'last_name': m.reply_to_message.from_user.last_name,
+                            'username': m.reply_to_message.from_user.username,
+                            'language_code': 'id',
+                            'title': m.chat.title,
+                            'photo': {
+                                'small_file_id': 'AQADBAADQrgxG-xw8FEAEAIAAwLRM3kABOEuO0ITTBqMAAQeBA',
+                                'small_file_unique_id': 'AgADQrgxG-xw8FE',
+                                'big_file_id': 'AQADBAADQrgxG-xw8FEAEAMAAwLRM3kABOEuO0ITTBqMAAQeBA',
+                                'big_file_unique_id': 'AgADQrgxG-xw8FE',
+                            },
+                            'type': 'supergroup',
+                            'name': m.reply_to_message.from_user.first_name,
+                        },
+                        'text': m.reply_to_message.text,
+                        'replyMessage': {},
+                    },
+                ],
+            }
+      response = (requests.post('https://api.safone.me/quotly', json=json_data)).json()
+      decode =base64.b64decode((response.get("image")))
+      img_file ='sticker.webp', 'wb')
+      img_file.write(decode)
+      img_file.close()
+      await m.reply_sticker(open("sticker.webp",'rb'))
+      await msg.delete()
+      os.remove("sticker.webp")
+    except:
+      return await msg.edit("**Gagal Membuat Sticker Quotly**")
 
