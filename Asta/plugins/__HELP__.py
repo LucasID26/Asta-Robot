@@ -94,6 +94,7 @@ Perintah:
 - /ping: Kecepatan respon bot.
 - /info [reply/username]: Informasi profile user/group dan channel.
 - /id: Id obrolan saat ini.
+- /asupan: Random video asupan hot 😂.
 """
 
 filter_help = """
@@ -144,6 +145,7 @@ Perintah Admin:
 Adapun Perintah lain
 - /bots: Berfungsi untuk cek ada berapa bot didalam group.
 - /staff: Daftar admin dalam obrolan saat ini.
+- /all: Mention semua member pada obrolan.
 - /clean atau /ghost: Module ini berfungsi untuk mengeluarkan akun terhapus dalam group.Tidak dapat dibatalkan.
 - /speedtest: Cek kecepatan jaringan bot.
 - /status: Informasi detail Bot.
