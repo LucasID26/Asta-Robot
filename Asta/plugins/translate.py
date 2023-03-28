@@ -12,14 +12,14 @@ from Asta.decorators.error import error
 @bot_admin
 @error
 async def trans(client,m):
-  if len(m.command) == 1:
+  if m.text == '/trbali':
     return await m.reply_text("Google Translate Bhs Bali, /trbali [text]")
   try:
-    if m.reply_to_message is not None:
+    if m.reply_to_message:
       if not m.reply_to_message.text:
         return await m.reply_text("Reply pesan bukan media")
       text = m.reply_to_message.text 
-    else:
+    elif not m.reply_to_message:
       text = m.text.split(" ",1)[1]
     tr = trbali(text)
     hasil = f"**Hasil translate ke Bhs Bali**\n\n`{tr}`"
