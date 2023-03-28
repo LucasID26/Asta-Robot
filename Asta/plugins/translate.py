@@ -22,7 +22,7 @@ async def trans(client,m):
     else:
       text = m.text.split(" ",1)[1]
     tr = trbali(text)
-    hasil = f"**Hasil translate ke {code}**\n\n`{tr}`"
+    hasil = f"**Hasil translate ke Bhs Bali**\n\n`{tr}`"
     await m.reply_text(hasil)
   except:
     await m.reply_text("Pastikan format sudah benar")
