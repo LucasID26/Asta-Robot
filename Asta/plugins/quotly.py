@@ -18,7 +18,7 @@ async def quotly(client,m):
     return await m.reply_text("**Mohon Balas ke Pesan**")
   if m.reply_to_message:
     if not m.reply_to_message.text:
-      return await m.reply_text("**Mohon balas ke pesan text bukan media**)
+      return await m.reply_text("**Mohon balas ke pesan text bukan media**")
     msg = await m.reply_text("`Membuat sticker . . .`")
     try:
       json_data = {
