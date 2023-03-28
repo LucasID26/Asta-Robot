@@ -12,8 +12,6 @@ from Asta.decorators.error import error
 @bot_admin
 @error
 async def trans(client,m):
-  if m.text == '/trbali':
-    return await m.reply_text("Google Translate Bhs Bali, /trbali [text]")
   try:
     if m.reply_to_message:
       if not m.reply_to_message.text:
@@ -21,6 +19,8 @@ async def trans(client,m):
       text = m.reply_to_message.text 
     elif not m.reply_to_message:
       text = m.text.split(" ",1)[1]
+    else:
+      return await m.reply_text("Google Translate Bhs Bali, /trbali [text]")
     tr = trbali(text)
     hasil = f"**Hasil translate ke Bhs Bali**\n\n`{tr}`"
     await m.reply_text(hasil)
