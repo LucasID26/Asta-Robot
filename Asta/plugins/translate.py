@@ -13,7 +13,7 @@ from Asta.decorators.error import error
 @error
 async def trans(client,m):
   if len(m.command) == 1:
-    return await m.reply_text("Google Translate Bhs Bali, /bali [text]")
+    return await m.reply_text("Google Translate Bhs Bali, /trbali [text]")
   try:
     if m.reply_to_message is not None:
       if not m.reply_to_message.text:
