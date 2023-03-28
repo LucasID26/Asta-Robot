@@ -12,7 +12,7 @@ async def helpp(client, m):
     button = InlineKeyboard(row_width=2)
     button.add(
       InlineButton(
-      'HELP❓',url=f'https://t.me/{bot.me.username}?start=help'),
+      'HELP❓',url=f'https://t.me/{bot.me.username}?start'),
       InlineButton(
         'OWNER👤',url='https://t.me/LucasBukanKalengSarden'),
       InlineButton(
