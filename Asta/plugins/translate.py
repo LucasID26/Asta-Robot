@@ -19,7 +19,7 @@ async def trans(client,m):
       text = m.reply_to_message.text 
     elif not m.reply_to_message:
       text = m.text.split(" ",1)[1]
-    else:
+    elif len(m.command) == 1:
       return await m.reply_text("Google Translate Bhs Bali, /trbali [text]")
     tr = trbali(text)
     hasil = f"**Hasil translate ke Bhs Bali**\n\n`{tr}`"
