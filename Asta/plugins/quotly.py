@@ -56,7 +56,7 @@ async def quotly(client,m):
             }
       response = (requests.post('https://api.safone.me/quotly', json=json_data)).json()
       decode =base64.b64decode((response.get("image")))
-      img_file ='sticker.webp', 'wb')
+      img_file = open('sticker.webp', 'wb')
       img_file.write(decode)
       img_file.close()
       await m.reply_sticker(open("sticker.webp",'rb'))
