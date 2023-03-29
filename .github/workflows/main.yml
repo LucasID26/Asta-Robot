@@ -25,7 +25,7 @@ jobs:
         run: |
           import requests
 
-          url = "${secrets.URL}"  # Ganti dengan URL repl Anda
+          url = "${{secrets.URL}}"  # Ganti dengan URL repl Anda
           response = requests.get(url)
 
           if response.status_code != 200:
