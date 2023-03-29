@@ -12,7 +12,7 @@ jobs:
       run: |
         curl --head --silent ${{secrets.URL}}
         if [ "$?" -eq "0" ]; then
-          echo "URL REPL is up"
+          echo "URL REPL RUN"
         else
-          echo "URL REPL is down"
+          echo "URL REPL NOT RUN"
         fi
