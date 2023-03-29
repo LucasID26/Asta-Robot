@@ -15,7 +15,7 @@ def flask_run():
 def run_flask():
   app.run(
     host="0.0.0.0",
-    port=random.randint(2000,9000))
+    port=8080)
 
 def run_thread():
   Thread(target=run_flask).start()
