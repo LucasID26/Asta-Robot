@@ -1,7 +1,7 @@
 name: Monitoring URL REPL GitHub
 on: 
   schedule:
-    - cron: '*/1 * * * *' # Menjadwalkan pengecekan setiap 1 menit
+    - cron: '*/5 * * * *'
 jobs:
   check_repl:
     runs-on: ubuntu-latest
