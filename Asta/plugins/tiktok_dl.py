@@ -85,43 +85,30 @@ async def callback_dl_tt(client,call):
         share = link_data[id]['share']
         views = link_data[id]['views']
         video = link_data[id]['video']
-        #res = requests.get(link_data[id]['video']).content
-        #with open(title, 'wb') as vd_file:
-         # vd_file.write(res)
-         # vd_file.close()
         await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
-        #await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
         await call.message.reply_video(video,thumb=link_data[id]['thumb'],caption=f"""
 {title}
 
 👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
 """)
-        await msg.delete()
-        os.remove(title)
+        return await msg.delete()
       elif data[1] == 'audio_tt':
         title = link_data[id]['a_title'] + '.mp3'
-        author = link_data[id]['author']
+        author = link_data[id]['a_author']
         like = link_data[id]['like']
         comment = link_data[id]['comment']
         share = link_data[id]['share']
         views = link_data[id]['views']
         audio = link_data[id]['audio']
-        #res = requests.get(link_data[id]['audio']).content
-        #with open(title, 'wb') as vd_file:
-        #  vd_file.write(res)
-         # vd_file.close()
         await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
-        #await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
         await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
 **Author:** {author}
 {title}
 
 👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
 """)
-        await call.message.delete()
-        os.remove(title) 
+        return await call.message.delete()
     else:
       await call.answer("Bukan buat lu!",True)
   except Exception as e:
-    print(e)
     #await call.answer("Timeout Callback data!",True)
