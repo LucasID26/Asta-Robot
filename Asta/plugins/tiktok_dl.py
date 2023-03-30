@@ -79,17 +79,18 @@ async def callback_dl(client,call):
     if data[1] == id:
       msg = await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📥 **Mengunduh**")    
       if data[0] == 'video_tt': 
-        title = link_data[id]['v_title'] + '.mp4'
+        title = link_data[id]['v_title']
         like = link_data[id]['like']
         comment = link_data[id]['comment']
         share = link_data[id]['share']
         views = link_data[id]['views']
-        res = requests.get(link_data[id]['video']).content
-        with open(title, 'wb') as vd_file:
-          vd_file.write(res)
-          vd_file.close()
+        video = link_data[id]['video']
+        #res = requests.get(link_data[id]['video']).content
+        #with open(title, 'wb') as vd_file:
+         # vd_file.write(res)
+         # vd_file.close()
         await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
-        await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
+        await call.message.reply_video(video,thumb=link_data[id]['thumb'],caption=f"""
 {title}
 
 👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
