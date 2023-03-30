@@ -3,6 +3,7 @@ from pyrogram import filters
 import requests,json,os
 from pykeyboard import InlineKeyboard,InlineButton
 from urllib.parse import urlparse 
+import asyncio
 
 from Asta.decorators.cek_admin import bot_admin
 from Asta.decorators.info_cmd import info_cmd
@@ -86,7 +87,9 @@ async def callback_dl_tt(client,call):
         views = link_data[id]['views']
         video = link_data[id]['video']
         await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
-        await call.message.reply_video(video,thumb=link_data[id]['thumb'],caption=f"""
+        await asyncio.sleep(2)
+        await call.message.delete()
+        return await call.message.reply_video(video,thumb=link_data[id]['thumb'],caption=f"""
 {title}
 
 👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
@@ -101,13 +104,14 @@ async def callback_dl_tt(client,call):
         views = link_data[id]['views']
         audio = link_data[id]['audio']
         await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
-        await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
+        await asyncio.sleep(2)
+        await call.message.delete()
+        return await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
 **Author:** {author}
 {title}
 
 👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
 """)
-        return await call.message.delete()
     else:
       await call.answer("Bukan buat lu!",True)
   except Exception as e:
