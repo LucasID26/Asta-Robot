@@ -113,6 +113,7 @@ async def callback_dl_tt(client,call):
 👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
 """)
     else:
-      await call.answer("Bukan buat lu!",True)
+      return await call.answer("Bukan buat lu!",True)
   except Exception as e:
-    await call.answer("Timeout Callback data!",True)
+    pass
+    #await call.answer("Timeout Callback data!",True)
