@@ -101,7 +101,7 @@ async def callback_dl_tt(client,call):
 💬: {comment}   👀: {views}` 
 """)
   elif data[1] == 'audio_tt':
-    title = link_data[id]['a_title'] + '.mp3'
+    title = link_data[id]['a_title']
     author = link_data[id]['a_author']
     like = link_data[id]['like']
     comment = link_data[id]['comment']
