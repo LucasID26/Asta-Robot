@@ -61,8 +61,7 @@ async def yt_dlyt_dl(client,m):
     
 
 
-    await m.reply_photo(photo=thumb,caption=f
-"""
+    await m.reply_photo(photo=thumb,caption=f"""
 **Name:** {name}
 **Username:** {username}
 
@@ -90,8 +89,7 @@ async def callback_dl(client,call):
           vd_file.write(res)
           vd_file.close()
         await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
-        await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f
-"""
+        await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
 {title}
 
 👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
@@ -109,8 +107,7 @@ async def callback_dl(client,call):
           vd_file.write(res)
           vd_file.close()
         await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
-        await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f
-"""
+        await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
 {title}
 
 👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
