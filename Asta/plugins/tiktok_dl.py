@@ -89,7 +89,8 @@ async def callback_dl(client,call):
         #with open(title, 'wb') as vd_file:
          # vd_file.write(res)
          # vd_file.close()
-        await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
+        await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
+        #await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
         await call.message.reply_video(video,thumb=link_data[id]['thumb'],caption=f"""
 {title}
 
@@ -107,7 +108,8 @@ async def callback_dl(client,call):
         with open(title, 'wb') as vd_file:
           vd_file.write(res)
           vd_file.close()
-        await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
+        await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}"
+        #await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
         await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
 {title}
 
