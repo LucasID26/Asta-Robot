@@ -73,7 +73,7 @@ async def tiktok_dl(client,m):
 
 @bot.on_callback_query(filters.create(lambda _, __, query: "tiktok|" in query.data))
 async def callback_dl_tt(client,call):
-  data = call.data.split("|",1)
+  data = call.data.split("|",2)
   id = str(call.from_user.id)
   try:
     if data[2] == id:
