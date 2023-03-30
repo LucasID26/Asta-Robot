@@ -100,17 +100,20 @@ async def callback_dl(client,call):
         os.remove(title)
       elif data[0] == 'audio_tt':
         title = link_data[id]['a_title'] + '.mp3'
+        author = link_data[id]['author']
         like = link_data[id]['like']
         comment = link_data[id]['comment']
         share = link_data[id]['share']
         views = link_data[id]['views']
-        res = requests.get(link_data[id]['audio']).content
-        with open(title, 'wb') as vd_file:
-          vd_file.write(res)
-          vd_file.close()
-        await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}"
+        audio = link_data[id]['audio']
+        #res = requests.get(link_data[id]['audio']).content
+        #with open(title, 'wb') as vd_file:
+        #  vd_file.write(res)
+         # vd_file.close()
+        await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
         #await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
         await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
+**Author:** {author}
 {title}
 
 👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
