@@ -115,4 +115,4 @@ async def callback_dl_tt(client,call):
     else:
       await call.answer("Bukan buat lu!",True)
   except Exception as e:
-    #await call.answer("Timeout Callback data!",True)
+    await call.answer("Timeout Callback data!",True)
