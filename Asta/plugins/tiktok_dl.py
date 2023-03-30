@@ -93,13 +93,13 @@ async def callback_dl_tt(client,call):
     video = link_data[id]['video']
     await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
     await asyncio.sleep(2)
-    await call.message.delete()
-    return await call.message.reply_video(video,caption=f"""
+    await call.message.reply_video(video,caption=f"""
 {title}
 
 `👍: {like}  🔁: {share}  
 💬: {comment}   👀: {views}` 
 """)
+    return await call.message.delete()
   elif data[1] == 'audio_tt':
     title = link_data[id]['a_title']
     author = link_data[id]['a_author']
@@ -110,11 +110,11 @@ async def callback_dl_tt(client,call):
     audio = link_data[id]['audio']
     await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
     await asyncio.sleep(2)
-    await call.message.delete()
-    return await call.message.reply_audio(audio,thumb=link_data[id]['thumb'],caption=f"""
+    await call.message.reply_audio(audio,thumb=link_data[id]['thumb'],caption=f"""
 **Author:** {author}
 {title}
 
 `👍: {like}  🔁: {share}  
 💬: {comment}   👀: {views}` 
 """)
+    return await call.message.delete()
