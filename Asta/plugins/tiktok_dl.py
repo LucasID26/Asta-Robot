@@ -66,7 +66,8 @@ async def tiktok_dl(client,m):
 **Name:** {name}
 **Username:** {username}
 
-`👍: {like}  🔁: {share}  💬: {comment}   👀: {views}` 
+`👍: {like}  🔁: {share}  
+💬: {comment}   👀: {views}` 
 """,reply_markup=button)
     await msg.delete() 
   except Exception as e: 
@@ -93,10 +94,11 @@ async def callback_dl_tt(client,call):
     await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
     await asyncio.sleep(2)
     await call.message.delete()
-    return await call.message.reply_video(video,thumb=link_data[id]['thumb'],caption=f"""
+    return await call.message.reply_video(video,caption=f"""
 {title}
 
-`👍: {like}  🔁: {share}  💬: {comment}   👀: {views}` 
+`👍: {like}  🔁: {share}  
+💬: {comment}   👀: {views}` 
 """)
   elif data[1] == 'audio_tt':
     title = link_data[id]['a_title'] + '.mp3'
@@ -109,9 +111,10 @@ async def callback_dl_tt(client,call):
     await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
     await asyncio.sleep(2)
     await call.message.delete()
-    return await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
+    return await call.message.reply_audio(audio,thumb=link_data[id]['thumb'],caption=f"""
 **Author:** {author}
 {title}
 
-`👍: {like}  🔁: {share}  💬: {comment}   👀: {views}` 
+`👍: {like}  🔁: {share}  
+💬: {comment}   👀: {views}` 
 """)
