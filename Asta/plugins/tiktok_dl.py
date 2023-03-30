@@ -66,7 +66,7 @@ async def tiktok_dl(client,m):
 **Name:** {name}
 **Username:** {username}
 
-👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
+`👍: {like}  🔁: {share}  💬: {comment}   👀: {views}` 
 """,reply_markup=button)
     await msg.delete() 
   except Exception as e: 
@@ -76,44 +76,42 @@ async def tiktok_dl(client,m):
 async def callback_dl_tt(client,call):
   data = call.data.split("|",2)
   id = str(call.from_user.id)
+  if id != data[2]:
+    return await call.answer("Bukan buat lu!",True)
   try:
-    if data[2] == id:
-      msg = await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📥 **Mengunduh**")    
-      if data[1] == 'video_tt': 
-        title = link_data[id]['v_title']
-        like = link_data[id]['like']
-        comment = link_data[id]['comment']
-        share = link_data[id]['share']
-        views = link_data[id]['views']
-        video = link_data[id]['video']
-        await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
-        await asyncio.sleep(2)
-        await call.message.delete()
-        return await call.message.reply_video(video,thumb=link_data[id]['thumb'],caption=f"""
+    data_tt = link_data[id]
+  except KeyError:
+    return await call.answer("Timeout Callback data!",True)
+  msg = await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📥 **Mengunduh**")    
+  if data[1] == 'video_tt': 
+    title = link_data[id]['v_title']
+    like = link_data[id]['like']
+    comment = link_data[id]['comment']
+    share = link_data[id]['share']
+    views = link_data[id]['views']
+    video = link_data[id]['video']
+    await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
+    await asyncio.sleep(2)
+    await call.message.delete()
+    return await call.message.reply_video(video,thumb=link_data[id]['thumb'],caption=f"""
 {title}
 
-👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
+`👍: {like}  🔁: {share}  💬: {comment}   👀: {views}` 
 """)
-        return await msg.delete()
-      elif data[1] == 'audio_tt':
-        title = link_data[id]['a_title'] + '.mp3'
-        author = link_data[id]['a_author']
-        like = link_data[id]['like']
-        comment = link_data[id]['comment']
-        share = link_data[id]['share']
-        views = link_data[id]['views']
-        audio = link_data[id]['audio']
-        await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
-        await asyncio.sleep(2)
-        await call.message.delete()
-        return await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
+  elif data[1] == 'audio_tt':
+    title = link_data[id]['a_title'] + '.mp3'
+    author = link_data[id]['a_author']
+    like = link_data[id]['like']
+    comment = link_data[id]['comment']
+    share = link_data[id]['share']
+    views = link_data[id]['views']
+    audio = link_data[id]['audio']
+    await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
+    await asyncio.sleep(2)
+    await call.message.delete()
+    return await call.message.reply_video(open(title,"rb"),thumb=link_data[id]['thumb'],caption=f"""
 **Author:** {author}
 {title}
 
-👍: {like}  🔁: {share}  💬: {comment}   👀: {views}  
+`👍: {like}  🔁: {share}  💬: {comment}   👀: {views}` 
 """)
-    else:
-      return await call.answer("Bukan buat lu!",True)
-  except Exception as e:
-    pass
-    #await call.answer("Timeout Callback data!",True)
