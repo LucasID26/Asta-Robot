@@ -71,7 +71,7 @@ async def tiktok_dl(client,m):
   except Exception as e: 
     await msg.edit(f"ERORR : {e}")
 
-@bot.on_callback_query(filters.create(lambda _, __, query: "tiktok" in query.data))
+@bot.on_callback_query(filters.create(lambda _, __, query: "tiktok|" in query.data))
 async def callback_dl_tt(client,call):
   data = call.data.split("|",1)
   id = str(call.from_user.id)
