@@ -118,5 +118,5 @@ async def callback_dl(client,call):
     else:
       await call.answer("Bukan buat lu!",True)
   except Exception as e:
-    pass
+    print(e)
     #await call.answer("Timeout Callback data!",True)
