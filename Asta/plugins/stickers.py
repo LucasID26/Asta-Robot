@@ -270,5 +270,8 @@ async def unkang(client,m):
       return await Asta.edit(f"**Sticker Berhasil Dihapus!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**")
     elif await get_response(m, asisstant) == "Sorry, I can't do this. Looks like you are not the owner of the relevant set.":
       return await Asta.edit("Saya mendeteksi bahwa id sticker itu tidak ada dalam sticker pack mu")
+    elif await get_response(m, asisstant) == "Please send me the sticker.":
+      await asisstant.send_message("stickers",'/cancel')
+      return await Asta.edit("Hmm sticker itu tidak ada dalam sticker pack mu!!")
   else:
     return await Asta.edit("**Silahkan Reply ke Sticker!**")
