@@ -29,8 +29,8 @@ async def yt_dlyt_dl(client,m):
   msg = await m.reply_text("`prosesss`")
   button = InlineKeyboard(row_width=2)
   button.add(
-    InlineButton('Video',callback_data=f'video|{id}'),
-    InlineButton('Audio',callback_data=f'audio|{id}')
+    InlineButton('Video',callback_data=f'yt|video|{id}'),
+    InlineButton('Audio',callback_data=f'yt|audio|{id}')
   )
   try:
     req = requests.get(f"https://apimu.my.id/downloader/youtube3?link={link[1]}&type=720").json()
@@ -49,52 +49,52 @@ async def yt_dlyt_dl(client,m):
   except Exception as e: 
     await msg.edit(f"ERORR : {e}")
 
-@bot.on_callback_query(group=2)
+@bot.on_callback_query(filters.create(lambda _, __, query: "yt|" in query.data))
 async def callback_dl(client,call):
-  data = call.data.split("|",1)
+  data = call.data.split("|",2)
   id = str(call.from_user.id)
+  if id != data[2]:
+    return await call.answer("Timeout Callback data!",True)
   try:
-    if data[1] == id:
-      msg = await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📥 **Mengunduh**")    
-      if data[0] == 'video': 
-        title = link_data[id]['title'] + '.mp4'
-        size = link_data[id]['sizev']
-        thumb = link_data[id]['thumb']
-        res = requests.get(link_data[id]['video']).content
-        with open(title, 'wb') as vd_file:
-          vd_file.write(res)
-          vd_file.close()
-        with open(f"{title}.jpg","wb") as ph_file:
-          ph_file.write(requests.get(thumb).content)
-          ph_file.close() 
-        await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
-        await call.message.reply_video(open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
+    data2 = link_data[id]
+  except KeyError:
+    return await call.answer("Timeout Callback data!",True)
+  msg = await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📥 **Mengunduh**")    
+  if data[1] == 'video': 
+    title = link_data[id]['title'] + '.mp4'
+    size = link_data[id]['sizev']
+    thumb = link_data[id]['thumb']
+    res = requests.get(link_data[id]['video']).content
+    with open(title, 'wb') as vd_file:
+      vd_file.write(res)
+      vd_file.close()
+    with open(f"{title}.jpg","wb") as ph_file:
+      ph_file.write(requests.get(thumb).content)
+      ph_file.close() 
+    await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
+    await call.message.reply_video(open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
 {title}
 • Size: {size}""")
-        await msg.delete()
-        os.remove(title)
-        os.remove(f"{title}.jpg") 
-      elif data[0] == 'audio':
-        title = link_data[id]['title'] + '.mp3'
-        size = link_data[id]['sizea']
-        thumb = link_data[id]['thumb']
-        res = requests.get(link_data[id]['audio']).content
-        with open(title, 'wb') as vd_file:
-          vd_file.write(res)
-          vd_file.close()
-        with open(f"{title}.jpg","wb") as ph_file:
-          ph_file.write(requests.get(thumb).content)
-          ph_file.close()
-        await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
-        await call.message.reply_audio(open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
+    await msg.delete()
+    os.remove(title)
+    os.remove(f"{title}.jpg") 
+    return
+  elif data[0] == 'audio':
+    title = link_data[id]['title'] + '.mp3'
+    size = link_data[id]['sizea']
+    thumb = link_data[id]['thumb']
+    res = requests.get(link_data[id]['audio']).content
+    with open(title, 'wb') as vd_file:
+      vd_file.write(res)
+      vd_file.close()
+    with open(f"{title}.jpg","wb") as ph_file:
+      ph_file.write(requests.get(thumb).content)
+      ph_file.close()
+    await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
+    await call.message.reply_audio(open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
 {title}
 • Size: {size}""")
-        await call.message.delete()
-        os.remove(title)
-        os.remove(f"{title}.jpg") 
-    else:
-      await call.answer("Bukan buat lu!",True)
-  except Exception as e:
-    print(e)
-    pass
-    #await call.answer("Timeout Callback data!",True)
+    await call.message.delete()
+    os.remove(title)
+    os.remove(f"{title}.jpg") 
+    return
