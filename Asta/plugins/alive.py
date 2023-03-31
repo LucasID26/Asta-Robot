@@ -41,7 +41,7 @@ def ping_server():
   response = requests.get(url, timeout=2) 
   end = time.time()
   ping = (end - start) * 1000
-  result = f"{ping:.2f} ms."
+  result = f"{ping:.2f} ms"
   return result
 
 
@@ -68,10 +68,10 @@ async def system(client,m):
     msg = f"""
 ❏ **SYSTEM ⚙**
 ├• **System** ➥ `{sistem}`
-├• **Version** ➥ `{versi}`
+├• **Version** ➥ `{versi.split("#",1)[1].split("Sun",1)[0]}`
 ├• **Machine** ➥ `{mesin}`
 ├• **Py_Implemenation** ➥ `{p_implementasi}`
-├• **BIT** ➥ `{bit}`
+├• **BIT** ➥ `{bit[0]}`|`{bit[1]}`
 ├• **Python Version** ➥ `{python_v}`
 └• **Uptime** ➥ `{uptime}`
 
