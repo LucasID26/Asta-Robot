@@ -46,7 +46,7 @@ async def get_monitor(client,m):
     except:
       unvalid += f"{a}. {url}\n"
       a += 1
-  await msg.edit(result)
+  await msg.edit(result + unvalid)
 
 @bot.on_message(filters.command("delmonitor",prefix) & filters.user(own[0]))
 async def del_monitor(client,m):
