@@ -51,14 +51,14 @@ async def get_monitor(client,m):
       invalid += f"{a}. {url}\n"
       j_invalid += 1
       a += 1
-    if j_valid and j_invalid != 0:
-      hasil += valid + invalid
-    elif j_valid and j_invalid == 0:
-      hasil += "Monitor Kosong"
-    elif j_valid != 0 and j_invalid == 0:
-      hasil += valid
-    elif j_invalid != 0 and j_valid == 0:
-      hasil += invalid
+  if j_valid and j_invalid != 0:
+    hasil += valid + invalid
+  elif j_valid and j_invalid == 0:
+    hasil += "Monitor Kosong"
+  elif j_valid != 0 and j_invalid == 0:
+    hasil += valid
+  elif j_invalid != 0 and j_valid == 0:
+    hasil += invalid
   await msg.edit(hasil)
 
 @bot.on_message(filters.command("delmonitor",prefix) & filters.user(own[0]))
