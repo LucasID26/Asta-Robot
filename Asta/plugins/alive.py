@@ -73,7 +73,7 @@ async def system(client,m):
 ├• **Py_Implemenation** ➥ `{p_implementasi}`
 ├• **BIT** ➥ `{bit}`
 ├• **Python Version** ➥ `{python_v}`
-└• **Uptime** ➥ `{uptime}` detik
+└• **Uptime** ➥ `{uptime}`
 
 ❏ **DISK 💾**
 ├• **CPU** ➥ `{cpu}%`
