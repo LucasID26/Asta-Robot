@@ -28,19 +28,24 @@ async def save_monitor(client,m):
 async def get_monitor(client,m):
   msg = await m.reply_text("`Mengumpulkan data monitor . . .`")
   result = "**STATISTIK MONITOR**\n"
+  unvalid = "**URL TIDAK VALID**\n"
   a = 1
   for url in db.find_one({"name":"MONITOR"})['monitor_url']:
     name = urlparse(url).netloc.split(".",1)[0]
-    res = requests.get(url)
-    if res.status_code == 200:
-      status = "Aktif"
-      status_c = res.status_code
-      respon = res.text
-    else:
-      status = "Tidak Aktif"
-      status_c = res.status_code
-      respon = "Tidak ada respon"
-    result += f"**Name:** `{name}`\n**Status:** `{status}`\n**Status Code:** `{status_c}`\n**Response:** `{respon}`\n\n"
+    try:
+      res = requests.get(url)
+      if res.status_code == 200:
+        status = "Aktif"
+        status_c = res.status_code
+        respon = res.text
+      else:
+        status = "Tidak Aktif"
+        status_c = res.status_code
+        respon = "Tidak ada respon"
+      result += f"**Name:** `{name}`\n**Status:** `{status}`\n**Status Code:** `{status_c}`\n**Response:** `{respon}`\n\n"
+    except:
+      unvalid += f"{a}. {url}\n"
+      a += 1
   await msg.edit(result)
 
 @bot.on_message(filters.command("delmonitor",prefix) & filters.user(own[0]))
