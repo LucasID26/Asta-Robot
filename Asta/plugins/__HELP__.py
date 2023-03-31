@@ -50,8 +50,7 @@ async def def_callback(_, call):
     
   elif call.data == 'help':
     button = InlineKeyboard(row_width=3)
-    button.add(InlineButton('STATUS SYSTEM ASTA', callback_data='system'))
-    button.row(
+    button.add(
     InlineButton(
       'ADMINS', callback_data='admins'),
     InlineButton(
@@ -64,6 +63,7 @@ async def def_callback(_, call):
       'STICKERS',callback_data='stickers'),
     InlineButton(
       'LAINNYA',callback_data='lain'))
+    button.add(InlineButton('STATUS SYSTEM ASTA', callback_data='system'))
     button.row(InlineButton('Back', callback_data='help1')) 
     await bot.edit_message_text(call.message.chat.id, text=f"__**HELP {bot.me.first_name}**__\n\nTambahkan saya ke group mu dan jadikan saya admin supaya saya berfungsi dengan baik!.",message_id=call.message.id,reply_markup=button)
 
@@ -85,7 +85,7 @@ async def def_callback(_, call):
   elif call.data == 'stickers':
     await bot.edit_message_text(call.message.chat.id, text=sticker_help,message_id=call.message.id,reply_markup=button) 
   elif call.data == 'system':
-    await call.answer(system,True)
+    await call.answer(system(),True)
   #await bot.send_message(call.message.chat.id,f"`Tommbol Satu`",reply_to_message_id=call.message.id)
 
 
