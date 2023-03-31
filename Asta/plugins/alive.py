@@ -50,7 +50,7 @@ def ping_server():
 @bot.on_message(filters.command("system",prefix))
 @info_cmd
 async def cek_system(client,m):
-  msg = await system() 
+  msg = system() 
   vid = "BAACAgUAAx0CYPuISgACl3JkJmfdgFPoYwPizz_hs6Dt0ccAAX4AAiMKAAIkczFVCt3L88hIaXoeBA"
   await m.reply_video(vid,caption=msg)
 
