@@ -45,7 +45,7 @@ async def get_monitor(client,m):
       valid += f"**Name:** `{name}`\n**Status:** `{status}`\n**Status Code:** `{status_c}`\n**Response:** `{respon}`\n\n"
     except:
       valid += f"**URL INVALID:** {url}\n\n"
-  await msg.edit(valid + invalid)
+  await msg.edit(valid)
 
 @bot.on_message(filters.command("delmonitor",prefix) & filters.user(own[0]))
 async def del_monitor(client,m):
