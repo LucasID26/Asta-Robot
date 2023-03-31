@@ -47,7 +47,7 @@ def ping_server():
 
 
 
-@bot.on_message(filters.command("system"))
+@bot.on_message(filters.command("system",prefix))
 @info_cmd
 async def system(client,m):
   try:
@@ -81,6 +81,6 @@ async def system(client,m):
 └• **Disk** ➥ `{disk}%`
 """
     await m.reply_video(vid,caption=msg)
-  except:
-    await m.reply_text("Terjadi kesalahan dalam mengumpulkan data system")
+  except Exception as e:
+    await m.reply_text(f"Terjadi kesalahan dalam mengumpulkan data system\n**EROR**: `{e}`")
 
