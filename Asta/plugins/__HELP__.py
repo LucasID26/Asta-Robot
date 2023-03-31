@@ -4,7 +4,7 @@ from pykeyboard import InlineButton, InlineKeyboard
 
 
 from Asta.decorators.info_cmd import info_cmd
-
+from Asta.plugins.alive import system
 @bot.on_message(filters.command(["help","start"],prefix))
 @info_cmd
 async def helpp(client, m):
@@ -51,6 +51,7 @@ async def def_callback(_, call):
   elif call.data == 'help':
     button = InlineKeyboard(row_width=3)
     button.add(
+    button.row(InlineButton('STATUS SYSTEM ASTA', callback_data='system'))
     InlineButton(
       'ADMINS', callback_data='admins'),
     InlineButton(
@@ -83,6 +84,8 @@ async def def_callback(_, call):
     await bot.edit_message_text(call.message.chat.id, text=generator_help,message_id=call.message.id,reply_markup=button)
   elif call.data == 'stickers':
     await bot.edit_message_text(call.message.chat.id, text=sticker_help,message_id=call.message.id,reply_markup=button) 
+  elif call.data == 'system':
+    await call.answer(system,True)
   #await bot.send_message(call.message.chat.id,f"`Tommbol Satu`",reply_to_message_id=call.message.id)
 
 
@@ -92,6 +95,7 @@ lain_help = """
 
 Perintah:
 - /ping: Kecepatan respon bot.
+- /system: Informasi mengenai system bot.
 - /info [reply/username]: Informasi profile user/group dan channel.
 - /id: Id obrolan saat ini.
 - /asupan: Random video asupan hot 😂.
@@ -148,8 +152,6 @@ Adapun Perintah lain
 - /all: Mention semua member pada obrolan.
 - /clean atau /ghost: Module ini berfungsi untuk mengeluarkan akun terhapus dalam group.Tidak dapat dibatalkan.
 - /speedtest: Cek kecepatan jaringan bot.
-- /status: Informasi detail Bot.
-- /alive: Bot aktif.
 """ 
 
 #GENERATOR HELP
