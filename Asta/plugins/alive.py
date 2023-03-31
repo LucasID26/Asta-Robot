@@ -26,7 +26,7 @@ async def ping(client, m):
   await msg.edit(f"""
 ❏ **PONG!!🏓**
 ├• **Pinger** ➥ `{durasi} detik`
-├• **Server** ➥ `{ping_server}`
+├• **Server** ➥ `{ping_server()}`
 ├• **Uptime ** ➥ `{uptime}`
 └• **Owner :** {owner} <a href='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz5q_KcP8RQbDQPciRoBSlwKMyBHAKMNN-pg&amp;usqp=CAU'>⁠</a>""")
 
