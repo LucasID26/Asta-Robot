@@ -70,7 +70,7 @@ async def system(client,m):
 ├• **System** ➥ `{sistem}`
 ├• **Version** ➥ `{versi}`
 ├• **Machine** ➥ `{mesin}`
-├• **Py_Implemenation** ➥ `{implementasi}`
+├• **Py_Implemenation** ➥ `{p_implementasi}`
 ├• **BIT** ➥ `{bit}`
 ├• **Python Version** ➥ `{python_v}`
 └• **Uptime** ➥ `{uptime}` detik
