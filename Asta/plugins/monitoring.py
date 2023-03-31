@@ -58,7 +58,7 @@ async def del_monitor(client,m):
   key = {"name": "MONITOR"}
   if db.find_one(key):
     if url in db.find_one(key)['monitor_url']:
-      db.delete_one({"name": "MONITOR", "monitor_url": url})
+      del db.find_one(key)['monitor_url'][url]
       await m.reply_text("URL dihapus dari daftar monitor")
     else:
       await m.reply_text("URL tidak ada dalam daftar monitor saya!")
