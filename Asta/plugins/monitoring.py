@@ -27,8 +27,11 @@ async def save_monitor(client,m):
 @bot.on_message(filters.command("monitor",prefix) & filters.user(own[0]))
 async def get_monitor(client,m):
   msg = await m.reply_text("`Mengumpulkan data monitor . . .`")
-  result = "**STATISTIK MONITOR**\n"
-  unvalid = "**URL TIDAK VALID**\n"
+  hasil = ""
+  valid = "**STATISTIK MONITOR**\n"
+  invalid = "**URL TIDAK VALID**\n"
+  j_valid = 0
+  j_invalid = 0
   a = 1
   for url in db.find_one({"name":"MONITOR"})['monitor_url']:
     name = urlparse(url).netloc.split(".",1)[0]
@@ -42,11 +45,21 @@ async def get_monitor(client,m):
         status = "Tidak Aktif"
         status_c = res.status_code
         respon = "Tidak ada respon"
-      result += f"**Name:** `{name}`\n**Status:** `{status}`\n**Status Code:** `{status_c}`\n**Response:** `{respon}`\n\n"
+      valid += f"**Name:** `{name}`\n**Status:** `{status}`\n**Status Code:** `{status_c}`\n**Response:** `{respon}`\n\n"
+      j_valid += 1
     except:
-      unvalid += f"{a}. {url}\n"
+      invalid += f"{a}. {url}\n"
+      j_invalid += 1
       a += 1
-  await msg.edit(result + unvalid)
+    if j_valid == 0:
+      hasil += valid
+    if j_invalid == 0:
+      hasil += invalid
+    if j_valid and j_invalid == 0:
+      hasil += "Monitor Kosong"
+    if j_valid and j_invalid != 0:
+      hasil += valid + invalid
+  await msg.edit(hasil)
 
 @bot.on_message(filters.command("delmonitor",prefix) & filters.user(own[0]))
 async def del_monitor(client,m):
