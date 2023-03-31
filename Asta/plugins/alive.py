@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 from Asta.decorators.info_cmd import info_cmd
 from Asta.func.duration import duration
+import requests
 
 starttime = datetime.utcnow()
 
@@ -23,6 +24,15 @@ async def ping(client, m):
   owner = (await bot.get_users(own[0])).mention
   await msg.edit(f"""
 ❏ **PONG!!🏓**
-├• **Pinger** - `{durasi} detik`
-├• **Uptime -** `{uptime}`
+├• **Pinger** ➥ `{durasi} detik`
+├• **Server** ➥ `{ping_server}`
+├• **Uptime ** ➥ `{uptime}`
 └• **Owner :** {owner} <a href='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz5q_KcP8RQbDQPciRoBSlwKMyBHAKMNN-pg&amp;usqp=CAU'>⁠</a>""")
+
+def ping_server():
+  start = time.time()
+  response = requests.get(url, timeout=2) 
+  end = time.time()
+  ping = (end - start) * 1000
+  result = f"{ping:.2f} ms."
+  return result
