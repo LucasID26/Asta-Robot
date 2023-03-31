@@ -50,11 +50,12 @@ def ping_server():
 @bot.on_message(filters.command("system",prefix))
 @info_cmd
 async def cek_system(client,m):
-  await system(client,m) 
+  msg = await system() 
+  vid = "BAACAgUAAx0CYPuISgACl3JkJmfdgFPoYwPizz_hs6Dt0ccAAX4AAiMKAAIkczFVCt3L88hIaXoeBA"
+  await m.reply_video(vid,caption=msg)
 
-async def system(client,m):
+def system():
   try:
-    vid = "BAACAgUAAx0CYPuISgACl3JkJmfdgFPoYwPizz_hs6Dt0ccAAX4AAiMKAAIkczFVCt3L88hIaXoeBA"
     #PLATFORM
     system = platform.uname()
     sistem = system.system
@@ -83,7 +84,7 @@ async def system(client,m):
 ├• **RAM** ➥ `{mem}%`
 └• **Disk** ➥ `{disk}%`
 """
-    await m.reply_video(vid,caption=msg)
+    return msg
   except Exception as e:
-    await m.reply_text(f"Terjadi kesalahan dalam mengumpulkan data system\n**EROR**: `{e}`")
+    return f"Terjadi kesalahan dalam mengumpulkan data system\n**EROR**: `{e}`"
 
