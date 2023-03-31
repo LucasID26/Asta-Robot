@@ -51,7 +51,7 @@ def ping_server():
 @info_cmd
 async def cek_system(client,m):
   vid = "BAACAgUAAx0CYPuISgACl3JkJmfdgFPoYwPizz_hs6Dt0ccAAX4AAiMKAAIkczFVCt3L88hIaXoeBA"
-  await m.reply_video(vid,caption=f"{system()}{disk()}")
+  await m.reply_video(vid,caption=system())
 
 def system():
   try:
@@ -64,6 +64,11 @@ def system():
     bit = platform.architecture()
     python_v = platform.python_version()
     uptime = duration((datetime.utcnow() - starttime).total_seconds())
+   
+    #DISK
+    cpu = psutil.cpu_percent(interval=0.5)
+    mem = psutil.virtual_memory().percent
+    disk = psutil.disk_usage("/").percent
     msg = f"""
 ❏ **SYSTEM ⚙**
 ├• **System** ➥ `{sistem}`
@@ -73,22 +78,14 @@ def system():
 ├• **BIT** ➥ `{bit[0]}`|`{bit[1]}`
 ├• **Python Version** ➥ `{python_v}`
 └• **Uptime** ➥ `{uptime}`
-"""
-    return msg
-  except Exception as e:
-    return f"Terjadi kesalahan dalam mengumpulkan data system\n**EROR**: `{e}`"
 
-def disk():
-  #DISK
-  cpu = psutil.cpu_percent(interval=0.5)
-  mem = psutil.virtual_memory().percent
-  disk = psutil.disk_usage("/").percent
-  msg = f"""
 ❏ **DISK 💾**
 ├• **CPU** ➥ `{cpu}%`
 ├• **RAM** ➥ `{mem}%`
 └• **DISK** ➥ `{disk}%`
 """
-  return msg
+    return msg
+  except Exception as e:
+    return f"Terjadi kesalahan dalam mengumpulkan data system\n**EROR**: `{e}`"
 
 
