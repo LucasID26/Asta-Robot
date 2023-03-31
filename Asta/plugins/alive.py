@@ -5,6 +5,7 @@ from datetime import datetime
 from Asta.decorators.info_cmd import info_cmd
 from Asta.func.duration import duration
 import requests
+import os
 
 starttime = datetime.utcnow()
 
@@ -30,6 +31,7 @@ async def ping(client, m):
 └• **Owner :** {owner} <a href='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz5q_KcP8RQbDQPciRoBSlwKMyBHAKMNN-pg&amp;usqp=CAU'>⁠</a>""")
 
 def ping_server():
+  url = os.environ['PING_URL']
   start = time.time()
   response = requests.get(url, timeout=2) 
   end = time.time()
