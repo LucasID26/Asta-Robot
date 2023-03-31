@@ -2,10 +2,15 @@ from pyrogram import filters
 from config import * 
 import time 
 from datetime import datetime
-from Asta.decorators.info_cmd import info_cmd
-from Asta.func.duration import duration
 import requests
 import os
+import platform
+import psutil
+
+from Asta.decorators.info_cmd import info_cmd
+from Asta.func.duration import duration
+from Asta.func.file_size import file_size 
+
 
 starttime = datetime.utcnow()
 
@@ -27,7 +32,7 @@ async def ping(client, m):
 ❏ **PONG!!🏓**
 ├• **Pinger** ➥ `{durasi} detik`
 ├• **Server** ➥ `{ping_server()}`
-├• **Uptime ** ➥ `{uptime}`
+├• **Uptime** ➥ `{uptime}`
 └• **Owner :** {owner} <a href='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz5q_KcP8RQbDQPciRoBSlwKMyBHAKMNN-pg&amp;usqp=CAU'>⁠</a>""")
 
 def ping_server():
@@ -38,3 +43,43 @@ def ping_server():
   ping = (end - start) * 1000
   result = f"{ping:.2f} ms."
   return result
+
+
+
+
+@bot.on_message(filters.command("system"))
+async def system(client,m):
+  try:
+    vid = "BAACAgUAAx0CYPuISgACl3JkJmfdgFPoYwPizz_hs6Dt0ccAAX4AAiMKAAIkczFVCt3L88hIaXoeBA"
+    #PLATFORM
+    system = platform.uname()
+    sistem = system.system
+    versi = system.version
+    mesin = system.machine
+    p_implementasi = platform.python_implementation()
+    bit = platform.architecture()
+    python_v = platform.python_version()
+    uptime = duration((datetime.utcnow() - starttime).total_seconds())
+    #DISK
+    cpu = psutil.cpu_percent(interval=0.5)
+    mem = psutil.virtual_memory().percent
+    disk = psutil.disk_usage("/").percent
+    msg = f"""
+❏ **SYSTEM ⚙**
+├• **System** ➥ `{sistem}`
+├• **Version** ➥ `{versi}`
+├• **Machine** ➥ `{mesin}`
+├• **Py_Implemenation** ➥ `{implementasi}`
+├• **BIT** ➥ `{bit}`
+├• **Python Version** ➥ `{python_v}`
+└• **Uptime** ➥ `{uptime}` detik
+
+❏ **DISK 💾**
+├• **CPU** ➥ `{cpu}%`
+├• **RAM** ➥ `{mem}%`
+└• **Disk** ➥ `{disk}%`
+"""
+    await m.reply_video(vid,caption=msg)
+  except:
+    await m.reply_text("Terjadi kesalahan dalam mengumpulkan data system")
+
