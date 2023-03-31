@@ -51,7 +51,7 @@ def ping_server():
 @info_cmd
 async def cek_system(client,m):
   vid = "BAACAgUAAx0CYPuISgACl3JkJmfdgFPoYwPizz_hs6Dt0ccAAX4AAiMKAAIkczFVCt3L88hIaXoeBA"
-  await m.reply_video(vid,caption=f"{system()}\n\n{disk()})
+  await m.reply_video(vid,caption=f"{system()}\n\n{disk()}")
 
 def system():
   try:
