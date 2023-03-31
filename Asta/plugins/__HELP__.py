@@ -50,8 +50,8 @@ async def def_callback(_, call):
     
   elif call.data == 'help':
     button = InlineKeyboard(row_width=3)
-    button.add(
     button.row(InlineButton('STATUS SYSTEM ASTA', callback_data='system'))
+    button.add(
     InlineButton(
       'ADMINS', callback_data='admins'),
     InlineButton(
