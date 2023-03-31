@@ -15,7 +15,7 @@ from Asta.func.file_size import file_size
 starttime = datetime.utcnow()
 
 @bot.on_message(filters.command("ping",prefix))
-#@info_cmd
+@info_cmd
 async def ping(client, m):
   uptime = duration((datetime.utcnow() - starttime).total_seconds())
   start = time.time() 
@@ -48,6 +48,7 @@ def ping_server():
 
 
 @bot.on_message(filters.command("system"))
+@info_cmd
 async def system(client,m):
   try:
     vid = "BAACAgUAAx0CYPuISgACl3JkJmfdgFPoYwPizz_hs6Dt0ccAAX4AAiMKAAIkczFVCt3L88hIaXoeBA"
