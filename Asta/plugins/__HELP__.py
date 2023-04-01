@@ -17,7 +17,7 @@ async def helpp(client, m):
         'OWNER👤',url='https://url-profile.kulukgalak.repl.co/profile'),
       InlineButton(
       'CHANNEL',url='https://t.me/YoiID_robot'))
-    await m.reply_text(f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol help dibawah!**', reply_markup=button)
+    await m.reply_text(f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol PERINTAH dibawah!**', reply_markup=button)
   elif m.chat.type.value == 'private':
     button = InlineKeyboard(row_width=3)
     button.add(
@@ -191,5 +191,5 @@ Module ini adalah solusi bagi kalian yang ingin mendownload video atau audio dar
 
 Perintah:
 - /ytdl [url]: Mendownload video atau audio dari url YOUTUBE.
-- /ttdk [url]: Mendownload video atau audio dari url TIKTOK.
+- /ttdl [url]: Mendownload video atau audio dari url TIKTOK.
 """
