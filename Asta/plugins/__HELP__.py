@@ -17,7 +17,7 @@ async def helpp(client, m):
         'OWNER👤',url='https://url-profile.kulukgalak.repl.co/profile'),
       InlineButton(
       'CHANNEL',url='https://t.me/YoiID_robot'))
-    await m.reply_text(f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol PERINTAH dibawah!**', reply_markup=button)
+    await m.reply_text(f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol HELP dibawah!**', reply_markup=button)
   elif m.chat.type.value == 'private':
     button = InlineKeyboard(row_width=3)
     button.add(
@@ -30,7 +30,7 @@ async def helpp(client, m):
       InlineButton(
         'Add to your group',url=f'http://t.me/{bot.me.username}?startgroup=true'
       ))
-    await m.reply_text(f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol help dibawah!**', reply_markup=button)
+    await m.reply_text(f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol PERINTAH dibawah!**', reply_markup=button)
 
     
     
@@ -46,7 +46,7 @@ async def def_callback(_, call):
       'CHANNEL',url='https://t.me/YoiID_robot'),
       InlineButton('Add to your group',url=f'http://t.me/{bot.me.username}?startgroup=true'
       ))
-    await bot.edit_message_text(call.message.chat.id,text=f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol help dibawah!**',message_id=call.message.id,reply_markup=button)
+    await bot.edit_message_text(call.message.chat.id,text=f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol PERINTAH dibawah!**',message_id=call.message.id,reply_markup=button)
     
   elif call.data == 'help':
     button = InlineKeyboard(row_width=3)
