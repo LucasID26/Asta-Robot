@@ -192,3 +192,4 @@ Module ini adalah solusi bagi kalian yang ingin mendownload video atau audio dar
 Perintah:
 - /ytdl [url]: Mendownload video atau audio dari url YOUTUBE.
 - /ttdk [url]: Mendownload video atau audio dari url TIKTOK.
+"""
