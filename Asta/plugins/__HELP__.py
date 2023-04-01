@@ -14,7 +14,7 @@ async def helpp(client, m):
       InlineButton(
       'HELP❓',url=f'https://t.me/{bot.me.username}?start'),
       InlineButton(
-        'OWNER👤',url='https://t.me/LucasBukanKalengSarden'),
+        'OWNER👤',url='https://url-profile.kulukgalak.repl.co/profile'),
       InlineButton(
       'CHANNEL',url='https://t.me/YoiID_robot'))
     await m.reply_text(f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol help dibawah!**', reply_markup=button)
@@ -24,7 +24,7 @@ async def helpp(client, m):
       InlineButton(
         'PERINTAH📚',callback_data='help'),
       InlineButton(
-        'OWNER👤',url='https://t.me/LucasBukanKalengSarden'),
+        'OWNER👤',url='https://url-profile.kulukgalak.repl.co/profile'),
       InlineButton(
       'CHANNEL',url='https://t.me/YoiID_robot'),
       InlineButton(
@@ -41,7 +41,7 @@ async def def_callback(_, call):
     button = InlineKeyboard(row_width=3)
     button.add(
       InlineButton('PERINTAH📚',callback_data='help'),
-      InlineButton('OWNER👤',url='https://t.me/LucasBukanKalengSarden'),
+      InlineButton('OWNER👤',url='https://url-profile.kulukgalak.repl.co/profile'),
       InlineButton(
       'CHANNEL',url='https://t.me/YoiID_robot'),
       InlineButton('Add to your group',url=f'http://t.me/{bot.me.username}?startgroup=true'
@@ -61,6 +61,8 @@ async def def_callback(_, call):
       'GENERATOR',callback_data='generator'),
     InlineButton(
       'STICKERS',callback_data='stickers'),
+    InlineButton(
+      'DOWNLOADER',callback_data='downloader'),
     InlineButton(
       'LAINNYA',callback_data='lain'))
     button.row(InlineButton('SYSTEM ASTA', callback_data='system'))
@@ -85,7 +87,9 @@ async def def_callback(_, call):
   elif call.data == 'stickers':
     await bot.edit_message_text(call.message.chat.id, text=sticker_help,message_id=call.message.id,reply_markup=button) 
   elif call.data == 'system':
-    await bot.edit_message_text(call.message.chat.id, text=system(),message_id=call.message.id,reply_markup=button) 
+    await bot.edit_message_text(call.message.chat.id, text=system(),message_id=call.message.id,reply_markup=button)
+  elif call.data == 'downloader':
+    await bot.edit_message_text(call.message.chat.id, text=downloader_help,message_id=call.message.id,reply_markup=button) 
   #await bot.send_message(call.message.chat.id,f"`Tommbol Satu`",reply_to_message_id=call.message.id)
 
 
@@ -178,3 +182,13 @@ Perintah:
 - /kang [reply_media]: Membuat sticker dari PHOTO,VIDEO,GIF termasuk menyimpan sticker yang sudah dibuat ke dalam sticker pack.
 - /unkang [reply_sticker]: Menghapus sticker dari sticker pack mu.
 """
+
+#DOWNLOADER HELP
+downloader_help = """
+**DOWNLOADER**
+
+Module ini adalah solusi bagi kalian yang ingin mendownload video atau audio dari module yang sudah tersedia.
+
+Perintah:
+- /ytdl [url]: Mendownload video atau audio dari url YOUTUBE.
+- /ttdk [url]: Mendownload video atau audio dari url TIKTOK.
