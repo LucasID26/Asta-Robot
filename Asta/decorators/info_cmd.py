@@ -4,17 +4,14 @@ from datetime import datetime
 from pytz import timezone
 from pyrogram import Client
 
-from Asta.func.sendGmail import sendgmail
-
-
-t_zona= datetime.now(tz=timezone('Asia/Makassar')) 
-hari = t_zona.strftime("%A")
-tgl = t_zona.strftime("%d/%B/%Y")
-jam = t_zona.strftime("%H:%M:%S")
 
 def info_cmd(func):
   @wraps(func)
   async def cmd(client,m,*args,**kwargs):
+    t_zona= datetime.now(tz=timezone('Asia/Makassar')) 
+    hari = t_zona.strftime("%A")
+    tgl = t_zona.strftime("%d/%B/%Y")
+    jam = t_zona.strftime("%H:%M:%S")
     user = m.from_user.mention
     cmd1 = m.command
     text = f"**Informasi Bot CMD:**\n"
@@ -28,8 +25,7 @@ def info_cmd(func):
 **TGL:** `{tgl}`
 **Jam:** `{jam}`
 **Perintah:** `{m.text}`
-"""
-      sendgmail("Laporan Command",text)     
+"""     
       await bot.send_message(-1001738215280,text)
       return await func(client,m,*args,**kwargs)
    
