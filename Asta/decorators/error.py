@@ -4,6 +4,9 @@ from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 from config import bot
 from pyrogram.errors import FloodWait
 
+from Asta.func.sendGmail import sendgmail
+
+
 def split_limits(text):
   if len(text) < 2048:
     return [text]
@@ -42,6 +45,7 @@ def error(func):
       error = f"__**Respon Error!**__\n**Error:** {err}"
       for x in error_feedback:        
         try:
+          sendgmail("LAPORAN ERROR",x)
           await bot.send_message(-1001519186585, x)
           try:
             await client.message.edit(error)
