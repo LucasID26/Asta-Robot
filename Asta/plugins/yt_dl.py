@@ -79,7 +79,7 @@ async def callback_dl(client,call):
     os.remove(title)
     os.remove(f"{title}.jpg") 
     return
-  elif data[0] == 'audio':
+  elif data[1] == 'audio':
     title = link_data[id]['title'] + '.mp3'
     size = link_data[id]['sizea']
     thumb = link_data[id]['thumb']
