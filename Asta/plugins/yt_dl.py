@@ -75,7 +75,7 @@ async def callback_dl(client,call):
     await call.message.reply_video(open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
 {title}
 • Size: {size}""")
-    await msg.delete()
+    await call.message.delete()
     os.remove(title)
     os.remove(f"{title}.jpg") 
     return
