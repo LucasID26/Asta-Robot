@@ -71,7 +71,7 @@ async def callback_dl(client,call):
     with open(f"{title}.jpg","wb") as ph_file:
       ph_file.write(requests.get(thumb).content)
       ph_file.close() 
-    await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
+    await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
     await call.message.reply_video(open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
 {title}
 • Size: {size}""")
@@ -90,7 +90,7 @@ async def callback_dl(client,call):
     with open(f"{title}.jpg","wb") as ph_file:
       ph_file.write(requests.get(thumb).content)
       ph_file.close()
-    await bot.edit_message_caption(chat_id=call.message.chat.id,message_id=call.message.id,caption=f"📤 **Mengunggah Hasil**\n{title}")
+    await msg.edit_caption(f"📤 **Mengunggah Hasil**\n{title}")
     await call.message.reply_audio(open(title,"rb"),thumb=f"{title}.jpg",caption=f"""
 {title}
 • Size: {size}""")
