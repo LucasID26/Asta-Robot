@@ -1,7 +1,7 @@
 import os
 import asyncio
 import requests
-from bs4 import BeautifulSoup as BF
+from bs4 import BeautifulSoup as BS
 from config import bot,asisstant,prefix
 from pyrogram import filters,emoji
 from pyrogram.errors import StickersetInvalid, YouBlockedUser
