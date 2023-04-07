@@ -1,5 +1,7 @@
 import os
 import asyncio
+import requests
+from bs4 import BeautifulSoup as BF
 from config import bot,asisstant,prefix
 from pyrogram import filters,emoji
 from pyrogram.errors import StickersetInvalid, YouBlockedUser
@@ -275,3 +277,64 @@ async def unkang(client,m):
       return await Asta.edit("Hmm sticker itu tidak ada dalam sticker pack mu!!")
   else:
     return await Asta.edit("**Silahkan Reply ke Sticker!**")
+
+
+
+@bot.on_message(filters.command(["packinfo", "stickerinfo"],prefix))
+@info_cmd
+@bot_admin
+@error
+async def packinfo(client,m):
+  rep = await m.reply("`Processing...`")
+  if not m.reply_to_message:
+    await rep.edit("Silahkan Reply ke Sticker...")
+    return
+  if not m.reply_to_message.sticker:
+    await rep.edit("Silahkan Reply ke Sticker...")
+    return
+  if not m.reply_to_message.sticker.set_name:
+    await rep.edit("`Sepertinya Sticker Liar!`")
+    return
+  stickerset = await bot.send(
+        GetStickerSet(
+            stickerset=InputStickerSetShortName(
+                short_name=m.reply_to_message.sticker.set_name
+            ),
+            hash=0,
+        )
+    )
+  emojis = []
+  for stucker in stickerset.packs:
+    if stucker.emoticon not in emojis:
+      emojis.append(stucker.emoticon)
+  output = f"""**Sticker Pack Title **: `{stickerset.set.title}`
+**Sticker Pack Short Name **: `{stickerset.set.short_name}`
+**Stickers Count **: `{stickerset.set.count}`
+**Archived **: `{stickerset.set.archived}`
+**Official **: `{stickerset.set.official}`
+**Masks **: `{stickerset.set.masks}`
+**Animated **: `{stickerset.set.animated}`
+**Emojis In Pack **: `{' '.join(emojis)}`
+"""
+  await rep.edit(output)
+
+
+
+@bot.on_message(filters.command("stickers", prefix))
+async def cb_sticker(client,m):
+  query = get_text(m)
+  if not query:
+    return await m.reply("**Masukan Nama Sticker Pack!**")
+  xx = await m.reply("`Searching sticker packs...`")
+  text = requests.get(f"https://combot.org/telegram/stickers?q={query}").text
+  soup = BS(text, "lxml")
+  results = soup.find_all("div", {"class": "sticker-pack__header"})
+  if not results:
+    return await xx.edit("**Tidak Dapat Menemukan Sticker Pack 🥺**")
+  reply = f"**Keyword Sticker Pack:**\n {query}\n\n**Hasil:**\n"
+  for pack in results:
+    if pack.button:
+      packtitle = (pack.find("div", "sticker-pack__title")).get_text()
+      packlink = (pack.a).get("href")
+      reply += f" •  [{packtitle}]({packlink})\n"
+  await xx.edit(reply)
