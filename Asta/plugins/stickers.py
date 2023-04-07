@@ -295,7 +295,7 @@ async def packinfo(client,m):
   if not m.reply_to_message.sticker.set_name:
     await rep.edit("`Sepertinya Sticker Liar!`")
     return
-  stickerset = await asisstant.send(
+  stickerset = await asisstant.invoke(
         GetStickerSet(
             stickerset=InputStickerSetShortName(
                 short_name=m.reply_to_message.sticker.set_name
