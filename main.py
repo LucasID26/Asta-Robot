@@ -2,7 +2,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from config import bot,asisstant
 from pyrogram import filters,idle
 from threading import Thread
-
+import Asta
 
 
 
