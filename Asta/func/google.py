@@ -1,6 +1,6 @@
 import requests 
 from bs4 import BeautifulSoup
-
+import re
 
 def google(keywords,limit = 20):
     query  = keywords.replace(' ','+')
