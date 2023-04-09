@@ -22,20 +22,20 @@ class MyHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b'404: File not found')
 
-def http_run():
-  httpd = HTTPServer(('', 8000), MyHandler)
-  httpd.serve_forever()
-
-def run_thread():
-  Thread(target=http_run).start()
-
-def run():
-  run_thread()
+def run_bot():
   bot.start()
   asisstant.start()
   print("START BOT")
   idle()
   bot.stop()
   asisstant.stop()
+
+def run_thread():
+  Thread(target=run_bot).start()
+
+def run():
+  run_thread()
+  httpd = HTTPServer(('', 8000), MyHandler)
+  httpd.serve_forever()
 
 run()
