@@ -11,7 +11,7 @@ HASH = os.environ['API_HASH']
 TOKEN = os.environ['BOT_TOKEN']
 ASISSTANT_STR = os.environ['ASISSTANT_STRING']
 DATABASE = os.environ["DB"]
-DB = pymongo.MongoClient(str(DATABASE))
+DB = pymongo.MongoClient(str(DATABASE),serverSelectionTimeoutMS=5000)
 
 dbname = DB["Asta-Robot"]
 
