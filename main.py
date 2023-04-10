@@ -2,7 +2,9 @@ from config import bot,asisstant
 from flask import Flask
 from threading import Thread 
 from pyrogram import idle
-import random
+import subprocess
+import sys
+import os
 import Asta
 
 app = Flask(__name__)
