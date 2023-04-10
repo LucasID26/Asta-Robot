@@ -17,6 +17,7 @@ def install_requirements():
     print("Installing requirements...")
     subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", requirements_file])
     print("Requirements installed.")
+    subprocess.check_call([sys.executable, "clear"])
   else:
     print("Requirements file not found.")
 
