@@ -1,0 +1,13 @@
+tgcrypto
+geopy
+lxml
+bs4
+pytz
+telethon
+ffmpeg
+flask
+pymongo
+pillow
+psutil
+pyromod==1.5
+pyrofork
