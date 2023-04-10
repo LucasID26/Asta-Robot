@@ -35,7 +35,7 @@ def run_thread():
 def run_all():
   install_requirements()
   run_thread()
-  #bot.run()
+  bot.run()
   bot.start()
   asisstant.start()
   idle()
