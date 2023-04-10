@@ -1,6 +1,5 @@
 from flask import Flask
 from threading import Thread 
-from pyrogram import idle
 import subprocess
 import sys
 import os
@@ -21,9 +20,6 @@ def install_requirements():
   else:
     print("Requirements file not found.")
 
-from config import bot,asisstant
-import Asta
-
 
 def run_flask():
   app.run(
@@ -36,6 +32,11 @@ def run_thread():
 def run_all():
   install_requirements()
   run_thread()
+  
+  from pyrogram import idle
+  from config import bot,asisstant
+  import Asta
+  
   bot.run()
   bot.start()
   asisstant.start()
