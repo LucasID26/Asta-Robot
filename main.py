@@ -1,11 +1,9 @@
-from config import bot,asisstant
 from flask import Flask
 from threading import Thread 
 from pyrogram import idle
 import subprocess
 import sys
 import os
-import Asta
 
 app = Flask(__name__)
 
@@ -22,6 +20,9 @@ def install_requirements():
     print("Requirements installed.")
   else:
     print("Requirements file not found.")
+
+from config import bot,asisstant
+import Asta
 
 
 def run_flask():
