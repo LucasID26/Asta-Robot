@@ -79,7 +79,7 @@ async def lokasi(client, m):
   text = m.text.split(" ",1)
   msg = await m.reply_text(f"__Searching lokasi__ {text[1]}...")
   try:
-    geolocator = Nominatim(user_agent="MyApp")
+    geolocator = Nominatim(user_agent="MyApp",timeout=5)
     location = geolocator.geocode(text[1])
 
     lat = location.latitude
