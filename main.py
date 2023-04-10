@@ -12,6 +12,16 @@ def flask_run():
   return "BOT RUN"
 
 
+def install_requirements():
+  requirements_file = "requirements.txt"
+  if os.path.exists(requirements_file):
+    print("Installing requirements...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", requirements_file])
+    print("Requirements installed.")
+  else:
+    print("Requirements file not found.")
+
+
 def run_flask():
   app.run(
     host="0.0.0.0",
@@ -21,6 +31,7 @@ def run_thread():
   Thread(target=run_flask).start()
 
 def run_all():
+  install_requirements()
   run_thread()
   #bot.run()
   bot.start()
