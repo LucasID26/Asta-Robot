@@ -14,13 +14,13 @@ app = Flask(__name__)
 async def restart_plugins(client,m):
   msg = await m.reply_text("__Restarting BOT__. . .")
   for file in os.listdir('Asta/plugins'):
-    with open('Asta/plugins/init.py', 'r') as f:
+    with open('Asta/plugins/__init__.py', 'r') as f:
       init_lines = f.readlines()
     if file.endswith('.py') and not file.startswith('__'):
       module_name = file[:-3]
       import_line = f"from . import {module_name}"
       if not re.search(fr"\b{re.escape(import_line)}\b", init_lines):
-        with open('Asta/plugins/init.py', 'a') as f:
+        with open('Asta/plugins/__init__.py', 'a') as f:
           f.write(import_line)
   import Asta    
   await msg.edit("__**Restarting berhasil✅**__")
