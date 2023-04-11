@@ -6,15 +6,15 @@ import subprocess
 import sys
 import os
 import re
-import signal
 import random
+
 app = Flask(__name__)
 
 @app.route('/')
 def flask_run():
   return "BOT RUN"
 
-@bot.on_message(filters.command('restart'))
+@bot.on_message(filters.command('restart',prefix) & filtera)
 async def restart_plugins(client,m):
   msg = await m.reply_text("__Restarting BOT__. . .")
   for file in os.listdir('Asta/plugins'):
@@ -30,7 +30,7 @@ async def restart_plugins(client,m):
   restart_program()
   
 def restart_program():
-  os.kill(os.getpid(), signal.SIGTERM)
+  #os.kill(os.getpid(), signal.SIGTERM)
   os.execvp(sys.executable, [sys.executable, "-m", "main.py"])
 
 
