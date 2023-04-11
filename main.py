@@ -9,7 +9,9 @@ import re
 
 app = Flask(__name__)
 
-
+@app.route('/')
+def flask_run():
+  return "BOT RUN"
 
 @bot.on_message(filters.command('restart'))
 async def restart_plugins(client,m):
@@ -25,13 +27,6 @@ async def restart_plugins(client,m):
           f.write(import_line)
   import Asta    
   await msg.edit("__**Restarting berhasil✅**__")
-
-
-
-
-@app.route('/')
-def flask_run():
-  return "BOT RUN"
 
 
 def install_requirements():
