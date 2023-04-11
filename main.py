@@ -14,7 +14,7 @@ app = Flask(__name__)
 def flask_run():
   return "BOT RUN"
 
-@bot.on_message(filters.command('restart',prefix) & filtera)
+@bot.on_message(filters.command('restart',prefix) & filters.user(own[0]))
 async def restart_plugins(client,m):
   msg = await m.reply_text("__Restarting BOT__. . .")
   for file in os.listdir('Asta/plugins'):
