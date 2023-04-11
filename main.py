@@ -1,10 +1,11 @@
 from flask import Flask
 from threading import Thread 
-from config import bot,prefix,own
+from config import bot,prefix,own,asisstant 
 from pyrogram import filters
 import subprocess
 import sys
 import os
+import re
 
 app = Flask(__name__)
 
@@ -55,9 +56,7 @@ def run_thread():
 def run_all():
   install_requirements()
   run_thread()
-  
-  from pyrogram import idle
-  from config import bot,asisstant
+
   import Asta
   
   bot.run()
