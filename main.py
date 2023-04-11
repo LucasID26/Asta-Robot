@@ -24,7 +24,7 @@ async def restart_plugins(client,m):
       import_line = f"from . import {module_name}"
       if not re.search(fr"\b{re.escape(import_line)}\b", str(init_lines)):
         with open('Asta/plugins/__init__.py', 'a') as f:
-          f.write(import_line)
+          f.write("\n"+import_line)
   import Asta    
   await msg.edit("__**Restarting berhasil✅**__")
 
