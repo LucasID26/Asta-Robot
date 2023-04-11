@@ -1,7 +1,7 @@
 from flask import Flask
 from threading import Thread 
 from config import bot,prefix,own,asisstant 
-from pyrogram import filters
+from pyrogram import filters,idle
 import subprocess
 import sys
 import os
@@ -25,8 +25,12 @@ async def restart_plugins(client,m):
       if not re.search(fr"\b{re.escape(import_line)}\b", str(init_lines)):
         with open('Asta/plugins/__init__.py', 'a') as f:
           f.write("\n"+import_line)
-  import Asta    
   await msg.edit("__**Restarting berhasil✅**__")
+  restart_program()
+  
+def restart_program():
+  python = sys.executable
+  os.execl(python, python, *sys.argv)
 
 
 def install_requirements():
@@ -54,7 +58,6 @@ def run_all():
 
   import Asta
   
-  bot.run()
   bot.start()
   asisstant.start()
   idle()

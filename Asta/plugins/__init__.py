@@ -14,9 +14,9 @@ from . import yt_dl
 from . import tiktok_dl
 from . import asupan
 from . import filters
-from . import debug
 from . import translate
 from . import quotly
 from . import stickers
 from . import monitoring
 from . import HELP
+from . import debug
