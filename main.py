@@ -6,7 +6,8 @@ import subprocess
 import sys
 import os
 import re
-
+import signal
+import random
 app = Flask(__name__)
 
 @app.route('/')
@@ -29,8 +30,8 @@ async def restart_plugins(client,m):
   restart_program()
   
 def restart_program():
-  python = sys.executable
-  os.execl(python, python, *sys.argv)
+  os.kill(os.getpid(), signal.SIGTERM)
+  os.execvp(sys.executable, [sys.executable, "-m", "main.py"])
 
 
 def install_requirements():
@@ -47,7 +48,7 @@ def install_requirements():
 def run_flask():
   app.run(
     host="0.0.0.0",
-    port=8080)
+    port=random.randint(5000, 9999))
 
 def run_thread():
   Thread(target=run_flask).start()
