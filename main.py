@@ -1,10 +1,33 @@
 from flask import Flask
 from threading import Thread 
+from config import bot,prefix,own
+from pyrogram import filters
 import subprocess
 import sys
 import os
 
 app = Flask(__name__)
+
+
+
+@bot.on_message(filters.command('restart'))
+async def restart_plugins(client,m):
+  msg = await m.reply_text("__Restarting BOT__. . .")
+  import Asta
+  for file in os.listdir('Asta/plugins'):
+    with open('Asta/plugins/init.py', 'r') as f:
+      init_lines = f.readlines()
+    if file.endswith('.py') and not file.startswith('__'):
+      module_name = file[:-3]
+      import_line = f"from . import {module_name}"
+      if not re.search(fr"\b{re.escape(import_line)}\b", init_lines):
+        with open('Asta/plugins/init.py', 'a') as f:
+          f.write(import_line)
+      
+  await msg.edit("__**Restarting berhasil✅**__")
+
+
+
 
 @app.route('/')
 def flask_run():
