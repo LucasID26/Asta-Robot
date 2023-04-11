@@ -1,48 +1,19 @@
 from flask import Flask
-from threading import Thread 
-from config import bot,prefix,own,asisstant 
-from pyrogram import filters,idle
-import subprocess
-import sys
-import os
-import re
+from threading import Thread
+from config import bot,asisstant 
+from Asta import install_requirements 
+from pyrogram import idle
 import random
+import os
+import asyncio 
+import pickle
+import traceback
 
 app = Flask(__name__)
 
 @app.route('/')
 def flask_run():
   return "BOT RUN"
-
-@bot.on_message(filters.command('restart',prefix) & filters.user(own[0]))
-async def restart_plugins(client,m):
-  msg = await m.reply_text("__Restarting BOT__. . .")
-  for file in os.listdir('Asta/plugins'):
-    with open('Asta/plugins/__init__.py', 'r') as f:
-      init_lines = f.readlines()
-    if file.endswith('.py') and not file.startswith('__'):
-      module_name = file[:-3]
-      import_line = f"from . import {module_name}"
-      if not re.search(fr"\b{re.escape(import_line)}\b", str(init_lines)):
-        with open('Asta/plugins/__init__.py', 'a') as f:
-          f.write("\n"+import_line)
-  await msg.edit("__**Restarting berhasil✅**__")
-  restart_program()
-  
-def restart_program():
-  #os.kill(os.getpid(), signal.SIGTERM)
-  os.execvp(sys.executable, [sys.executable, "-m", "main.py"])
-
-
-def install_requirements():
-  requirements_file = "requirements.txt"
-  if os.path.exists(requirements_file):
-    print("Installing requirements...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", requirements_file])
-    print("Requirements installed.")
-    subprocess.call("clear")
-  else:
-    print("Requirements file not found.")
 
 
 def run_flask():
@@ -53,16 +24,32 @@ def run_flask():
 def run_thread():
   Thread(target=run_flask).start()
 
-def run_all():
+async def run_all():
   install_requirements()
   run_thread()
 
   import Asta
   
-  bot.start()
-  asisstant.start()
-  idle()
-  bot.stop()
-  asisstant.stop()
+  await bot.start()
+  await asisstant.start()
+  if os.path.exists("restart.pickle"):
+    with open('restart.pickle', 'rb') as status:
+      chat_id, message_id = pickle.load(status)
+      os.remove("restart.pickle")
+      await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text="__**Restarting berhasil✅**__")
+  await idle()
+  await bot.stop()
+  await asisstant.stop()
 
-run_all()
+loop = asyncio.get_event_loop()
+if __name__ == "__main__":
+  try:
+    loop.run_until_complete(run_all())
+  except KeyboardInterrupt:
+    pass 
+  except Exception:
+    err = traceback.format_exc()
+    print(err)
+  finally:
+    loop.stop()
+    print("STOPED")
