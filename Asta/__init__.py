@@ -15,7 +15,7 @@ def check_plugins():
       module_name = file[:-3]
       if module_name not in sys.modules:
         importlib.import_module(module_name)
-        teks += f"- `{module_name}`\n")
+        teks += f"- `{module_name}`\n"
         import_line = f"from . import {module_name}\n"
         if import_line not in init_lines:
           with open('Asta/plugins/__init__.py', 'a') as f:
