@@ -20,7 +20,7 @@ async def restart_plugins(client,m):
     if file.endswith('.py') and not file.startswith('__'):
       module_name = file[:-3]
       import_line = f"from . import {module_name}"
-      if not re.search(fr"\b{re.escape(import_line)}\b", init_lines):
+      if not re.search(fr"\b{re.escape(import_line)}\b", str(init_lines)):
         with open('Asta/plugins/__init__.py', 'a') as f:
           f.write(import_line)
   import Asta    
