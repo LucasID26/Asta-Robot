@@ -2,6 +2,7 @@ from . import plugins
 
 import importlib
 import os
+import sys
 from config import bot,prefix,own
 from pyrogram import filters
 
