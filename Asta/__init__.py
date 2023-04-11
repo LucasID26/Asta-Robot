@@ -23,7 +23,7 @@ def check_plugins():
   return teks
 
 
-@bot.on_message(filters.command('restart))
+@bot.on_message(filters.command('restart'))
 async def restart_plugins(client,m):
   teks = "**NEW PLUGINS :**\n"
   msg = await m.reply_text("__Restarting plugins__. . .")
