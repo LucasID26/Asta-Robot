@@ -26,13 +26,14 @@ def run_thread():
   Thread(target=run_flask).start()
 
 async def run_all():
+  importlib.invalidate_caches()
   git_pull = git()
   importlib.import_module("Asta")
   install_requirements()
-  run_thread()
   
   await bot.start()
   await asisstant.start()
+  run_thread()
   if os.path.exists("restart.pickle"):
     with open('restart.pickle', 'rb') as status:
       chat_id, message_id = pickle.load(status)
