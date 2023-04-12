@@ -48,7 +48,7 @@ async def remove(client, message):
            else:
              msg = await message.reply("__Prosess ban akun terhapus! __")
              k = 0
-             processTime = lenDeletedList*10
+             processTime = lenDeletedList*2
              temp = await msg.edit(text=f"🚨 | Jumlah dari {lenDeletedList} akun terhapus telah terdeteksi.\n⏳ | Perkiraan waktu: {processTime} detik dari sekarang.")
              if stopProcess: stopProcess = False
              while len(deletedList) > 0 and not stopProcess:   
@@ -58,7 +58,7 @@ async def remove(client, message):
                except Exception:
                  pass  
                k+=1
-               await asyncio.sleep(10)
+               await asyncio.sleep(2)
              if k == lenDeletedList:  
                await msg.edit(text=f"✅ | Berhasil menghapus semua akun terhapus dari obrolan ini.")  
              else:
