@@ -8,7 +8,7 @@ from Asta.decorators.error import error
 
 
 
-@bot.on_message(filters.command('dbg',prefix))
+@bot.on_message(filters.command(['dbg','debug'],prefix))
 @info_cmd
 @bot_admin
 @error
