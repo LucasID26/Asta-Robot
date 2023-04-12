@@ -1,7 +1,7 @@
 from flask import Flask
 from threading import Thread
 from config import bot,asisstant 
-from Asta import install_requirements,git
+
 from pyrogram import idle
 import random
 import os
@@ -25,10 +25,11 @@ def run_thread():
   Thread(target=run_flask).start()
 
 async def run_all():
+  from Asta import install_requirements,git
   install_requirements()
   run_thread()
   git_pull = git()
-
+  await asyncio.sleep(5)
   import Asta
   
   await bot.start()
