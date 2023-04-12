@@ -37,4 +37,18 @@ def install_requirements():
     print("Requirements installed.")
     subprocess.call("clear")
   else:
-    print("Requirements file not found.")
+    print("Requirements file not found.") 
+
+
+def git():
+  fetch = subprocess.run(["git", "fetch"], capture_output=True, text=True).stdout.strip()
+  pull_file = ""
+  if "up to date" not in fetch_output:
+    subprocess.run(["git", "pull"])
+    result = subprocess.run(['git', 'diff', '--name-status', '@..@{u}'], capture_output=True, text=True)
+    files = result.stdout.strip().split('\n')
+    for file in files:
+      status, filename = file.split('\t')
+      pull_file += 
+      
+
