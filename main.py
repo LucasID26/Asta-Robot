@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def flask_run():
-  return "BOT RUN"
+  return "ASTA-ROBOT RUN"
 
 
 def run_flask():
