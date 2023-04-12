@@ -69,7 +69,7 @@ def git():
     hasil += '**FILE DIHAPUS :**\n'
     for file in deleted_files:
       hasil += file+'\n'
-  else:
+  if not added_files and not modified_files and not deleted_files:
     hasil += "**UP TO DATE WITH MAIN**"
   return hasil
       
