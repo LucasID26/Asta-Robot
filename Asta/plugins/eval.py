@@ -14,7 +14,7 @@ from pykeyboard import InlineKeyboard,InlineButton
 async def shell(client, m):
     cmd = m.text.split(" ",1)
     if len(m.command) == 1:
-        return await m.reply(text="No command to execute was given.",quote=True)
+        return await m.reply(text="Tidak ada perintah untuk diselesaikan.",quote=True)
     msg = await m. reply(text="__Processing...__",quote=True)
     shell = (await shell_exec(cmd[1]))[0]
     button = InlineKeyboard()
@@ -46,7 +46,7 @@ async def shell(client, m):
 async def evaluation_cmd_t(client, m):
   cmd = m.text.split(" ",1)
   if len(m.command) == 1:
-    return await m.reply_text(text="__No evaluate message!__")
+    return await m.reply_text(text="__Tidak ada kode untuk diselesaikan!__")
   status = await m.reply_text(text="__Processing eval pyrogram...__")
 
   old_stderr = sys.stderr
