@@ -17,7 +17,7 @@ async def debug_cmd(client,m):
     debug = m.reply_to_message
   else:
     debug = m
-  hasil = f"<b>HASIL-DEBUG:</b>\n<code>{debug}</code>"
+  hasil = f"<b>HASIL-DEBUG-ASTA:</b>\n<code>{debug}</code>"
   if len(hasil) >= 4096:
     with open("Asta_Debug.txt","w+",encoding="utf8") as dbg:
       dbg.write(hasil)
