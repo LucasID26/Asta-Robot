@@ -2,7 +2,6 @@ from flask import Flask
 from threading import Thread
 from config import bot,asisstant 
 import importlib
-from Asta import install_requirements,git
 from pyrogram import idle
 import random
 import os
@@ -26,9 +25,11 @@ def run_thread():
   Thread(target=run_flask).start()
 
 async def run_all():
-  importlib.invalidate_caches()
+  from Asta.__init__ import install_requirements,git
   git_pull = git()
+  await asyncio.sleep(5)
   importlib.import_module("Asta")
+  import Asta
   install_requirements()
   
   await bot.start()
