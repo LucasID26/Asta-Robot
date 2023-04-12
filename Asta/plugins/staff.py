@@ -56,7 +56,7 @@ async def admins(client, message):
           text2 += f"└ {admin.mention}\n\n"
         else:
           text2 += f"└ @{admin.username}\n\n"
-      text2 += f"✅ | **Total number of admins**: {lenAdminList}\n❌ | Bots and hidden admins were rejected." 
+      text2 += f"✅ | **Jumlah total admins**: {lenAdminList}\n❌ | Bot dan admin tersembunyi tidak diikut sertakan." 
       await message.reply_text(text2) 
   except FloodWait as e:
     await asyncio.sleep(e.value) 
