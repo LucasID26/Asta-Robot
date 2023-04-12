@@ -1,7 +1,7 @@
 from flask import Flask
 from threading import Thread
 from config import bot,asisstant 
-from Asta import install_requirements 
+from Asta import install_requirements,git
 from pyrogram import idle
 import random
 import os
@@ -27,6 +27,7 @@ def run_thread():
 async def run_all():
   install_requirements()
   run_thread()
+  git_pull = git()
 
   import Asta
   
@@ -36,7 +37,7 @@ async def run_all():
     with open('restart.pickle', 'rb') as status:
       chat_id, message_id = pickle.load(status)
       os.remove("restart.pickle")
-      await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text="__**Restarting berhasil✅**__")
+      await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{git_pull}\n\n__**Restarting berhasil✅**__")
   await idle()
   await bot.stop()
   await asisstant.stop()

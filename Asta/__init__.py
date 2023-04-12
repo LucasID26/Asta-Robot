@@ -41,14 +41,36 @@ def install_requirements():
 
 
 def git():
-  fetch = subprocess.run(["git", "fetch"], capture_output=True, text=True).stdout.strip()
-  pull_file = ""
-  if "up to date" not in fetch_output:
-    subprocess.run(["git", "pull"])
-    result = subprocess.run(['git', 'diff', '--name-status', '@..@{u}'], capture_output=True, text=True)
-    files = result.stdout.strip().split('\n')
-    for file in files:
-      status, filename = file.split('\t')
-      pull_file += 
+  subprocess.run(['git', 'pull'])
+  git_diff = subprocess.Popen(['git', 'diff', '--name-status', 'HEAD@{1}..HEAD'], stdout=subprocess.PIPE)
+  output_str = git_diff.communicate()[0].decode('utf-8')
+
+  added_files = []
+  modified_files = []
+  deleted_files = []
+  hasil = ""
+  for line in output_str.split('\n'):
+    if line.startswith('A'):
+      added_files.append(line[2:])
+    elif line.startswith('M'):
+      modified_files.append(line[2:])
+    elif line.startswith('D'):
+      deleted_files.append(line[2:])
+  if added_files:
+    hasil += '**FILE BARU :**\n'
+    for file in added_files:
+      hasil += file+'\n'
+    pass 
+  if modified_files:
+    hasil += '**FILE DI EDIT :**\n'
+    for file in modified_files:
+      hasil += file+'\n'
+  if deleted_files:
+    hasil += '**FILE DIHAPUS :**\n'
+    for file in deleted_files:
+      hasil += file+'\n'
+  else:
+    hasil += "**UP TO DATE WITH MAIN**"
+  return hasil
       
 
