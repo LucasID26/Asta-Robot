@@ -35,7 +35,7 @@ async def everyone(client, m):
       else:  
         chatQueue.append(m.chat.id)
         if len(m.command) > 1:
-          inputText = m.command[1]
+          inputText = m.text.split(" ",1]
         elif len(m.command) == 1:
           inputText = "@all"    
         membersList = []
