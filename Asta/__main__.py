@@ -32,7 +32,7 @@ async def restarting():
 
 def restart_program():
   os.system('git pull')
-  os.execv(sys.executable, ['python'] + sys.argv)
+  os.execv(sys.executable, ['python', 'main.py']) #+ sys.argv)
 
    
 def menulis_init():
