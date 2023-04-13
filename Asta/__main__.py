@@ -19,7 +19,7 @@ def restart():
   install = install_requirements()
   pesan += install
   pull = git()
-  pesan += pull
+  pesan += '\n\n'+pull
   return pesan
 
 
