@@ -36,7 +36,7 @@ async def ping(client, m):
 ├• **Server** ➥ `{ping_server()}` 
 └• **Uptime** ➥ `{uptime}` 
 
-{text_posisi('**OWNER**','tengah')}
+{text_posisi('OWNER','tengah')}
 {owner} <a href='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz5q_KcP8RQbDQPciRoBSlwKMyBHAKMNN-pg&amp;usqp=CAU'>⁠</a>
 """)
 
