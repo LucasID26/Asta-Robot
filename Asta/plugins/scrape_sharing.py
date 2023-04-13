@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 
 import asyncio
 
-@asisstant.on_message(filters.chat(-1001519186585))
+@asisstant.on_message(filters.chat(-1001549051935))
 async def sharing(client,m):
   text = m.text
   urls = []
@@ -13,6 +13,7 @@ async def sharing(client,m):
     url_components = urlparse(word)
     if url_components.scheme and url_components.netloc:
       urls.append(word)
+  jumlah = 0
   for url in urls:
     if urlparse(url).path in ['/ADITXROBOT']:
       split_url = urlparse(url).query.split("=")[1]
@@ -24,3 +25,5 @@ async def sharing(client,m):
         if message.video:
           id = message.video.file_id
           await asisstant.send_video("@aslibukansuci",video=id)
+          jumlah += 1
+  await asisstant.send_message(1928677026,f'**Berhasil mengirim {jumlah} video ke Channel** @aslibukansuci')
