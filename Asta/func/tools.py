@@ -1,6 +1,7 @@
 import asyncio
 import math
 import os
+import re
 import shlex
 from typing import Tuple
 from PIL import Image
