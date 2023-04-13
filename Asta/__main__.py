@@ -67,7 +67,8 @@ def install_requirements():
   if result_dict['status'] == 'Berhasil✅':
     pesan_install += f"**Status :** {result_dict['status']}\n**INFO :** {result_dict['message']}"
   else:
-    pesan_install += f"**Status :** {result_dict['status']}\n**INFO :** {result_dict['message']}\n**Module :** {'\n'.join(['  - ' + module for module in result_dict['failed_modules']])}"
+    module_gagal = '\n'.join(['  - ' + module for module in result_dict['failed_modules']]) 
+    pesan_install += f"**Status :** {result_dict['status']}\n**INFO :** {result_dict['message']}\n**Module :** {module_gagal}"
   return pesan_install
 
 
