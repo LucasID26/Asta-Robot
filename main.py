@@ -26,12 +26,12 @@ def run_thread():
 
 
 async def run_all():
-  from Asta.__main__ import restarting
-  await restarting()
+  from Asta.__main__ import restarting,restart
   importlib.import_module("Asta")
-  
+  restart()
   await bot.start()
   await asisstant.start()
+  await restarting()
   run_thread()
   await idle()
   await bot.stop()
