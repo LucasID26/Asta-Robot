@@ -21,7 +21,8 @@ async def ping(client, m):
   start = time.time() 
   msg = await m.reply_text("**0% ▒▒▒▒▒▒▒▒▒▒**")
   end = time.time()
-  durasi = round(end - start,3)
+  durasi = (end - start) * 1000
+  p_result = f"{ping:.2f} ms"
   #await msg.edit("**20% ██▒▒▒▒▒▒▒▒**")
   #await msg.edit("**40% ████▒▒▒▒▒▒**")
   #await msg.edit("**60% ██████▒▒▒▒**")
@@ -30,7 +31,7 @@ async def ping(client, m):
   owner = (await bot.get_users(own[0])).mention
   await msg.edit(f"""
 ❏ **PONG!!🏓**
-├• **Pinger** ➥ `{durasi} detik`
+├• **Pinger** ➥ `{p_result}`
 ├• **Server** ➥ `{ping_server()}`
 ├• **Uptime** ➥ `{uptime}`
 └• **Owner :** {owner} <a href='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz5q_KcP8RQbDQPciRoBSlwKMyBHAKMNN-pg&amp;usqp=CAU'>⁠</a>""")
