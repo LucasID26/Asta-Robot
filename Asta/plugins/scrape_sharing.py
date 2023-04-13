@@ -6,7 +6,7 @@ import asyncio
 
 @asisstant.on_message(filters.chat(-1001549051935))
 async def sharing(client,m):
-  text = m.text
+  text = m.text or m.caption
   urls = []
   words = text.split()
   for word in words:
