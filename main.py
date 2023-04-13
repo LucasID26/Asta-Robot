@@ -24,10 +24,10 @@ def run_flask():
 def run_thread():
   Thread(target=run_flask).start()
 
+git_pull = ""
+
 async def run_all():
-  from Asta.__init__ import install_requirements,git
-  git_pull = git()
-  await asyncio.sleep(5)
+  from Asta.__init__ import install_requirements
   importlib.import_module("Asta")
   import Asta
   install_requirements()
@@ -47,6 +47,9 @@ async def run_all():
 loop = asyncio.get_event_loop()
 if __name__ == "__main__":
   try:
+    from Asta.__init__ import git
+    pull = git()
+    git_pull += pull
     loop.run_until_complete(run_all())
   except KeyboardInterrupt:
     pass 
