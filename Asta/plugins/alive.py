@@ -22,7 +22,7 @@ async def ping(client, m):
   msg = await m.reply_text("**0% ▒▒▒▒▒▒▒▒▒▒**")
   end = time.time()
   durasi = (end - start) * 1000
-  p_result = f"{ping:.2f} ms"
+  p_result = f"{durasi:.2f} ms"
   #await msg.edit("**20% ██▒▒▒▒▒▒▒▒**")
   #await msg.edit("**40% ████▒▒▒▒▒▒**")
   #await msg.edit("**60% ██████▒▒▒▒**")
