@@ -23,7 +23,8 @@ async def run_cmd(cmd: str) -> Tuple[str, str, int, int]:
 
 def text_posisi(text, posisi):
   max_chars = 40
-
+  text = re.sub(r'<[^>]*>', ' ', text)
+  text = re.sub(r'[\*_~]', ' ', text)
   total_spaces = max_chars - len(text)
   if posisi == 'kiri':
       spaces_kiri = 0
