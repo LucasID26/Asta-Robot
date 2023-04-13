@@ -26,7 +26,7 @@ async def list_bots(client, message):
     else:    
       bots = botList.pop(0)
       text3 += f"└ {bots.mention}\n\n"
-      text3 += f"✅ | **Total number of bots**: {lenBotList}"
+      text3 += f"✅ | **Total jumlah bot**: {lenBotList}"
       await message.reply(text=text3) 
   except Exception as e:
     await message.reply(e,quote=True)
