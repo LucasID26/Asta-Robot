@@ -27,7 +27,7 @@ def run_thread():
 
 async def run_all():
   from Asta.__main__ import restarting
-  restarting()
+  await restarting()
   importlib.import_module("Asta")
   
   await bot.start()
