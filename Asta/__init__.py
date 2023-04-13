@@ -26,8 +26,7 @@ async def restart_plugins(client,m):
   restart_program() 
 
 def restart_program():
-  #os.kill(os.getpid(), signal.SIGTERM)
-  os.execvp(sys.executable, [sys.executable, "main.py"]) 
+  os.execv(sys.executable, ['python'] + sys.argv)
 
 def install_requirements():
   requirements_file = "requirements.txt"
@@ -41,7 +40,8 @@ def install_requirements():
 
 
 def git():
-  subprocess.run(['git', 'pull'])
+  #subprocess.run(['git', 'pull'])
+  os.system('git pull')
   git_diff = subprocess.Popen(['git', 'diff', '--name-status', 'HEAD@{1}..HEAD'], stdout=subprocess.PIPE)
   output_str = git_diff.communicate()[0].decode('utf-8')
 
