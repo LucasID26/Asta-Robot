@@ -1,5 +1,6 @@
 from pyrogram import filters
 from config import asisstant
+from urllib.parse import urlparse
 
 import asyncio
 
