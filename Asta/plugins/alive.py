@@ -25,7 +25,7 @@ async def ping(client, m):
   p_result = f"{durasi:.2f} ms"
   #await msg.edit("**20% ██▒▒▒▒▒▒▒▒**")
   #await msg.edit("**40% ████▒▒▒▒▒▒**")
-  #await msg.edit("**60% ██████▒▒▒▒**")
+  await msg.edit("**60% ██████▒▒▒▒**")
   #await msg.edit("**80% ████████▒▒**")
   await msg.edit("**100% ██████████**")
   owner = (await bot.get_users(own[0])).mention
