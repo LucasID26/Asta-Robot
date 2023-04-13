@@ -11,26 +11,26 @@ async def restart_plugins(client,m):
   msg = await m.reply_text("__Restarting BOT__. . .")
   with open("restart.pickle", "wb") as status:
     pickle.dump([m.chat.id, msg.id], status)
-  restart_program()
-  await restarting() 
+  restart_program() 
+
+def restart():
+  pesan = ""
+  menulis_init()
+  install = install_requirements()
+  pesan += install
+  pull = git()
+  pesan += pull
+  return pesan
+
+
 
 async def restarting():
-  menulis_init()
   if os.path.exists("restart.pickle"):
     with open('restart.pickle', 'rb') as status:
       chat_id, message_id = pickle.load(status)
       os.remove("restart.pickle")
-    pesan = ""
-    pesan_awal = "__Restarting BOT__. . .\n"
-    await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{pesan_awal}\n`Menginstall requirements. . .`")
-    install = install_requirements()
-    pesan += install
-    await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{pesan_awal}\n{pesan}\n\n`Mengecek file yang diupdate. . .`")
-    pull = git()
-    pesan += pull
-    await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{pesan}\n\n`Restarting berhasil✅`")
-  else:
-    pass
+      pesan = restart()
+      await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{pesan}\n\n`Restarting berhasil✅`")
 
 def restart_program():
   os.system('git pull')
