@@ -20,15 +20,17 @@ async def restarting():
     with open('restart.pickle', 'rb') as status:
       chat_id, message_id = pickle.load(status)
       os.remove("restart.pickle")
-  pesan = ""
-  pesan_awal = "__Restarting BOT__. . .\n"
-  await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{pesan_awal}\n`Menginstall requirements. . .`")
-  install = install_requirements()
-  pesan += install
-  await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{pesan_awal}\n{pesan}\n\n`Mengecek file yang diupdate. . .`")
-  pull = git()
-  pesan += pull
-  await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{pesan}\n\n`Restarting berhasil✅`")
+    pesan = ""
+    pesan_awal = "__Restarting BOT__. . .\n"
+    await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{pesan_awal}\n`Menginstall requirements. . .`")
+    install = install_requirements()
+    pesan += install
+    await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{pesan_awal}\n{pesan}\n\n`Mengecek file yang diupdate. . .`")
+    pull = git()
+    pesan += pull
+    await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{pesan}\n\n`Restarting berhasil✅`")
+  else:
+    pass
 
 def restart_program():
   os.system('git pull')
