@@ -13,7 +13,7 @@ async def restart_plugins(client,m):
     pickle.dump([m.chat.id, msg.id], status)
   restarting() 
 
-def restarting():
+async def restarting():
   restart_program()
   menulis_init()
   if os.path.exists("restart.pickle"):
