@@ -21,5 +21,5 @@ async def sharing(client,m):
       await asyncio.sleep(5)
       async for message in asisstant.get_chat_history(bot,limit=1):
         if message.video:
-        Id = message.video.file_id
-        await asisstant.send_video("aslibukansuci",video=Id)
+          id = message.video.file_id
+          await asisstant.send_video("aslibukansuci",video=id)
