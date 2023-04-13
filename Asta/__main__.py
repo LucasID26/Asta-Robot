@@ -70,7 +70,7 @@ def install_requirements():
     pesan_install += f"**Status :** {result_dict['status']}\n**INFO :** {result_dict['message']}"
   else:
     module_gagal = '\n'.join(['  - ' + module for module in result_dict['failed_modules']]) 
-    pesan_install += f"**Status :** {result_dict['status']}\n**INFO :** {result_dict['message']}\n**Module :** {module_gagal}"
+    pesan_install += f"**Status :** {result_dict['status']}\n**INFO :** {result_dict['message']}\n**Module :\n** {module_gagal}"
   return pesan_install
 
 
