@@ -21,6 +21,25 @@ async def run_cmd(cmd: str) -> Tuple[str, str, int, int]:
         process.pid,
     )
 
+def generate_message(text, position):
+  max_chars = 40
+
+  total_spaces = max_chars - len(text)
+  if position == 'kiri':
+      spaces_left = 0
+      spaces_right = total_spaces
+  elif position == 'tengah':
+      spaces_left = total_spaces // 2
+      spaces_right = total_spaces - spaces_left
+  elif position == 'kanan':
+      spaces_left = total_spaces
+      spaces_right = 0
+
+  message = " " * spaces_left + text + " " * spaces_right
+  return message
+
+
+
 def get_arg(m):
   msg = m.text
   msg = msg.replace(" ", "", 1) if msg[1] == " " else msg
