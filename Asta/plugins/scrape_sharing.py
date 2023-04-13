@@ -12,7 +12,7 @@ async def sharing(client,m):
   for word in words:
     url_components = urlparse(word)
     if url_components.scheme and url_components.netloc:
-        urls.append(word)
+      urls.append(word)
   for url in urls:
     if urlparse(url).path in ['/ADITXROBOT']:
       split_url = urlparse(url).query.split("=")[1]
@@ -23,4 +23,4 @@ async def sharing(client,m):
       async for message in asisstant.get_chat_history(bot,limit=1):
         if message.video:
           id = message.video.file_id
-          await asisstant.send_video("aslibukansuci",video=id)
+          await asisstant.send_video("@aslibukansuci",video=id)
