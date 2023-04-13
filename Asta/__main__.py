@@ -11,10 +11,10 @@ async def restart_plugins(client,m):
   msg = await m.reply_text("__Restarting BOT__. . .")
   with open("restart.pickle", "wb") as status:
     pickle.dump([m.chat.id, msg.id], status)
+  restart_program()
   await restarting() 
 
 async def restarting():
-  restart_program()
   menulis_init()
   if os.path.exists("restart.pickle"):
     with open('restart.pickle', 'rb') as status:
