@@ -35,7 +35,7 @@ def text_posisi(text, posisi):
       spaces_kiri = total_spaces
       spaces_kanan = 0
 
-  message = " " * spaces_left + text + " " * spaces_right
+  message = " " * spaces_kiri + text + " " * spaces_kanan
   return message
 
 
