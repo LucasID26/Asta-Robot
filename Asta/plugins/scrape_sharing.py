@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 
 import asyncio
 
-@asisstant.on_message(filters.chat(-1001627097162))
+@asisstant.on_message(filters.chat(-1001519186585))
 async def sharing(client,m):
   text = m.text
   urls = []
