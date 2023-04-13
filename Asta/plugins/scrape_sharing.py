@@ -4,7 +4,7 @@ from config import asisstant
 import asyncio
 
 @asisstant.on_message(filters.chat(-1001627097162))
-async def sharing(client,id):
+async def sharing(client,m):
   text = m.text
   urls = []
   words = text.split()
