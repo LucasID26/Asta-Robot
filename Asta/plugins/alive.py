@@ -9,7 +9,8 @@ import psutil
 
 from Asta.decorators.info_cmd import info_cmd
 from Asta.func.duration import duration
-from Asta.func.file_size import file_size 
+from Asta.func.file_size import file_size
+from Asta.func.tools import text_posisi
 
 
 starttime = datetime.utcnow()
@@ -32,9 +33,12 @@ async def ping(client, m):
   await msg.edit(f"""
 ❏ **PONG!!🏓**
 ├• **Pinger** ➥ `{p_result}`
-├• **Server** ➥ `{ping_server()}`
-├• **Uptime** ➥ `{uptime}`
-└• **Owner :** {owner} <a href='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz5q_KcP8RQbDQPciRoBSlwKMyBHAKMNN-pg&amp;usqp=CAU'>⁠</a>""")
+├• **Server** ➥ `{ping_server()}` 
+└• **Uptime** ➥ `{uptime}` 
+
+**{text_posisi('OWNER','tengah')}** 
+{owner} <a href='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz5q_KcP8RQbDQPciRoBSlwKMyBHAKMNN-pg&amp;usqp=CAU'>⁠</a>
+""")
 
 def ping_server():
   url = os.environ['PING_URL']
