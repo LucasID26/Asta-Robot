@@ -63,7 +63,7 @@ def install_requirements():
     for line in completed_process.stderr.splitlines():
       line = line.decode('utf-8').strip()
       if line.startswith('ERROR: Could not find a version'):
-        module_name = line.split()[6]
+        module_name = line.split()[-4]
         result_dict['failed_modules'].append(module_name)
   pesan_install = f"**Install Requirements :**\n"
   if result_dict['status'] == 'Berhasil✅':
