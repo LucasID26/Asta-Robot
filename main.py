@@ -26,19 +26,13 @@ def run_thread():
 
 
 async def run_all():
-  from Asta.__init__ import install_requirements,git
-  git_pull = git()
+  from Asta.__main__ import restarting
+  restarting()
   importlib.import_module("Asta")
-  install_requirements()
   
   await bot.start()
   await asisstant.start()
   run_thread()
-  if os.path.exists("restart.pickle"):
-    with open('restart.pickle', 'rb') as status:
-      chat_id, message_id = pickle.load(status)
-      os.remove("restart.pickle")
-      await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=f"{git_pull}\n\n__**Restarting berhasil✅**__")
   await idle()
   await bot.stop()
   await asisstant.stop()
