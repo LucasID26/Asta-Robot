@@ -1,70 +1,35 @@
-import pytz
-from datetime import datetime
-from pyrogram import Client
-import calendar
+from pyrogram import Client, Message
+from typing import List
+
 
 class MyClient(Client):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.timezone = pytz.timezone('Asia/Jakarta')
+    async def build_table(self, judul: List[str], query: List[str]) -> str:
+        # menghitung panjang maksimal untuk setiap kolom berdasarkan isi data
+        max_lengths = [len(max(judul, key=len))] + [len(max(query[i], key=len)) for i in range(len(judul))]
 
-    def to_local_time(self, date):
-        return self.timezone.localize(date).strftime('%Y-%m-%d %H:%M:%S')
+        # membangun header
+        header = '|'.join([f'{judul[i]:^{max_lengths[i]}}' for i in range(len(judul))])
+        header += '\n' + '|'.join(['-' * length for length in max_lengths])
 
-    async def send_kalender(self, chat_id: int, year: int, month: int, timezone: str = 'Asia/Jakarta'):
-        # konversi waktu ke zona waktu yang diberikan
-        tz = pytz.timezone(timezone)
-        now = datetime.now(tz)
+        # membangun baris data
+        rows = ''
+        for i in range(len(query[0])):
+            row = '|'.join([f'{query[j][i]:^{max_lengths[j]}}' for j in range(len(judul))])
+            rows += '\n' + row
 
-        # mencari thread ID jika belum diset
-        if self.thread_id is None:
-            async for message in self.iter_history(chat_id):
-                if message.reply_to_message is None:
-                    self.thread_id = message.message_id
-                    break
+        # mengembalikan teks tabel
+        return f'{header}\n{rows}'
 
-        # membuat objek calendar untuk bulan dan tahun yang diberikan
-        cal = calendar.monthcalendar(year, month)
+    async def send_table(self, chat_id: int, judul: List[str], query: List[str]):
+        # membangun teks tabel menggunakan method build_table
+        table_text = await self.build_table(judul, query)
 
-        # membuat teks kalender dalam format yang diinginkan
-        calendar_text = f"Kalender untuk bulan {calendar.month_name[month]} {year}:\n\n"
-        for week in cal:
-            for day in week:
-                if day == 0:
-                    calendar_text += "   "
-                else:
-                    # menandai hari ini dengan tanda asterisk (*) jika day sama dengan tanggal sekarang
-                    if day == now.day and month == now.month and year == now.year:
-                        calendar_text += f"**{day:2d}**"
-                    else:
-                        calendar_text += f"`{day:2d}`"
-            calendar_text += "\n"
+        # kirim pesan dengan teks tabel menggunakan fungsi send_message
+        await self.send_message(chat_id, table_text, parse_mode='Markdown')
 
-        # kirim pesan dengan teks kalender menggunakan fungsi send_message
-        await self.send_message(chat_id, calendar_text, reply_to_message_id=self.thread_id)
+    async def reply_table(self, message: Message, judul: List[str], query: List[str]):
+        # membangun teks tabel menggunakan method build_table
+        table_text = await self.build_table(judul, query)
 
-    async def reply_kalender(self, message, year: int, month: int, timezone: str = 'Asia/Jakarta'):
-        chat_id = message.chat.id
-        # konversi waktu ke zona waktu yang diberikan
-        tz = pytz.timezone(timezone)
-        now = datetime.now(tz)
-
-        # membuat objek calendar untuk bulan dan tahun yang diberikan
-        cal = calendar.monthcalendar(year, month)
-
-        # membuat teks kalender dalam format yang diinginkan
-        calendar_text = f"Kalender untuk bulan {calendar.month_name[month]} {year}:\n\n"
-        for week in cal:
-            for day in week:
-                if day == 0:
-                    calendar_text += "   "
-                else:
-                    # menandai hari ini dengan tanda asterisk (*) jika day sama dengan tanggal sekarang
-                    if day == now.day and month == now.month and year == now.year:
-                        calendar_text += f"*{day:2d}* "
-                    else:
-                        calendar_text += f"{day:2d} "
-            calendar_text += "\n"
-        
-        # kirim pesan dengan teks kalender menggunakan fungsi reply_to_message
-        await message.reply_text(calendar_text)
+        # kirim pesan dengan teks tabel menggunakan fungsi reply
+        await message.reply(table_text, parse_mode='Markdown')
