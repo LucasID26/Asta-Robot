@@ -26,4 +26,5 @@ async def sharing(client,m):
           id = message.video.file_id
           await asisstant.send_video("@aslibukansuci",video=id)
           jumlah += 1
-  await asisstant.send_message(1928677026,f'**Berhasil mengirim {jumlah} video ke Channel** @aslibukansuci')
+  if jumlah >= 1:
+    await asisstant.send_message(1928677026,f'**Berhasil mengirim {jumlah} video ke Channel** @aslibukansuci')
