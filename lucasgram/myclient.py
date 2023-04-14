@@ -1,6 +1,6 @@
 from pyrogram import Client
 from telegraph import Telegraph,upload_file
-
+from typing import List
 
 class MyClient(Client):
   async def create_graph(self, title: str, content: List[str], photo_path: str = None):
