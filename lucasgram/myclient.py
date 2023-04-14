@@ -11,7 +11,7 @@ class MyClient(Client):
     if isinstance(content, str):
       with open(content, 'rb') as f:
         img = f.read()
-      image_url = upload_image(img)
+      image_url = upload_file(img)
       html_content = f'<img src="{image_url}"/>'
     elif isinstance(content, str):  # jika content berupa teks
       html_content = content
