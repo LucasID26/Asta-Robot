@@ -11,3 +11,4 @@ pillow
 psutil
 pyromod==1.5
 pyrofork
+telegraph
