@@ -1,6 +1,6 @@
 import os 
 #from pyrogram import Client 
-from Asta import MyClient
+from Asta.method import MyClient
 import pymongo 
 import pyromod.listen
 #from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
