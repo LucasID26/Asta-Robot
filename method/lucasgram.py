@@ -16,6 +16,13 @@ class MyClient(Client):
         tz = pytz.timezone(timezone)
         now = datetime.now(tz)
 
+        # mencari thread ID jika belum diset
+        if self.thread_id is None:
+            async for message in self.iter_history(chat_id):
+                if message.reply_to_message is None:
+                    self.thread_id = message.message_id
+                    break
+
         # membuat objek calendar untuk bulan dan tahun yang diberikan
         cal = calendar.monthcalendar(year, month)
 
@@ -34,8 +41,8 @@ class MyClient(Client):
             calendar_text += "\n"
 
         # kirim pesan dengan teks kalender menggunakan fungsi send_message
-        await self.send_message(chat_id, calendar_text)
-        
+        await self.send_message(chat_id, calendar_text, reply_to_message_id=self.thread_id)
+
     async def reply_kalender(self, message, year: int, month: int, timezone: str = 'Asia/Jakarta'):
         chat_id = message.chat.id
         # konversi waktu ke zona waktu yang diberikan
@@ -60,4 +67,4 @@ class MyClient(Client):
             calendar_text += "\n"
         
         # kirim pesan dengan teks kalender menggunakan fungsi reply_to_message
-        await self.send_message(chat_id, calendar_text, reply_to_message_id=message.message_id)
+        await message.reply_text(calendar_text)
