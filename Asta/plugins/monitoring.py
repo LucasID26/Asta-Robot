@@ -1,9 +1,11 @@
 from pyrogram import filters
-from config import bot,prefix,own,dbname
+from config import bot,prefix,own
 import requests
+import os
 from urllib.parse import urlparse
 
-db = dbname.Monitor
+
+api_key = os.environ['UPTIME_API']
 
 
 @bot.on_message(filters.command("addmonitor",prefix) & filters.user(own[0]))
@@ -13,16 +15,31 @@ async def save_monitor(client,m):
   url = m.text.split(" ",1)[1]
   if not urlparse(url).scheme:
     return await m.reply_text("Cantumkan URL yang valid")
-  key = {"name": "MONITOR"}
-  if db.find_one(key):
-    if url in db.find_one(key)['monitor_url']:
-      await m.reply_text("URL sudah ada dalam daftar monitor saya!")
-    else:
-      save = db.update_one(key, {"$push": {"monitor_url": url}})
-      await m.reply_text("URL ditambahkan dalam daftar monitor")
-  else:
-    save = db.insert_one({"name": "MONITOR", "monitor_url": [url]})
-    await m.reply_text("URL ditambahkan dalam daftar monitor")
+  
+  url_uptime  = "https://api.uptimerobot.com/v2/newMonitor"
+  monitor_url = []
+
+  for monitor in get_monitor():
+    monitor_url.append(monitor["url"])
+  if url in monitor_url:
+    return await m.reply_text('URL sudah terdaftar dalam monitor')
+  payload = {
+        "api_key": api_key,
+        "url": url,
+        "type": 1,
+        "friendly_name": urlparse(url).netloc
+  }
+  res = requests.post(url_uptime, data=data).json()
+  status = "Berhasil✅" if res['stat'] == "ok" else "Kegagalan❎"
+  if status == 'Berhasil✅':
+    pesan = f"**Nama :** `{urlparse(url).netloc}`\n**Status :** `{status}`\n**ID :** `{res['monitor']['id']}`"
+    await m.reply_text(pesan)
+  elif status == 'Kegagalan❎':
+    pesan = f"**Status :** `{status}`\n**Error :** `{res['error']['message']}`" 
+    await m.reply_text(pesan)
+
+
+
 
 @bot.on_message(filters.command("monitor",prefix) & filters.user(own[0]))
 async def get_monitor(client,m):
@@ -63,3 +80,17 @@ async def del_monitor(client,m):
       await m.reply_text("URL tidak ada dalam daftar monitor saya!")
   else:
     await m.reply_text("Monitor kosong")
+
+
+
+def get_monitor():
+  url = "https://api.uptimerobot.com/v2/getMonitors"
+  payload = {
+    "api_key": api_key,
+    "format": "json"
+  }
+  res = requests.post(url, data=payload).json()
+  return res['monitors']
+
+
+
