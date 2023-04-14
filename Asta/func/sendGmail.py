@@ -3,7 +3,7 @@ import smtplib
 from email.mime.text import  MIMEText
 from email.mime.multipart import MIMEMultipart
 
-asta_gmail = os.environ["ASTA_GMAIL"]
+asta_gmail = os.environ["BOT_GMAIL"]
 g_pass = os.environ["GMAIL_PASS"]
 owner_gmail = os.environ["OWN_GMAIL"]
 
