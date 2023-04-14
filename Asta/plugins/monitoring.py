@@ -32,10 +32,10 @@ async def save_monitor(client,m):
   }
   res = requests.post(url_uptime, data=payload).json()
   stat = "Berhasil✅" if res['stat'] == "ok" else "Kegagalan❎"
-  if status == 'Berhasil✅':
+  if stat == 'Berhasil✅':
     pesan = f"**Nama :** `{urlparse(url).netloc}`\n**Stat :** `{stat}`\n**Status :** `{res['monitor']['status']}`\n**ID :** `{res['monitor']['id']}`"
     await m.reply_text(pesan)
-  elif status == 'Kegagalan❎':
+  elif stat == 'Kegagalan❎':
     pesan = f"**Stat :** `{stat}`\n**Error :** `{res['error']['message']}`" 
     await m.reply_text(pesan)
 
@@ -72,10 +72,10 @@ async def del_monitor(client,m):
 
   res = requests.post(url_uptime, data=payload).json()
   stat = "Berhasil✅" if res['stat'] == "ok" else "Kegagalan❎"
-  if status == 'Berhasil✅':
+  if stat == 'Berhasil✅':
     pesan = f"**Nama :** `{urlparse(url).netloc}`\n**Stat :** `{stat}`\n**Status :** `{res['monitor']['status']}`\n**ID :** `{res['monitor']['id']}`"
     await m.reply_text(pesan)
-  elif status == 'Kegagalan❎':
+  elif stat == 'Kegagalan❎':
     pesan = f"**Stat :** `{stat}`\n**Error :** `{res['error']['message']}`" 
     await m.reply_text(pesan)
 
