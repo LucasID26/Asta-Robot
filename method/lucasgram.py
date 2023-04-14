@@ -34,7 +34,7 @@ class MyClient(Client):
             calendar_text += "\n"
 
         # kirim pesan dengan teks kalender menggunakan fungsi send_message
-        await self.send_message(chat_id, calendar_text, parse_mode='Markdown')
+        await self.send_message(chat_id, calendar_text)
         
     async def reply_kalender(self, message, year: int, month: int, timezone: str = 'Asia/Jakarta'):
         chat_id = message.chat.id
