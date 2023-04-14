@@ -30,7 +30,7 @@ async def save_monitor(client,m):
         "type": 1,
         "friendly_name": urlparse(url).netloc
   }
-  res = requests.post(url_uptime, data=data).json()
+  res = requests.post(url_uptime, data=payload).json()
   status = "Berhasil✅" if res['stat'] == "ok" else "Kegagalan❎"
   if status == 'Berhasil✅':
     pesan = f"**Nama :** `{urlparse(url).netloc}`\n**Status :** `{status}`\n**ID :** `{res['monitor']['id']}`"
