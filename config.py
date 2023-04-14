@@ -1,5 +1,6 @@
 import os 
-from pyrogram import Client 
+#from pyrogram import Client 
+from Asta import MyClient
 import pymongo 
 import pyromod.listen
 #from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
@@ -18,13 +19,13 @@ dbname = DB["Asta-Robot"]
 
 prefix = ['/','!','.','*'] 
 own = [1928677026]
-bot = Client('Asta-Robot',
+bot = MyClient('Asta-Robot',
              api_id=ID,
              api_hash=HASH,
              bot_token=TOKEN,
              in_memory=True
             )
-asisstant = Client('Asta-Asisstant',
+asisstant = MyClient('Asta-Asisstant',
              api_id=ID,
              api_hash=HASH,
              session_string=ASISSTANT_STR,
