@@ -9,12 +9,10 @@ class MyClient(Client):
     telegraph.create_account(short_name='my_account')
 
     if isinstance(content, str):  # jika content berupa path file
-      with open(content, 'rb') as f:
-        #img = f.read()
-        image_url = upload_file(f)
-      html_content = f'<img src="{image_url}"/>'
-    elif isinstance(content, bytes):  # jika content berupa bytes/file
-      html_content = f'<img src="{upload_file(content)}"/>'
+      with open(file_path, "rb") as f:
+        file_bytes = f.read()
+      image_url = upload_file(file_bytes)
+      html_content = f'<img src="{image_url.link}"/>'
     else:
       html_content = content
 
