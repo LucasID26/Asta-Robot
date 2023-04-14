@@ -1,6 +1,6 @@
 import os 
 #from pyrogram import Client 
-from method.lucasgram import MyClient
+from lucasgram import MyClient
 import pymongo 
 import pyromod.listen
 #from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
