@@ -8,15 +8,16 @@ class MyClient(Client):
     telegraph = Telegraph()
     telegraph.create_account(short_name='my_account')
 
-    if isinstance(content, str):
+    if isinstance(content, str):  # jika content berupa path file
       with open(content, 'rb') as f:
         #img = f.read()
         image_url = upload_file(f)
       html_content = f'<img src="{image_url}"/>'
-    elif isinstance(content, str):  # jika content berupa teks
-      html_content = content
+    elif isinstance(content, bytes):  # jika content berupa bytes/file
+      html_content = f'<img src="{upload_file(content)}"/>'
     else:
-      raise ValueError('Content harus berupa teks atau path file')
+      html_content = content
 
     page = telegraph.create_page(title=title, html_content=html_content)
     return page['url']
+
