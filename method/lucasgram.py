@@ -28,9 +28,9 @@ class MyClient(Client):
                 else:
                     # menandai hari ini dengan tanda asterisk (*) jika day sama dengan tanggal sekarang
                     if day == now.day and month == now.month and year == now.year:
-                        calendar_text += f"*{day:2d}* "
+                        calendar_text += f"**{day:2d}**"
                     else:
-                        calendar_text += f"{day:2d} "
+                        calendar_text += f"`{day:2d}`"
             calendar_text += "\n"
 
         # kirim pesan dengan teks kalender menggunakan fungsi send_message
