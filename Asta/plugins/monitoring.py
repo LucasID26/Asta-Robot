@@ -44,10 +44,7 @@ async def save_monitor(client,m):
 
 @bot.on_message(filters.command("monitor",prefix) & filters.user(own[0]))
 async def get_monitor(client,m):
-  msg = await m.reply_text("`Mengumpulkan data monitor . . .`")
-  if len(db.find_one({"name":"MONITOR"})['monitor_url']) == 0:
-    return await msg.edit("**MONITOR KOSONG**")
-  
+  msg = await m.reply_text("`Mengumpulkan data monitor . . .`")  
   pesan = "**STATISTIK MONITOR**\n\n"
   for monitor in get_monitor():
     nama = monitor['friendly_name']
