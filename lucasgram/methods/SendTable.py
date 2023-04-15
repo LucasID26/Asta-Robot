@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import io
 
-async def SendTable(self, chat_id, data, caption=None, message_thread_id: int = None):
+async def SendTable(self, chat_id, data, caption, message_thread_id):
     df = pd.DataFrame(data)
 
     fig, ax = plt.subplots()
