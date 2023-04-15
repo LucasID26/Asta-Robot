@@ -1,4 +1,5 @@
 import itertools
+import json
 
 async def GetTopSender(self, chat_id):
   try:
@@ -26,7 +27,7 @@ async def GetTopSender(self, chat_id):
         }
     }
 
-    return result_dict
+    return json.dumps(result_dict, indent=4)
 
   except Exception as e:
     print(f"Error getting top sender: {e}")
