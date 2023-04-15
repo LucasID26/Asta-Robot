@@ -1,3 +1,5 @@
+import itertools
+
 async def GetTopSender(self, chat_id):
   try:
     senders = {}
