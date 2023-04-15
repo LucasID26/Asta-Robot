@@ -13,7 +13,7 @@ class MyClient(Client):
     for filename in os.listdir(methods_dir):
       if filename.endswith(".py"):
         module_name = filename[:-3]
-        module = importlib.import_module(f"{methods_dir}.{module_name}")
+        module = importlib.import_module(f"lucasgram.methods.{module_name}")
 
         for name in dir(module):
           if not name.startswith("__"):
