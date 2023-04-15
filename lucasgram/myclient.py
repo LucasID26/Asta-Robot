@@ -4,7 +4,7 @@ from telegraph import Telegraph
 class MyClient(Client):
   #FUN
   async def create_text_graph(self, title: str, content: list):
-    await CreateTextGraph(title, content)
+    return await CreateTextGraph(title, content)
 
 
 async def CreateTextGraph(title, content):
