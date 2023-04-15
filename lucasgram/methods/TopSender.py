@@ -19,7 +19,10 @@ async def GetTopSender(self, chat_id):
             "message_count": senders[top_sender_id]
         },
         "all_senders": {
-            await self.get_users(sender_id): message_count for sender_id, message_count in senders.items()
+            sender_id: {
+                "user": await self.get_users(sender_id),
+                "message_count": message_count
+            } for sender_id, message_count in senders.items()
         }
     }
 
@@ -27,3 +30,4 @@ async def GetTopSender(self, chat_id):
 
   except Exception as e:
     print(f"Error getting top sender: {e}")
+
