@@ -1,6 +1,6 @@
 
 
-async def get_top_sender(self, chat_id):
+async def GetTopSender(self, chat_id):
   try:
     members_count = await self.get_chat_members_count(chat_id)
     all_members = await self.get_chat_members(chat_id, limit=members_count)
