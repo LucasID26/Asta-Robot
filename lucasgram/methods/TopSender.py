@@ -1,16 +1,16 @@
-async def GetTopSender(self, chat_id):
+async def GetTopSenders(self, chat_id):
   try:
-    #members_count = await self.get_chat_members_count(chat_id)
-    #all_members = await self.get_chat_members(chat_id, limit=members_count)
-
     senders = {}
     async for message in self.search_messages(chat_id=chat_id):
       user_id = message.from_user.id
       senders[user_id] = senders.get(user_id, 0) + 1
 
-    top_sender_id = max(senders, key=senders.get)
-    top_sender = await self.get_users(top_sender_id)
+    sorted_senders = sorted(senders.items(), key=lambda x: x[1], reverse=True)
+    top_senders = itertools.islice(sorted_senders, 10)
 
-    return top_sender.first_name, senders[top_sender_id]
+    top_senders_info = {await self.get_users(sender[0]): sender[1] for sender in top_senders}
+
+    return top_senders_info
+
   except Exception as e:
-    print(f"Error getting top sender: {e}")
+    print(f"Error getting top senders: {e}")
