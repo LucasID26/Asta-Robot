@@ -1,14 +1,20 @@
 from pyrogram import Client
-from telegraph import Telegraph
-  
+import os
+import importlib
+
 class MyClient(Client):
-  #FUN
-  async def create_text_graph(self, title: str, content: list):
-    return await CreateTextGraph(title, content)
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
 
+    methods_dir = "lucasgram/methods"
 
-async def CreateTextGraph(title, content):
-  telegraph = Telegraph()
-  telegraph.create_account(short_name='my_account')
-  page = telegraph.create_page(title=title, html_content=''.join(content))
-  return page['url']
+    for filename in os.listdir(methods_dir):
+      if filename.endswith(".py"):
+        module_name = filename[:-3]
+        module = importlib.import_module(f"{methods_dir}.{module_name}")
+
+        for name in dir(module):
+          if not name.startswith("__"):
+            method = getattr(module, name)
+            setattr(self, name, method)
+
