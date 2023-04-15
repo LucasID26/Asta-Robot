@@ -16,5 +16,5 @@ class MyClient(Client):
         for name in dir(module):
           if not name.startswith("__"):
             method = getattr(module, name)
-            setattr(self, name, method)
+            setattr(self, name, partial(method, self))
 
