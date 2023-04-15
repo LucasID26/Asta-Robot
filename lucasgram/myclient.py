@@ -1,6 +1,9 @@
 from pyrogram import Client
 import os
 import importlib
+from functools import partial
+
+
 
 class MyClient(Client):
   def __init__(self, *args, **kwargs):
