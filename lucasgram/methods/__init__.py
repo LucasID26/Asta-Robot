@@ -1,3 +1,3 @@
-from .graph import CreateTextGraph
-from .TopSender import GetTopSender
-from .SendTable import SendTable
+from .create_text_graph import CreateTextGraph
+from .get_top_sender import GetTopSender
+from .send_table import SendTable
