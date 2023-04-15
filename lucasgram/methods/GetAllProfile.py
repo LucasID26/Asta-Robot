@@ -1,6 +1,6 @@
 from pyrogram.types import InputMediaPhoto, InputMediaVideo 
 
-async def get_all_profile(self, chat_id: int, user_id: int, inputphoto: bool = True, inputvideo: bool = True):
+async def get_all_profile(chat_id: int, user_id: int, inputphoto: bool = True, inputvideo: bool = True):
   media = []
   if inputphoto:
     photos = await self.get_profile_photos(user_id)
