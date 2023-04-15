@@ -11,19 +11,21 @@ async def GetTopSender(self, chat_id):
     top_sender_id = max(senders, key=senders.get)
     top_sender = await self.get_users(top_sender_id)
 
-    all_senders = {}
+    all_senders = []
     for sender_id, message_count in senders.items():
       user = await self.get_users(sender_id)
+      if len(all_senders) >= 10:
+        break
       user_dict = {
           "id": user.id,
           "first_name": user.first_name,
           "last_name": user.last_name,
-          "username": user.username
-      }
-      all_senders[str(sender_id)] = {
-          "user": user_dict,
+          "username": user.username,
           "message_count": message_count
       }
+      all_senders.append({
+          "user": user_dict
+      })
 
     result_dict = {
         "top_sender": {
@@ -31,9 +33,9 @@ async def GetTopSender(self, chat_id):
                 "id": top_sender.id,
                 "first_name": top_sender.first_name,
                 "last_name": top_sender.last_name,
-                "username": top_sender.username
-            },
-            "message_count": senders[top_sender_id]
+                "username": top_sender.username,
+                "message_count": senders[top_sender_id]
+            }
         },
         "all_senders": all_senders
     }
