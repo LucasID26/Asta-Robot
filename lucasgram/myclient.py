@@ -1,7 +1,6 @@
 from pyrogram import Client
 import os
 import importlib
-from functools import partial
 
 
 
@@ -19,5 +18,5 @@ class MyClient(Client):
         for name in dir(module):
           if not name.startswith("__"):
             method = getattr(module, name)
-            setattr(self, name, partial(method, self))
+            setattr(self, name, method)
 
