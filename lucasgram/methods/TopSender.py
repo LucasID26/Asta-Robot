@@ -40,7 +40,7 @@ async def GetTopSender(self, chat_id):
         "all_senders": all_senders
     }
 
-    return json.dumps(result_dict, indent=4)
+    return json.dumps(result_dict, indent=2)
 
   except Exception as e:
     print(f"Error getting top sender: {e}")
