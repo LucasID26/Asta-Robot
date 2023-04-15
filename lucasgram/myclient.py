@@ -9,6 +9,6 @@ class MyClient(Client):
     return await CreateTextGraph(title, content)
   async def get_top_sender(self, chat_id):
     return await GetTopSender(self, chat_id)
-  async def send_table(self, chat_id: int, data, caption: str, message_thread_id: int):
+  async def send_table(self, chat_id: int, data, caption: str = None, message_thread_id: int = None):
     return await SendTable(self, chat_id, data, caption, message_thread_id)
 
