@@ -1,7 +1,6 @@
 from telegraph import Telegraph
 
 
-@staticmethod
 async def create_text_graph(title: str, content: list):
   telegraph = Telegraph()
   telegraph.create_account(short_name='my_account')
