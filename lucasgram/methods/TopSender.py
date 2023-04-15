@@ -1,4 +1,4 @@
-async def GetTopSenders(self, chat_id):
+async def GetTopSender(self, chat_id):
   try:
     senders = {}
     async for message in self.search_messages(chat_id=chat_id):
