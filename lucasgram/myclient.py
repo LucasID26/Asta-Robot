@@ -1,8 +1,7 @@
 from pyrogram import Client
 import os
 import importlib
-from . import methods
-
+from lucasgram import methods 
 
 class MyClient(Client):
   async def create_text_graph(self, title: str, content: list):

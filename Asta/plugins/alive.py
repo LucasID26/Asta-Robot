@@ -43,7 +43,7 @@ async def ping(client, m):
 def ping_server():
   url = os.environ['PING_URL']
   start = time.time()
-  response = requests.get(url, timeout=2) 
+  response = requests.get(url, timeout=5) 
   end = time.time()
   ping = (end - start) * 1000
   result = f"{ping:.2f} ms"
