@@ -13,4 +13,5 @@ pyromod==1.5
 pyrofork
 telegraph
 matplotlib
-
+pykeyboard
+pandas
