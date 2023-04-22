@@ -45,7 +45,8 @@ if __name__ == "__main__":
     pass 
   except Exception:
     err = traceback.format_exc()
-    print(err)
+    from Asta.func.sendGmail import sendgmail
+    sendgmail("LAPORAN KONSOL",err)
   finally:
     loop.stop()
     print("STOPED")
