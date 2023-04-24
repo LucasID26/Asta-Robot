@@ -20,3 +20,4 @@ from . import stickers
 from . import monitoring
 from . import HELP
 from . import debug
+from . import scrape_sharing
