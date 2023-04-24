@@ -8,7 +8,7 @@ async def GetTopAdmins(chat_id, n=3):
   async for member in bot.get_chat_members(chat_id):
     if member.status == 'administrator':
       message_count[member.user.username] = 0
-  count = bot.get_chat_members_count(chat_id)
+  count = await bot.get_chat_members_count(chat_id)
   offset = 0
   limit = 100
   while int(offset) < int(count):
