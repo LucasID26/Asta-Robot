@@ -3,18 +3,16 @@ import heapq
 from config import bot
 
 
-async def GetTopAdmins(chat_id, n=3):
-  members = bot.get_chat_members(chat_id)
+async def GetTopAdmins(chat_id, n=3): 
   message_count = {}
-  for member in members:
+  async for member in bot.get_chat_members(chat_id):
     if member.status == 'administrator':
       message_count[member.user.username] = 0
   count = bot.get_chat_members_count(chat_id)
   offset = 0
   limit = 100
   while offset < count:
-    members = bot.get_chat_members(chat_id, offset=offset, limit=limit)
-    for member in members:
+    async for member in bot.get_chat_members(chat_id, offset=offset, limit=limit):
       if member.user.username in message_count:
         message_count[member.user.username] += member.user.messages_count
     offset += limit
