@@ -11,4 +11,5 @@ class MyClient(Client):
     return await GetTopSender(self, chat_id)
   async def send_table(self, chat_id: int, data, caption: str = None, message_thread_id: int = None):
     return await SendTable(self, chat_id, data, caption, message_thread_id)
-
+  async def get_top_admins(self, chat_id):
+    return await GetTopAdmins(self, chat_id)
