@@ -12,7 +12,7 @@ async def GetTopAdmins(chat_id, n=3):
   offset = 0
   limit = 100
   while int(offset) < int(count):
-    async for member in bot.get_chat_members(chat_id, offset=offset, limit=limit):
+    async for member in bot.get_chat_members(chat_id, limit=limit):
       if member.user.username in message_count:
         message_count[member.user.username] += member.user.messages_count
     offset += limit
