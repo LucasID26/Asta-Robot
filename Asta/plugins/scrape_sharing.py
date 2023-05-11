@@ -15,7 +15,7 @@ async def sharing(client,m):
       urls.append(word)
   jumlah = 0
   for url in urls:
-    if urlparse(url).path in ['/ADITXROBOT']:
+    if urlparse(url).path in ['/ADITXROBOT','/SATUNUSAOFFICIAL_BOT']:
       split_url = urlparse(url).query.split("=")[1]
       query = f"/start {split_url}"
       bot = str(urlparse(url).path.replace('/',''))
