@@ -138,7 +138,7 @@ async def resize_media(media: str, video: bool, fast_forward: bool) -> str:
 
 
 
-async def convert_video(filename: str) -> str:
+async def convert_video2(filename: str) -> str:
     downpath, f_name = os.path.split(filename)
     webm_video = os.path.join(downpath, f"{f_name.split('.', 1)[0]}.webm")
     cmd = [
@@ -171,3 +171,13 @@ async def convert_video(filename: str) -> str:
     if webm_video != filename:
         os.remove(filename)
     return webm_video
+
+async def convert_video(filename: str) -> str:
+    downpath, f_name = os.path.split(filename)
+    webm_video = os.path.join(downpath, f"{f_name.split('.', 1)[0]}.webm")
+    ffmpeg.input(filename).output(webm_video, t='00:00:03', vf='fps=30', vcodec='vp9', vb='500k', preset='ultrafast', s='512x512', y=None, an=None).run()
+    if webm_video != filename:
+        os.remove(filename)
+    return webm_video
+    
+    
