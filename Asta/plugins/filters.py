@@ -1,5 +1,5 @@
 from pyrogram import filters
-from config import bot,prefix
+from config import bot,asisstant,prefix
 
 from database.filters_db import del_filter, get_filter, get_filters_names, save_filter
 
@@ -87,10 +87,10 @@ async def stopf(client, m):
 
 
 @bot.on_message(
-    filters.text & ~filters.private & ~filters.via_bot & ~filters.forwarded,
+    filters.text & ~filters.user([1914512347]) & ~filters.private & ~filters.via_bot & ~filters.forwarded,
     group=1,
 )
-async def filters_re(client, m):
+async def filters_re(client,m):
   text1 = m.text.lower()
   text = text1.split()
   if not text:
@@ -103,11 +103,15 @@ async def filters_re(client, m):
       type = _filter["type"]
       respon = _filter["data"]
       if type == "text":
-        return await m.reply_text(respon)
-        break
+        try:
+          return await asisstant.send_message(chat_id=m.chat.id,text=respon,reply_to_message_id=m.id)
+        except:
+          return await m.reply_text(respon)
       elif type == "sticker":
-        return await m.reply_sticker(respon)
-        break
+        try:
+          return await asisstant.send_sticker(chat_id=m.chat.id,sticker=respon,reply_to_message_id=m.id)
+        except:
+          return await m.reply_sticker(respon)
 
 
     

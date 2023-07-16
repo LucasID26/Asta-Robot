@@ -1,6 +1,6 @@
 from flask import Flask
 from threading import Thread
-from config import bot, asisstant
+from config import bot, asisstant, asisstant2
 import importlib
 from pyrogram import idle
 import random
@@ -27,21 +27,26 @@ def run_thread():
 
 async def run_all():
   from Asta.__main__ import restarting, restart
-  restart()
+  from Asta.plugins.anon_share import share_link
+  #restart()
+  import os
   importlib.import_module("Asta")
   await bot.start()
   await asisstant.start()
+  await asisstant2.start()
   run_thread()
+  #await share_link()
   await restarting()
   await idle()
   await bot.stop()
   await asisstant.stop()
+  await asisstant2.stop()
 
 
 loop = asyncio.get_event_loop()
 if __name__ == "__main__":
   try:
-    loop.run_until_complete(run_all())
+    loop.run_until_complete(run_all()) 
   except KeyboardInterrupt:
     pass
   except Exception:

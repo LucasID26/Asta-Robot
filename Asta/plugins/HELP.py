@@ -16,7 +16,7 @@ async def helpp(client, m):
       InlineButton(
         'OWNER👤',url='https://url-profile.kulukgalak.repl.co/profile'),
       InlineButton(
-      'CHANNEL',url='https://t.me/YoiID_robot'))
+      'CHANNEL',url='https://t.me/YoiID_267'))
     await m.reply_text(f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol HELP dibawah!**', reply_markup=button)
   elif m.chat.type.value == 'private':
     button = InlineKeyboard(row_width=3)
@@ -26,7 +26,7 @@ async def helpp(client, m):
       InlineButton(
         'OWNER👤',url='https://url-profile.kulukgalak.repl.co/profile'),
       InlineButton(
-      'CHANNEL',url='https://t.me/YoiID_robot'),
+      'CHANNEL',url='https://t.me/YoiID_267'),
       InlineButton(
         'Add to your group',url=f'http://t.me/{bot.me.username}?startgroup=true'
       ))
@@ -43,7 +43,7 @@ async def def_callback(_, call):
       InlineButton('PERINTAH📚',callback_data='help'),
       InlineButton('OWNER👤',url='https://url-profile.kulukgalak.repl.co/profile'),
       InlineButton(
-      'CHANNEL',url='https://t.me/YoiID_robot'),
+      'CHANNEL',url='https://t.me/YoiID_267'),
       InlineButton('Add to your group',url=f'http://t.me/{bot.me.username}?startgroup=true'
       ))
     await bot.edit_message_text(call.message.chat.id,text=f'**Yo hallo saya adalah {bot.me.first_name}\nJika ingin mengetahui fitur saya silahkan tekan tombol PERINTAH dibawah!**',message_id=call.message.id,reply_markup=button)
@@ -155,7 +155,6 @@ Adapun Perintah lain
 - /staff: Daftar admin dalam obrolan saat ini.
 - /all: Mention semua member pada obrolan.
 - /clean atau /ghost: Module ini berfungsi untuk mengeluarkan akun terhapus dalam group.Tidak dapat dibatalkan.
-- /speedtest: Cek kecepatan jaringan bot.
 """ 
 
 #GENERATOR HELP
@@ -181,6 +180,7 @@ Perintah:
 - /q atau /quotly [reply]: Membuat sticker dari TEXT.
 - /kang [reply_media]: Membuat sticker dari PHOTO,VIDEO,GIF termasuk menyimpan sticker yang sudah dibuat ke dalam sticker pack.
 - /unkang [reply_sticker]: Menghapus sticker dari sticker pack mu.
+- /stickerinfo [reply_sticker]: Untuk mengetahui informasi sticker pack.
 """
 
 #DOWNLOADER HELP

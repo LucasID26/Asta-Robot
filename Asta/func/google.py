@@ -11,7 +11,7 @@ def google(keywords,limit = 20):
     num = min(limit + 1,100)
     headers = {
         'User-agent':
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
+        'Mozilla/5.0 (Linux; Android 13; M2101K7BNY Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.5672.162 Mobile Safari/537.36 GoogleApp/13.31.14.26.arm64'
     }
     
     params = {
@@ -45,7 +45,7 @@ def google(keywords,limit = 20):
 def Gimages(query):
     google_images = []
     headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36"
+    "User-Agent": "Mozilla/5.0 (Linux; Android 13; M2101K7BNY Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.5672.162 Mobile Safari/537.36 GoogleApp/13.31.14.26.arm64"
 }
     params = {
     "q": query,

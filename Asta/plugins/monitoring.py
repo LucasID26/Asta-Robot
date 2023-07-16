@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 api_key = os.environ['UPTIME_API']
 
 
-@bot.on_message(filters.command("addmonitor",prefix) & filters.user(own[0]))
+@bot.on_message(filters.command("addmonitor",prefix) & filters.user(own))
 async def save_monitor(client,m):
   if len(m.command) == 1:
     return await m.reply_text("Cantumkan URL yang mau ditambahkan dalam daftar monitor")
@@ -42,7 +42,7 @@ async def save_monitor(client,m):
 
 
 
-@bot.on_message(filters.command("monitor",prefix) & filters.user(own[0]))
+@bot.on_message(filters.command("monitor",prefix) & filters.user(own))
 async def get_monitor(client,m):
   msg = await m.reply_text("`Mengumpulkan data monitor . . .`")  
   pesan = "**STATISTIK MONITOR**\n\n"
@@ -55,7 +55,7 @@ async def get_monitor(client,m):
     pesan += f"**Nama :** `{nama}`\n**Status :** `{status}`\n**ID :** `{id}`\n**Interval :** `{interval}`\n**Timeout :** `{timeout}`\n\n"
   await msg.edit(pesan)
 
-@bot.on_message(filters.command("delmonitor",prefix) & filters.user(own[0]))
+@bot.on_message(filters.command("delmonitor",prefix) & filters.user(own))
 async def del_monitor(client,m):
   if len(m.command) == 1:
     return await m.reply_text("Cantumkan ID monitor yang mau dihapus dari daftar monitor")

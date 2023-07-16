@@ -4,14 +4,16 @@ from html import escape
 from pyrogram.types import InputMediaPhoto, InputMediaVideo 
 from pyrogram.errors import FloodWait 
 import asyncio
-import lxml
+import lxml 
+from requests import get
+import json
 from geopy.geocoders import Nominatim
 
 from Asta.decorators.error import error
 from Asta.decorators.info_cmd import info_cmd 
 from Asta.decorators.cek_admin import bot_admin
 
-from Asta.func.google import google,Gimages
+from Asta.func.google import Gimages
 
 
 @bot.on_message(filters.command(["google","g"],prefix)) 
@@ -23,12 +25,12 @@ async def s_google(client, m):
   if len(m.command) == 1:
     return await m.reply_text("Pencarian google\n/g [query]")
   msg = await m.reply_text(f"__Searching google__ {text[1]}...")
-  ggl = google(text[1], limit=20)
-  hasil = f"📌 Hasil pencarian GOOGLE **{text[1]}** berjumlah {len(ggl)}:\n\n"
-  for i in ggl:
-    title = i['judul']
+  ggl = get(f"https://yasirapi.vercel.app/google/?q={text}").json()
+  hasil = f"📌 Hasil pencarian GOOGLE **{text[1]}** berjumlah {len(ggl['result'])}:\n\n"
+  for i in ggl['result']:
+    title = i['title']
     link = i['link']
-    deskripsi = i['deskripsi'] 
+    deskripsi = i['snippet'] 
     hasil1 = f'<a href="{link}">{title}</a>'
     hasil += f"{hasil1}\n{escape(deskripsi)}\n\n"
   await msg.edit(hasil,disable_web_page_preview=True)
