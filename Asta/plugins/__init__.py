@@ -14,7 +14,7 @@ from . import yt_dl
 from . import tiktok_dl
 from . import asupan
 from . import filters
-from . import translate
+from . import g_translate
 from . import quotly
 from . import stickers
 from . import monitoring
@@ -22,4 +22,6 @@ from . import HELP
 from . import debug
 from . import scrape_sharing 
 from . import gcast 
-from . import chatbot
+from . import chatbot 
+from . import okasta
+from . import yoi_afk

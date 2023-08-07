@@ -64,6 +64,8 @@ async def def_callback(_, call):
     InlineButton(
       'DOWNLOADER',callback_data='downloader'),
     InlineButton(
+      'AFK',callback_data='afk'),
+    InlineButton(
       'LAINNYA',callback_data='lain'))
     button.row(InlineButton('SYSTEM ASTA', callback_data='system'))
     button.row(InlineButton('Back', callback_data='help1')) 
@@ -90,9 +92,20 @@ async def def_callback(_, call):
     await bot.edit_message_text(call.message.chat.id, text=system(),message_id=call.message.id,reply_markup=button)
   elif call.data == 'downloader':
     await bot.edit_message_text(call.message.chat.id, text=downloader_help,message_id=call.message.id,reply_markup=button) 
+  elif call.data == 'afk':
+    await bot.edit_message_text(call.message.chat.id, text=afk_help,message_id=call.message.id,reply_markup=button)
   #await bot.send_message(call.message.chat.id,f"`Tommbol Satu`",reply_to_message_id=call.message.id)
 
 
+afk_help = """
+**AFK (Away From Keyboard)**
+
+Ingin offline?,tapi orang lain harus mengetahui anda sedang offline karena melakukan apa?,module AFK solusinya.
+
+Perintah:
+- /afk [reason]: Beri tahu orang lain bahwa Anda AFK atau sedang tidak aktif.
+- Cukup ketik sesuatu di grup untuk menghapus Status AFK.
+"""
 
 lain_help = """
 **LAINNYA**
@@ -103,6 +116,7 @@ Perintah:
 - /info [reply/username]: Informasi profile user/group dan channel.
 - /id: Id obrolan saat ini.
 - /asupan: Random video asupan hot 😂.
+- Ok Asta: Asta Asisstant module yang mirip dengan google asisstant.
 """
 
 filter_help = """
@@ -154,6 +168,7 @@ Adapun Perintah lain
 - /bots: Berfungsi untuk cek ada berapa bot didalam group.
 - /staff: Daftar admin dalam obrolan saat ini.
 - /all: Mention semua member pada obrolan.
+- /cancel: Memberhentikan tag all.
 - /clean atau /ghost: Module ini berfungsi untuk mengeluarkan akun terhapus dalam group.Tidak dapat dibatalkan.
 """ 
 

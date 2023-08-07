@@ -10,7 +10,7 @@ import psutil
 from Asta.decorators.info_cmd import info_cmd
 from Asta.func.duration import duration
 from Asta.func.file_size import file_size
-from Asta.func.tools import text_posisi
+from Asta.func.tools import text_posisi,edit_or_reply
 
 
 starttime = datetime.utcnow()
@@ -20,7 +20,7 @@ starttime = datetime.utcnow()
 async def ping(client, m):
   uptime = duration((datetime.utcnow() - starttime).total_seconds())
   start = time.time() 
-  msg = await m.reply_text("**0% ▒▒▒▒▒▒▒▒▒▒**")
+  msg = await m.reply(text="**0% ▒▒▒▒▒▒▒▒▒▒**")
   end = time.time()
   durasi = (end - start) * 1000
   p_result = f"{durasi:.2f} ms"
@@ -29,7 +29,7 @@ async def ping(client, m):
   await msg.edit("**60% ██████▒▒▒▒**")
   #await msg.edit("**80% ████████▒▒**")
   await msg.edit("**100% ██████████**")
-  owner = (await bot.get_users(own[0])).mention
+  owner = (await bot.get_users(own[1])).mention
   await msg.edit(f"""
 ❏ **PONG!!🏓**
 ├• **Pinger** ➥ `{p_result}`

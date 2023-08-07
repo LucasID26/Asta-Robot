@@ -65,4 +65,7 @@ async def remove(client, message):
                await message.reply(f"✅ | Berhasil menghapus {k} akun terhapus dari obrolan ini.",quote=True)  
              chatQueue.remove(message.chat.id)
    except FloodWait as e:
-     await asyncio.sleep(e.value)
+     await asyncio.sleep(e.value) 
+
+
+

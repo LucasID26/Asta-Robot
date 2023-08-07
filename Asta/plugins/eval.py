@@ -7,15 +7,15 @@ import asyncio
 import traceback 
 import io
 from pykeyboard import InlineKeyboard,InlineButton
+from Asta.func.tools import edit_or_reply
 
-
-@bot.on_message(filters.command("sh") & filters.user(own))
+@bot.on_message(filters.command("sh",prefix) & filters.user(own))
 @bot.on_edited_message(filters.command("sh",prefix) & filters.user(own))
 async def shell(client, m):
     cmd = m.text.split(" ",1)
     if len(m.command) == 1:
-        return await m.reply(text="Tidak ada perintah untuk diselesaikan.",quote=True)
-    msg = await m. reply(text="__Processing...__",quote=True)
+        return await m.reply(text="Tidak ada perintah untuk diselesaikan.")
+    msg = await m.reply(text="__Processing...__")
     shell = (await shell_exec(cmd[1]))[0]
     button = InlineKeyboard()
     button.add(InlineButton("DELETE",callback_data=f"delete#{m.from_user.id}"))
@@ -46,8 +46,8 @@ async def shell(client, m):
 async def evaluation_cmd_t(client, m):
   cmd = m.text.split(" ",1)
   if len(m.command) == 1:
-    return await m.reply_text(text="__Tidak ada kode untuk diselesaikan!__")
-  status = await m.reply_text(text="__Processing eval pyrogram...__")
+    return await m.reply(text="__Tidak ada kode untuk diselesaikan!__")
+  status = await m.reply(text="__Processing eval pyrogram...__")
 
   old_stderr = sys.stderr
   old_stdout = sys.stdout
@@ -87,7 +87,7 @@ async def evaluation_cmd_t(client, m):
     await status.delete()
     os.remove("AstaEval.txt")
   else:
-    await status.edit_text(text=final_output,reply_markup=button)
+    await status.edit(text=final_output,reply_markup=button)
 
 
 async def aexec(code, c, m):

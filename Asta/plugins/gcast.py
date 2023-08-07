@@ -1,4 +1,4 @@
-from config import prefix,bot,asisstant,asisstant2
+from config import prefix,bot,asisstant
 import asyncio
 from pyrogram import filters
 from Asta.decorators.cek_admin import bot_admin
@@ -29,7 +29,7 @@ async def broadcast(client,m):
 async def gas_gcast(m, gcs):
   sent = await m.reply("<code>Sedang menyiarkan pesan...</code>")
   pesan = "<b>Data Broadcast :</b>\n\n"
-  for akun in [asisstant,asisstant2]:
+  for akun in [asisstant]:
     nama = (await akun.get_me()).first_name
     sukses = 0
     gagal = 0

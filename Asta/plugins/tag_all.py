@@ -25,8 +25,6 @@ async def everyone(client, m):
   global stopProcess  
   try:
     bott = await bot.get_chat_member(m.chat.id, "self")
-    if bott.status == ChatMemberStatus.MEMBER:
-      return await m.reply(text="🕹 | Jadiin gw admin dong biar bisa tag all",quote=True)
     if len(chatQueue) > 5:
       await m.reply(text="⛔️ | Saya sudah mengerjakan jumlah maksimal 5 obrolan saya saat ini. Coba lagi sebentar lagi.")
     else:  
@@ -94,7 +92,7 @@ async def everyone(client, m):
     await asyncio.sleep(e.value) 
 
 #STOP TAGG ALL
-@bot.on_message(filters.command("stop",prefix))
+@bot.on_message(filters.command("cancel",prefix))
 @info_cmd
 @no_private
 @bot_admin

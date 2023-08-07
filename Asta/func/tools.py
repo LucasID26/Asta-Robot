@@ -6,6 +6,8 @@ import shlex
 import ffmpeg
 from typing import Tuple
 from PIL import Image
+import httpx 
+from inspect import getfullargspec
 #from pymediainfo import MediaInfo
 
 
@@ -181,4 +183,48 @@ async def convert_video2(filename: str) -> str:
         os.remove(filename)
     return webm_video
     
-    
+async def edit_or_reply(m,text):
+  if m.from_user and m.from_user.is_self:
+    await m.edit_text(text)
+  else:
+    await m.reply_text(text)
+
+#REQUESTS
+class HTTP:
+    async def get(self, url, format='text'):
+        async with httpx.AsyncClient() as client:
+            try:
+                response = await client.get(url)
+                if response.status_code == 200:
+                    if format == 'text':
+                        return response.text
+                    elif format == 'json':
+                        return response.json()
+                    elif format == 'content':
+                        return response.content
+                    else:
+                        raise ValueError("Invalid format specified.")
+                else:
+                    return None
+            except Exception as e:
+                print(f"Error: {e}")
+                return None
+
+    async def post(self, url, data, headers=None, format='text'):
+        async with httpx.AsyncClient() as client:
+            try:
+                response = await client.post(url, data=data, headers=headers)
+                if response.status_code == 200:
+                    if format == 'text':
+                        return response.text
+                    elif format == 'json':
+                        return response.json()
+                    elif format == 'content':
+                        return response.content
+                    else:
+                        raise ValueError("Invalid format specified.")
+                else:
+                    return None
+            except Exception as e:
+                print(f"Error: {e}")
+                return None

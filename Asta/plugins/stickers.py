@@ -15,14 +15,21 @@ from Asta.decorators.info_cmd import info_cmd
 from Asta.decorators.cek_admin import bot_admin
 from Asta.decorators.error import error
 
+
+status_kang = False 
+status_unkang = False
 @bot.on_message(filters.command(["addsticker", "tikel", "kang"],prefix))
 @info_cmd
 @bot_admin
 @error
 async def kang(client,m):
+  global status_kang
+  if status_kang:
+    return await m.reply("Saya sedang dalam proses pembuatan sticker silahkan coba beberapa detik lagi!!")
   user = m.from_user
   replied = m.reply_to_message
   Asta = await m.reply_text("`Menambahkan sticker ke sticker pack mu...`")
+  status_kang = True
   media_ = None
   emoji_ = None
   is_anim = False
@@ -52,6 +59,7 @@ async def kang(client,m):
       ff_vid = True
     elif replied.sticker:
       if not replied.sticker.file_name:
+        status_kang = False
         return await Asta.edit("**Stiker tidak memiliki Nama!**")
       emoji_ = replied.sticker.emoji
       is_anim = replied.sticker.is_animated
@@ -63,9 +71,11 @@ async def kang(client,m):
         resize = True
         ff_vid = True
     else:
+      status_kang = False
       return await Asta.edit("**File Tidak Didukung**")
     media_ = await bot.download_media(replied, file_name="Asta/downloads/")
   else:
+    status_kang = False
     return await Asta.edit("**Silahkan Reply ke Media Foto/GIF/Sticker!**")
   if media_:
     args = get_arg(m)
@@ -135,6 +145,7 @@ async def kang(client,m):
         await asisstant.unblock_user("stickers")
         await asisstant.send_message("stickers", "/addsticker")
       except Exception as e:
+        status_kang = False
         return await Asta.edit(f"**ERROR:** `{e}`")
       await asyncio.sleep(2)
       await asisstant.send_message("stickers", packname)
@@ -156,41 +167,43 @@ async def kang(client,m):
                     + " Karena Sticker Pack Sudah Penuh`"
                 )
         await asisstant.send_message("stickers", packname)
-        await asyncio.sleep(2)
+        await asyncio.sleep(1)
         if await get_response(m, asisstant) == "Invalid pack selected.":
           await asisstant.send_message("stickers", cmd)
-          await asyncio.sleep(2)
+          await asyncio.sleep(1)
           await asisstant.send_message("stickers", packnick)
-          await asyncio.sleep(2)
+          await asyncio.sleep(1)
           await asisstant.send_document("stickers", media_)
-          await asyncio.sleep(2)
+          await asyncio.sleep(1)
           await asisstant.send_message("Stickers", emoji_)
-          await asyncio.sleep(2)
+          await asyncio.sleep(1)
           await asisstant.send_message("Stickers", "/publish")
-          await asyncio.sleep(2)
+          await asyncio.sleep(1)
           if is_anim:
               await asisstant.send_message(
                             "Stickers", f"<{packnick}>", parse_mode=ParseMode.MARKDOWN
                         )
-              await asyncio.sleep(2)
+              await asyncio.sleep(1)
           await asisstant.send_message("Stickers", "/skip")
-          await asyncio.sleep(2)
+          await asyncio.sleep(1)
           await asisstant.send_message("Stickers", packname)
-          await asyncio.sleep(2)
+          await asyncio.sleep(1)
+          status_kang = False
           return await Asta.edit(
                         f"**Sticker Berhasil Ditambahkan!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**"
                     )
       await asisstant.send_document("stickers", media_)
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
       if (
                 await get_response(m, asisstant)
                 == "Sorry, the file type is invalid."
             ):
+        status_kang = False
         return await Asta.edit(
                     "**Gagal Menambahkan Sticker, Gunakan @Stickers Bot Untuk Menambahkan Sticker Anda.**"
                 )
       await asisstant.send_message("Stickers", emoji_)
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
       await asisstant.send_message("Stickers", "/done")
     else:
       await Asta.edit("`Membuat Sticker Pack Baru`")
@@ -199,29 +212,31 @@ async def kang(client,m):
       except YouBlockedUser:
         await asisstant.unblock_user("stickers")
         await asisstant.send_message("stickers", "/addsticker")
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
       await asisstant.send_message("Stickers", packnick)
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
       await asisstant.send_document("stickers", media_)
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
       if (
                 await get_response(m, asisstant)
                 == "Sorry, the file type is invalid."
             ):
+        status_kang = False
         return await Asta.edit(
                     "**Gagal Menambahkan Sticker, Gunakan @Stickers Bot Untuk Menambahkan Sticker Anda.**"
                 )
       await asisstant.send_message("Stickers", emoji_)
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
       await asisstant.send_message("Stickers", "/publish")
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
       if is_anim:
           await asisstant.send_message("Stickers", f"<{packnick}>")
-          await asyncio.sleep(2)
+          await asyncio.sleep(1)
       await asisstant.send_message("Stickers", "/skip")
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
       await asisstant.send_message("Stickers", packname)
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
+    status_kang = False
     await Asta.edit(
             f"**Sticker Berhasil Ditambahkan!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**"
         )
@@ -238,50 +253,63 @@ async def get_response(m, asisstant):
 @bot_admin
 @error
 async def unkang(client,m):
+  global status_unkang
+  if status_unkang:
+    return await m.reply("Saya sedang dalam proses pembuatan sticker silahkan coba beberapa detik lagi!!")
   if not m.reply_to_message:
     return await m.reply_text("Silahkan reply sticker yang mau dihapus,pastikan reply sticker dari pesan mu sendiri")
   replied = m.reply_to_message
   Asta = await m.reply_text("`Menghapus sticker dari sticker pack mu . . .`")
   if replied.sticker:
+    status_unkang = True
     try:
       await asisstant.send_message("stickers", "/delsticker")
     except YouBlockedUser:
       await asisstant.unblock_user("stickers")
       await asisstant.send_message("stickers", "/delsticker")
     except Exception as e:
+      status_unkang = False
       return await Asta.edit(f"**ERROR:** `{e}`")
-    await asyncio.sleep(2)
+    await asyncio.sleep(1)
     packname = replied.sticker.set_name
     if not packname:
+      status_unkang = False
       return await Asta.edit("Sticker tidak terdaftar dalam pack manapun")
     await asisstant.send_message("stickers",packname)
-    await asyncio.sleep(2)
+    await asyncio.sleep(1)
     if await get_response(m, asisstant) == "Invalid set selected.":
+      status_unkang = False
       return await Asta.edit("Wow kamu mau hapus sticker ini dari sticker pack orang lain?")
     elif int(packname.split("_u")[1].split("_v")[0]) != int(m.from_user.id):
       await asisstant.send_message("stickers",'/cancel')
+      status_unkang = False
       return await Asta.edit("Wow kamu mau hapus sticker ini dari sticker pack orang lain?")
     elif await get_response(m, asisstant) == "This set has only one sticker in it. Deleting the sticker will also delete the set and free its link. Are you sure you want to do this?":
       await asisstant.send_message("stickers",'Delete anyway')
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
       if await get_response(m, asisstant) == "Done! The sticker set is gone.":
+        status_unkang = False
         return await Asta.edit(f"**Sticker Berhasil Dihapus!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**")
     try:
       await asisstant.forward_messages("stickers",from_chat_id=m.chat.id,message_ids=m.reply_to_message.id)
     except:
       await asisstant.send_sticker("stickers",replied.sticker.file_id)   
-    await asyncio.sleep(2)
+    await asyncio.sleep(1)
     if await get_response(m, asisstant) == "This is the last sticker in this set. Deleting it will also delete the set and free its link. Are you sure you want to do this?":
       await asisstant.send_message("stickers",'Delete anyway')
-      await asyncio.sleep(2)
+      await asyncio.sleep(1)
       if await get_response(m, asisstant) == "Done! The sticker set is gone.":
+        status_unkang = False
         return await Asta.edit(f"**Sticker Berhasil Dihapus!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**")
     elif await get_response(m, asisstant) == "I have deleted that sticker for you, it will stop being available to Telegram users within an hour.":
+      status_unkang = False
       return await Asta.edit(f"**Sticker Berhasil Dihapus!**\n         🔥 **[KLIK DISINI](https://t.me/addstickers/{packname})** 🔥\n**Untuk Menggunakan Stickers**")
     elif await get_response(m, asisstant) == "Sorry, I can't do this. Looks like you are not the owner of the relevant set.":
+      status_unkang = False
       return await Asta.edit("Saya mendeteksi bahwa id sticker itu tidak ada dalam sticker pack mu")
     elif await get_response(m, asisstant) == "Please send me the sticker.":
       await asisstant.send_message("stickers",'/cancel')
+      status_unkang = False
       return await Asta.edit("Hmm sticker itu tidak ada dalam sticker pack mu!!")
   else:
     return await Asta.edit("**Silahkan Reply ke Sticker!**")

@@ -1,8 +1,9 @@
 import asyncio
 import base64
 import os
-import requests
-from config import bot,prefix
+import requests 
+import asyncio
+from config import bot,asisstant,prefix
 from pyrogram import filters
 
 from Asta.decorators.info_cmd import info_cmd
@@ -20,6 +21,11 @@ async def quotly(client,m):
     if not m.reply_to_message.text:
       return await m.reply_text("**Mohon balas ke pesan text bukan media**")
     msg = await m.reply_text("`Membuat sticker . . .`")
+    try:
+      await quotly2(m,m.reply_to_message.id)
+      return await msg.delete()
+    except:
+      return await msg.edit("**Gagal Membuat Sticker Quotly**")
     try:
       json_data = {
                 'type': 'quote',
@@ -65,3 +71,15 @@ async def quotly(client,m):
     except:
       return await msg.edit("**Gagal Membuat Sticker Quotly**")
 
+
+async def get_response(bott):
+  async for message in asisstant.get_chat_history(bott,limit=1):
+    return message
+
+async def quotly2(m,msg_id1):
+  await bot.forward_messages(chat_id="@AkuMelindaaa",from_chat_id=m.chat.id,message_ids=msg_id1)
+  msg_id = await get_response("@AstaRobot_bot")
+  await asisstant.forward_messages(chat_id="@QuotLyBot",from_chat_id="@AstaRobot_bot",message_ids=msg_id.id)
+  await asisstant.delete_messages("@AstaRobot_bot",msg_id.id)
+  await asyncio.sleep(8)
+  await m.reply_sticker((await get_response("QuotLyBot")).sticker.file_id)
