@@ -1,7 +1,6 @@
 from config import bot 
 from requests import get 
 import json
-import speech_recognition as sr
 import os
 
 from pyrogram import filters 
